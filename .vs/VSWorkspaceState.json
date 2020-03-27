@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public"
   ],
-  "SelectedNode": "\\signUpTemplate.html",
+  "SelectedNode": "\\firebase.json",
   "PreviewInSolutionExplorer": false
 }
