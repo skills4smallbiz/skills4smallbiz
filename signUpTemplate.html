@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.13.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/7.13.0/firebase-analytics.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+
+
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyD- _Zm5y - K8xINw3m9eDeHBnAE4DqtSv50",
+            authDomain: "project-id.firebaseapp.com",
+            databaseURL: "https://project-id.firebaseio.com",
+            projectId: "covidsmallbizlink",
+            storageBucket: "project-id.appspot.com",
+            messagingSenderId: "sender-id",
+            appId: "covidsmallbizlink",
+            measurementId: "G-measurement-id",
+        };
+
+        var database = firebase.database();
+        function createVol() {
+            firebase.database().ref('users/' + userId).set({
+                Username: document.getElementById("FullName").nodeValue,
+                Email: document.getElementById("Email").nodeValue,
+                FrontEnd: Document.getElementById("FrontEnd").checked,
+                BackEnd: Document.getElementById("BackEnd").checked,
+                Fullstack: Document.getElementById("Fullstack").checked,
+                Law: Document.getElementById("Law").checked,
+                Marketing: Document.getElementById("Marketing").checked,
+                Accounting: Document.getElementById("Accounting").checked,
+                Data_Sci: Document.getElementById("Data_Sci").checked,
+                Other: Document.getElementById("Other").checked,
+                Password: Document.getElementById("Password").nodeValue
+                //TODO: Profile Picuture
+            });
+        }
+
+
+    </script>
+
+    <div class="onLoad">
+
+    </div>
+    <div class="dev">
+      
+        <input id="FullName" name="Full Name" type="text"/>
+        <input id="Email" name="email" type="text"/>
+        <input id="FrontEnd" name="Front End Developer" type="checkbox" />
+        <input id="BackEnd" name="Back End Developer" type="checkbox"/>
+        <input id="Fullstack" name="Full Stack Developer" type="checkbox" />
+        <input id="Law" name="Law" type="checkbox" />
+        <input id="Marketing" name="Marketing" type="checkbox" />
+        <input id="Accounting" name="Accounting" type="checkbox" />
+        <input id="Data_Sci" name="Data Scientist" type="checkbox" />
+        <input id="Other" name="Other" type="text" />
+        <input id="Password" name="Password" type="text" />
+
+    </div>
+    <div class="biz">
+    </div>
+
+
+
+</body>
+</html>
