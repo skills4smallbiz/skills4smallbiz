@@ -25,6 +25,7 @@
                 </ul>
             </div><a class="btn btn-primary ml-auto" role="button" href="/sign.html">Sign In/Sign Up</a></div>
     </nav>
+    <div class="biz">
     <h4 class="text-center">Business</h4>
     <div style="margin: 0px auto;width: 80%;max-width: 570px;">
         <form>
@@ -46,6 +47,8 @@
             <div class="form-group"><button class="btn btn-primary" type="submit">update</button></div>
         </form>
     </div>
+    </div> 
+    <div class="vol">  
     <h4 class="text-center" style="padding-top: 59px;">Volunteer</h4>
     <div style="margin: 0px auto;width: 80%;max-width: 570px;">
         <form>
@@ -65,7 +68,7 @@
             <div class="form-group"><button class="btn btn-primary" type="submit">update</button></div>
         </form>
     </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
+    </div>
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 
@@ -77,67 +80,81 @@
 <script>
     var db = firebase.firestore()
 
-    var user = firebase.auth().currentUser;
-    var in_name, in_email, in_photoUrl, uid, emailVerified;
-
-    if (user != null) {
-        in_name = user.displayName;
-        in_email = user.email;
-        in_photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-    } 
-
-
-
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var in_email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var isAnonymous = user.isAnonymous;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            // ...
+        } else {
+            window.location.replace("sign.html"); 
+        }
+    });
     function savebiz() {
         in_data = document.getElementById("biz");
-        in_bizName = in_data.getElementById("biz-name");
-        raw_services = in_data.getElementsByID("service");
-        in_about = in_data.getElementById("about")
+        in_bizName = in_data.getElementById("biz-name").innerText;
+        in_accounting = in_data.getElementById("serv-accounting").checked 
+        in_webdev = in_data.getElementById("serv-webdev").checked
+        in_phone = in_data.getElementById("serv-phone-line").checked
+        in_legal = in_data.getElementById("serv-legal").checked
+        in_ad = in_data.getElementById("serv-advertising").checked
+        in_consulting = in_data.getElementById("serv-consulting").checked
+        in_about = in_data.getElementById("about").innerText
+        in_Address = in_data.getElementById("address").innerText
+        in_other = in_data.getElementById("other").innerText
+        in_services = []
+        if (in_accounting) { in_services.push("Accounting") }
+        if (in_webdev) { in_services.push("WebDev") }
+        if (in_phone) { in_services.push("Phone") }
+        if (in_legal) { in_services.push("Legal") }
+        if (in_ad) { in_services.push("Advertising") }
+        if (in_consulting) { in_services.push("Consulting") }
 
-        in_Address = in_data.getElementById("Address");
-        in_services = [];
-        for (i = 0; i < raw_services.length; i++) {
-            var s = raw_services[i];
-            if (s.checked) {
-                in_services.append(s.innerText);
-            }
-        }
         db.collection("businesses").doc(uid).set({
-            name: in_name,
+            name: displayName,
             email: in_email,
             photoURL: in_photoUrl,
             bizName: in_bizName,
             services: in_services,
             address: in_address,
-            about: in_about
-        }); 
-        
+            about: in_about,
+            other: in_other
+        });
 
     }
 
     function saveVol() {
         in_data = document.getElementById("vol");
-        raw_services = in_data.getElementsByClass("service");
-        in_address = in_data.getElementById("Address");
-        in_services = [];
-        for (i = 0; i < raw_services.length; i++) {
-            var s = raw_services[i];
-            if (s.checked) {
-                in_services.append(s.innerText);
-            }
-        }
+        in_accounting = in_data.getElementById("serv-accounting").checked
+        in_webdev = in_data.getElementById("serv-webdev").checked
+        in_phone = in_data.getElementById("serv-phone-line").checked
+        in_legal = in_data.getElementById("serv-legal").checked
+        in_ad = in_data.getElementById("serv-advertising").checked
+        in_consulting = in_data.getElementById("serv-consulting").checked
+        in_about = in_data.getElementById("about").innerText
+        in_Address = in_data.getElementById("address").innerText
+        in_services = []
+        if (in_accounting) { in_services.push("Accounting") }
+        if (in_webdev) { in_services.push("WebDev") }
+        if (in_phone) { in_services.push("Phone") }
+        if (in_legal) { in_services.push("Legal") }
+        if (in_ad) { in_services.push("Advertising") }
+        if (in_consulting) { in_services.push("Consulting") }
+
         db.collection("businesses").doc(uid).set({
-            name: in_name,
+            name: displayName,
             email: in_email,
             photoURL: in_photoUrl,
             services: in_services,
-            town: in_town,
-            state: in_state,
+            address: in_address,
+            about: in_about
         });
+;
 
 
     }
