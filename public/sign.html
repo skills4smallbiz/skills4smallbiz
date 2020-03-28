@@ -86,9 +86,26 @@
       // Privacy policy url.
       privacyPolicyUrl: '<your-privacy-policy-url>'
     };
-    
     ui.start('#firebaseui-auth-container', uiConfig);
-    
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var uid = user.uid;
+            sessionStorage.setItem("user",user);
+            sessionStorage.setItem("uid", uid);
+            sessionStorage.setItem("name", displayName);
+            sessionStorage.setItem("email", email);
+            // ...
+        } else {
+            // User is signed out.
+            // ...
+        }
+});
+email-password.html
+
     
 </script>
 
