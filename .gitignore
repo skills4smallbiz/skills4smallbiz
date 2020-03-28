@@ -63,4 +63,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
-.vs 
+
+# VS Code:
+.vs
+
+# DS_Store
+.DS_Store
