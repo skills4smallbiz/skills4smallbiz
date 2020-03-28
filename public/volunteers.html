@@ -44,6 +44,32 @@
       storageBucket: "covidsmallbizlink.appspot.com",
       appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
     };
+    var db = firebase.firestore()
+    var b = db.collection("businesses")
+
+
+
+    var user = firebase.auth().currentUser;
+    var in_name, in_email, in_photoUrl, uid, emailVerified;
+
+    if (user != null) {
+        in_name = user.displayName;
+        in_email = user.email;
+        in_photoUrl = user.photoURL;
+        emailVerified = user.emailVerified;
+        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+    }
+
+
+
+
+    var userData;
+    db.collection("volunteers").doc(uid).get().then(function (doc) {
+        userData = doc.data()
+    });
+
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
