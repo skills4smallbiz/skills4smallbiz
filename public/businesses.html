@@ -1,14 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CLB7</title>
+    <title>CovidBizLink</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
@@ -31,41 +32,22 @@
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
-<script src="assets/js/setup.js"></script>
-
+<!-- Previously loaded Firebase SDKs -->
 
 <script>
-    var db = firebase.firestore();
-    var v = db.collection("volunteers")
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provide).then(result => {
-        user = result.user;
-    });
-    var userData;
-    db.collection("businesses").doc(user).get().then(function (doc) {
-        userData = doc.data()
-    });
+    // TODO: Replace the following with your app's Firebase project configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
+      authDomain: "covidsmallbizlink.firebaseapp.com",
+      databaseURL: "https://covidsmallbizlink.firebaseio.com",
+      projectId: "covidsmallbizlink",
+      storageBucket: "covidsmallbizlink.appspot.com",
+      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
+    };
 
-
-        
-
-    var services = userData["services"];
-    b.where('services', 'array-contains-any', desired).get().then(function (vol) {
-            var div = document.createElement("div");
-            div.appendChild(document.createTextNode("Name:" + vol.name))
-            div.appendChild(document.createTextNode("Email:" +vol.email))
-            var s = ""
-            for (i = 0; i < vol.services.length; i++) {
-                s.push(vol.services[i])
-            }
-            div.appendChild(document.createTextNode("State:" + vol.state))
-            div.appendChild(document.createTextNode("Town:" + vol.town))
-            document.getElementById("Results").appendChild(div)
-        });
-        
-//This is close enough to what I want that it will be enough for tonight. Still needs to be debugged
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 </script>
-
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
