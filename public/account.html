@@ -76,35 +76,28 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
-
+<script src="assets/js/setup.js"></script>
 <script>
-    // TODO: Replace the following with your app's Firebase project configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-      authDomain: "covidsmallbizlink.firebaseapp.com",
-      databaseURL: "https://covidsmallbizlink.firebaseio.com",
-      projectId: "covidsmallbizlink",
-      storageBucket: "covidsmallbizlink.appspot.com",
-      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-    };
+    var uid, in_email, in_photo, displayName;
+    var user = firebase.auth().currentUser;
 
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var in_email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var isAnonymous = user.isAnonymous;
-            var uid = user.uid;
-            var providerData = user.providerData;
-            // ...
-        } else {
-            window.location.replace("sign.html"); 
-        }
-    });
+    if (user) {
+        displayName = user.displayName;
+        in_email = user.email;
+        //         var emailVerified = user.emailVerified;
+        //         in_photo = user.photoURL;
+        //         var isAnonymous = user.isAnonymous;
+        uid = user.uid;
+        //         var providerData = user.providerData;
 
-    console.log(UID)
+        console.log(uid)
+    } else {
+//      window.location.replace("sign.html"); 
+            console.log("User Not Logged IN")
+    }
+
+
+    console.log(uid)
     function savebiz() {
         in_data = document.getElementById("biz");
         in_bizName = in_data.getElementById("biz-name").innerText;
