@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -76,92 +76,20 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
-<script src="assets/js/setup.js"></script>
+
 <script>
-    var uid, in_email, in_photo, displayName;
-    uid = sessionStorage.getItem("uid");
-    name = sessionStorage.getItem("name");
-    email = sessionStorage.getItem("email");
+    // TODO: Replace the following with your app's Firebase project configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
+      authDomain: "covidsmallbizlink.firebaseapp.com",
+      databaseURL: "https://covidsmallbizlink.firebaseio.com",
+      projectId: "covidsmallbizlink",
+      storageBucket: "covidsmallbizlink.appspot.com",
+      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
+    };
 
-    if (uid) {
-        b = document.getElementsByClassName("btn btn-primary ml-auto")[0];
-        b.innerText = "Hello, " + name;
-        b.href = "businesses.html";
-
-        console.log(uid)
-    } else {
-     window.location.href = "sign.html"; 
-            // console.log("User Not Logged IN") 
-    }
-
-
-    console.log(uid)
-    function savebiz() {
-        in_data = document.getElementById("biz");
-        in_bizName = in_data.getElementById("biz-name").innerText;
-        in_accounting = in_data.getElementById("serv-accounting").checked 
-        in_webdev = in_data.getElementById("serv-webdev").checked
-        in_phone = in_data.getElementById("serv-phone-line").checked
-        in_legal = in_data.getElementById("serv-legal").checked
-        in_ad = in_data.getElementById("serv-advertising").checked
-        in_consulting = in_data.getElementById("serv-consulting").checked
-        in_about = in_data.getElementById("about").innerText
-        in_Address = in_data.getElementById("address").innerText
-        in_other = in_data.getElementById("other").innerText
-        in_services = []
-        if (in_accounting) { in_services.push("Accounting") }
-        if (in_webdev) { in_services.push("WebDev") }
-        if (in_phone) { in_services.push("Phone") }
-        if (in_legal) { in_services.push("Legal") }
-        if (in_ad) { in_services.push("Advertising") }
-        if (in_consulting) { in_services.push("Consulting") }
-
-        db.collection("businesses").doc(uid).set({
-            name: displayName,
-            email: in_email,
-            photoURL: in_photoUrl,
-            bizName: in_bizName,
-            services: in_services,
-            address: in_address,
-            about: in_about,
-            other: in_other
-        });
-
-    }
-
-    function saveVol() {
-        in_data = document.getElementById("vol");
-        in_accounting = in_data.getElementById("serv-accounting").checked
-        in_webdev = in_data.getElementById("serv-webdev").checked
-        in_phone = in_data.getElementById("serv-phone-line").checked
-        in_legal = in_data.getElementById("serv-legal").checked
-        in_ad = in_data.getElementById("serv-advertising").checked
-        in_consulting = in_data.getElementById("serv-consulting").checked
-        in_about = in_data.getElementById("about").innerText
-        in_Address = in_data.getElementById("address").innerText
-        in_services = []
-        if (in_accounting) { in_services.push("Accounting") }
-        if (in_webdev) { in_services.push("WebDev") }
-        if (in_phone) { in_services.push("Phone") }
-        if (in_legal) { in_services.push("Legal") }
-        if (in_ad) { in_services.push("Advertising") }
-        if (in_consulting) { in_services.push("Consulting") }
-
-        db.collection("businesses").doc(uid).set({
-            name: displayName,
-            email: in_email,
-            photoURL: in_photoUrl,
-            services: in_services,
-            address: in_address,
-            about: in_about
-        });
-;
-
-
-    }
-
-
-
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
