@@ -44,30 +44,25 @@
 
 
 <script>
-    //paste here!
-
-
-
-
-
-
-
-    var db = firebase.firestore()//something like that
+    var db = firebase.firestore();
     var v = db.collection("volunteers")
-    function getData() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provide).then(result => {
+        user = result.user;
+    });
+    var userData;
+    db.collection("businesses").doc(user).get().then(function (doc) {
+        userData = doc.data()
+    });
+
+
         
 
-        var desired = []
-        var services = document.getElementsByClassName("service");
-        for (i = 0; i < services.length; i++) {
-            if (services.checked) {
-                desired.push(services[i].getAttribute("name"))
-            }
-        }
-        b.where('Services', 'array-contains', desired), get().then(function (vol) {
+    var services = userData["services"];
+    b.where('services', 'array-contains-any', desired).get().then(function (vol) {
             var div = document.createElement("div");
             div.appendChild(document.createTextNode("Name:" + vol.name))
-            div.appendChild(document.createTextNode("Email:" vol.email))
+            div.appendChild(document.createTextNode("Email:" +vol.email))
             var s = ""
             for (i = 0; i < vol.services.length; i++) {
                 s.push(vol.services[i])
@@ -78,7 +73,6 @@
         });
         
 //This is close enough to what I want that it will be enough for tonight. Still needs to be debugged
-    }
 </script>
 
     <script src="assets/js/jquery.min.js"></script>
