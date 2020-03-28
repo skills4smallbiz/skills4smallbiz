@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -33,40 +33,40 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
-
+<script src="assets/js/setup.js"></script>
 <script>
-    // TODO: Replace the following with your app's Firebase project configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-      authDomain: "covidsmallbizlink.firebaseapp.com",
-      databaseURL: "https://covidsmallbizlink.firebaseio.com",
-      projectId: "covidsmallbizlink",
-      storageBucket: "covidsmallbizlink.appspot.com",
-      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-    };
-    var user = firebase.auth().currentUser;
-    var in_name, in_email, in_photoUrl, uid, emailVerified;
-
-    if (user != null) {
-        in_name = user.displayName;
-        in_email = user.email;
-        in_photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-    } 
-
-
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var in_email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var isAnonymous = user.isAnonymous;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            // ...
+        } else {
+            window.location.replace("sign.html");
+        }
+    });
     var db = firebase.firestore();
-    var v = db.collection("volunteers")
+    var v = db.collection("volunteer")
     var userData;
     db.collection("businesses").doc(uid).get().then(function (doc) {
         userData = doc.data()
     });
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    var selection = v.where("services", "array-contains-any", userData['services'])
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                //TODO:Add query data to doc  
+
+            });
+        })
+
+
 </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
