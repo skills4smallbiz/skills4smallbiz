@@ -15,7 +15,7 @@
 
     // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-//firebase.firestore()
+var db = firebase.firestore()
 /*
 firebase.database.enableLogging(function (message) {
     console.log("[FIREBASE]", message);
