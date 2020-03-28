@@ -43,11 +43,21 @@
 <!-- Previously loaded Firebase SDKs -->
 <script src="reference/setup.js"></script>
 <script>
-//Someone needs to show me how to get the username of current user, after which this should be easy
+    //paste here
+
+
+
+
     var db = firebase.firestore()//something like that
     var b = db.collection("buisnesses")
     function getData() {
+        function googleLogin() {
+            const provider = new firebase.auth.GoogleAuthProvider();
 
+            firebase.auth().signInWithPopup(provider)
+
+                .then(result => {
+        //   user = result.user;
 
         var desired = []
         var services = document.getElementsByClassName("service");
