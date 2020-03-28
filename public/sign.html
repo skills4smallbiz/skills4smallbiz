@@ -89,10 +89,14 @@
     
 </script>
 
-    <h6 class="text-center" style="font-size: 34px;">Sign In / Sign Up</h6>
-    <div id="firebaseui-auth-container"></div><img class="img-fluid" src="assets/img/IMG_8041%202%20copy.JPG" style="opacity: 0.89;filter: blur(4px);">
-    <div id="loader">
-        <p>Loading...</p>
+    <div id="container"><img class="img-fluid flex-grow-1" id="background-img" src="assets/img/IMG_8041%202%20copy.JPG" style="opacity: 0.89;filter: blur(4px);">
+        <div id="login-div" style="width: 100%;padding-top: 16px;">
+            <h2 class="text-center" style="color: rgb(255,255,255);">Sign In / Sign Up</h2>
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">
+                <p class="text-center">Loading...</p>
+            </div>
+        </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

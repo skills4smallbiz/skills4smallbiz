@@ -88,3 +88,24 @@
   color: #fff;
 }
 
+.img-fluid, .img-thumbnail {
+  object-fit: cover;
+}
+
+.text-center {
+}
+
+#login-div {
+  position: relative;
+}
+
+#container {
+  position: relative;
+}
+
+#background-img {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+}
+
