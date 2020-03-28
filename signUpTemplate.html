@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+
+<script src="/__/reference/setup.js"></script>
+    <script>
+               
+
+        function createVol() {
+            var first = document.getElementById("First").innerText
+            var Last = document.getElementById("Last").innerText
+            var name = first + ' ' + last 
+            var userName = document.getElementById("username").innerText
+            firebase.database().ref('Buisness/' + userID).set({
+                Username: userID,
+                name: name,
+                Email: document.getElementById("Email").innerText,
+                FrontEnd: Document.getElementById("FrontEnd").checked,
+                BackEnd: Document.getElementById("BackEnd").checked,
+                Fullstack: Document.getElementById("Fullstack").checked,
+                Law: Document.getElementById("Law").checked,
+                Marketing: Document.getElementById("Marketing").checked,
+                Accounting: Document.getElementById("Accounting").checked,
+                Data_Sci: Document.getElementById("Data_Sci").checked,
+                Other: Document.getElementById("Other").checked,
+                Password: Document.getElementById("Password").innerText
+                //TODO: Profile Picuture
+                
+
+                }
+
+            });
+        }
+
+        function createBiz() {
+
+            var first = document.getElementById("First").nodeValue
+            var Last = document.getElementById("Last").nodeValue
+            var userID = first.trim() + last.trim()
+            var name = first + ' ' + last 
+
+ 
+
+            firebase.database().ref('Developer/' + userId).set({
+                Username: document.getElementById("FullName").nodeValue,
+                Email: document.getElementById("Email").nodeValue,
+                FrontEnd: Document.getElementById("FrontEnd").checked,
+                BackEnd: Document.getElementById("BackEnd").checked,
+                Fullstack: Document.getElementById("Fullstack").checked,
+                Law: Document.getElementById("Law").checked,
+                Marketing: Document.getElementById("Marketing").checked,
+                Accounting: Document.getElementById("Accounting").checked,
+                Data_Sci: Document.getElementById("Data_Sci").checked,
+                Other: Document.getElementById("Other").checked,
+                Password: Document.getElementById("Password").nodeValue
+                //TODO: Profile Picuture
+            });
+        }
+    </script>
+
+
+    <div class="dev">
+      
+        <input id="First" name="First Name" type="text"/>
+        <input id="Last" name="Last Name" type="text" />
+        <input id="Email" name="email" type="text"/>
+        <input id="FrontEnd" name="Front End Developer" type="checkbox" />
+        <input id="BackEnd" name="Back End Developer" type="checkbox"/> 
+        <input id="Fullstack" name="Full Stack Developer" type="checkbox" />
+        <input id="Law" name="Law" type="checkbox" />
+        <input id="Marketing" name="Marketing" type="checkbox" />
+        <input id="Accounting" name="Accounting" type="checkbox" />
+        <input id="Data_Sci" name="Data Scientist" type="checkbox" />
+        <input id="Other" name="Other" type="text" />
+        <input id="State" name="State" type="Text" />
+        <input id="Town" name="Town" type="text" />
+        <input id="Password" name="Password" type="text" />
+    </div>
+    <div class="biz">
+ 
+        <input id="First" name="First Name" type="text"/>
+        <input id="Last" name="Last Name" type="text" />
+        <input id="Email" name="email" type="text"/>
+        <input id="FrontEnd" name="Front End Developer" type="checkbox" />
+        <input id="BackEnd" name="Back End Developer" type="checkbox"/> 
+        <input id="Fullstack" name="Full Stack Developer" type="checkbox" />
+        <input id="Law" name="Law" type="checkbox" />
+        <input id="Marketing" name="Marketing" type="checkbox" />
+        <input id="Accounting" name="Accounting" type="checkbox" />
+        <input id="Data_Sci" name="Data Scientist" type="checkbox" />
+        <input id="Other" name="Other" type="text" />
+        <input id="State" name="State" type="Text" />
+        <input id="Town" name="Town" type="text" />
+        <input id="Password" name="Password" type="text" />
+
+
+    </div>
+
+
+
+</body>
+</html>
