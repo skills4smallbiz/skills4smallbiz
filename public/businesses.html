@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -24,29 +24,55 @@
                 </ul>
             </div><a class="btn btn-primary ml-auto" role="button" href="/sign.html">Sign In/Sign Up</a></div>
     </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+<div class="Dashboard">
+    <div id="Header">
+        Accounting: <input class="service" name="Accounting" type="checkbox" />
+        <button onclick="getData">Get Volunteers!</button>
+    </div>
+    <div id="Results">
 
+    </div>
+
+</div>
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
-<!-- Previously loaded Firebase SDKs -->
+<script src="reference/setup.js"></script>
+
 
 <script>
-    // TODO: Replace the following with your app's Firebase project configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-      authDomain: "covidsmallbizlink.firebaseapp.com",
-      databaseURL: "https://covidsmallbizlink.firebaseio.com",
-      projectId: "covidsmallbizlink",
-      storageBucket: "covidsmallbizlink.appspot.com",
-      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-    };
+    var db = firebase.firestore()//something like that
+    var v = db.collection("volunteers")
+    function getData() {
+        
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+        var desired = []
+        var services = document.getElementsByClassName("service");
+        for (i = 0; i < services.length; i++) {
+            if (services.checked) {
+                desired.push(services[i].getAttribute("name"))
+            }
+        }
+        b.where('Services', 'array-contains', desired), get().then(function (vol) {
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode("Name:" + vol.name))
+            div.appendChild(document.createTextNode("Email:" vol.email))
+            var s = ""
+            for (i = 0; i < vol.services.length; i++) {
+                s.push(vol.services[i])
+            }
+            div.appendChild(document.createTextNode("State:" + vol.state))
+            div.appendChild(document.createTextNode("Town:" + vol.town))
+            document.getElementById("Results").appendChild(div)
+        });
+        
+//This is close enough to what I want that it will be enough for tonight. Still needs to be debugged
+    }
 </script>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
