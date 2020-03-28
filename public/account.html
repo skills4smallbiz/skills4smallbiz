@@ -79,21 +79,19 @@
 <script src="assets/js/setup.js"></script>
 <script>
     var uid, in_email, in_photo, displayName;
-    var user = firebase.auth().currentUser;
+    uid = sessionStorage.getItem("uid");
+    name = sessionStorage.getItem("name");
+    email = sessionStorage.getItem("email");
 
-    if (user) {
-        displayName = user.displayName;
-        in_email = user.email;
-        //         var emailVerified = user.emailVerified;
-        //         in_photo = user.photoURL;
-        //         var isAnonymous = user.isAnonymous;
-        uid = user.uid;
-        //         var providerData = user.providerData;
+    if (uid) {
+        b = document.getElementsByClassName("btn btn-primary ml-auto")[0];
+        b.innerText = "Hello " + name;
+        b.href = "businesses.html";
 
         console.log(uid)
     } else {
-//      window.location.replace("sign.html"); 
-            console.log("User Not Logged IN")
+     window.location.href = "sign.html"; 
+            // console.log("User Not Logged IN") 
     }
 
 
