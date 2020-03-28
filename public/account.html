@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -81,10 +81,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
-
+<script src="assets/js/setup.js"></script>
 <script>
     var db = firebase.firestore()
-
     console.log(db.collection("businesses").doc("johnSmith").get().then(
         function (doc) {
             if (doc.exists) {
@@ -95,15 +94,15 @@
 
 
     ///DeBugging Vars
-    var displayName = "John Smith"
-    var in_email = "js@fake.com"
-    
-
+    var displayName = sessionStorage.getItem('name')
+    var in_email = sessionStorage.getItem('email')
+    var uid = sessionStorage.getItem('uid')
+    console.log(uid)
 ///////////////////////////////////
 
 
     function savebiz() {
-        window.alert("Saving Data...")
+        console.log("Saving Data...")
         var data = document.forms[0];
         var in_bizName = data.getElementsByTagName("input")["biz-name"].innerText;
         var in_accounting = data.getElementsByTagName("input")["serv-webdev"].checked 
@@ -122,8 +121,8 @@
         if (in_legal) { in_services.push("Legal") }
         if (in_ad) { in_services.push("Advertising") }
         if (in_consulting) { in_services.push("Consulting") }
-        window.alert("Data found, uploading to database")
-        db.collection("businesses").doc("Debug").set({
+        console.log("Data found, uploading to database")
+        db.collection("businesses").doc(uid).set({
             name: displayName,
             email: in_email,
             //     photoURL: in_photoUrl,
@@ -132,7 +131,7 @@
             address: in_Address,
             //          about: in_about,
             //   other: in_other
-        }).then(function () { window.alert("Saved Data") });
+        }).then(function () {console.log("Saved Data") });
     }
 /*
     function saveVol() {
