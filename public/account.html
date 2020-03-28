@@ -74,9 +74,10 @@
     function savebiz() {
         in_data = document.getElementById("biz");
         in_bizName = in_data.getElementById("biz-name");
-        raw_services = in_data.getElementsByClass("service");
-        in_town = in_data.getElementById("town");
-        in_state = in_data.getElementById("state");
+        raw_services = in_data.getElementsByID("service");
+        in_about = in_data.getElementById("about")
+
+        in_Address = in_data.getElementById("Address");
         in_services = [];
         for (i = 0; i < raw_services.length; i++) {
             var s = raw_services[i];
@@ -90,18 +91,17 @@
             photoURL: in_photoUrl,
             bizName: in_bizName,
             services: in_services,
-            town: in_town,
-            state: in_state,
+            address: in_address,
+            about: in_about
         }); 
         
 
     }
 
     function saveVol() {
-        in_data = document.getElementById("biz");
+        in_data = document.getElementById("vol");
         raw_services = in_data.getElementsByClass("service");
-        in_town = in_data.getElementById("town");
-        in_state = in_data.getElementById("state");
+        in_address = in_data.getElementById("Address");
         in_services = [];
         for (i = 0; i < raw_services.length; i++) {
             var s = raw_services[i];
