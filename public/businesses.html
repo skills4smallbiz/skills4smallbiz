@@ -35,14 +35,24 @@
 
 
 <script>
+    var user = firebase.auth().currentUser;
+    var in_name, in_email, in_photoUrl, uid, emailVerified;
+
+    if (user != null) {
+        in_name = user.displayName;
+        in_email = user.email;
+        in_photoUrl = user.photoURL;
+        emailVerified = user.emailVerified;
+        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+    } 
+
+
     var db = firebase.firestore();
     var v = db.collection("volunteers")
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provide).then(result => {
-        user = result.user;
-    });
     var userData;
-    db.collection("businesses").doc(user).get().then(function (doc) {
+    db.collection("businesses").doc(uid).get().then(function (doc) {
         userData = doc.data()
     });
 

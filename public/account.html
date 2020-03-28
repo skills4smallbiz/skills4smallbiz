@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -32,17 +32,18 @@
 
         <h3>Toggle: my volunteer profile/my business profile</h3>
 
-        <div class="Dashboard">
-                <div id="Header">
-                    Accounting: <input class="service" name="Accounting" type="checkbox" />
-                    <button onclick="getData">Get Volunteers!</button>
+        <div class="Entry-Field">
+                <div id="biz">
+                   <input class="service" /> 
+                     
+                
                 </div>
                 <div id="Results">
             
                 </div>
             
             </div>
-    </div>
+   </div>
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
@@ -51,20 +52,77 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
-
+<script src="/assets/js/setup.js"></script>
 <script>
-    // TODO: Replace the following with your app's Firebase project configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-      authDomain: "covidsmallbizlink.firebaseapp.com",
-      databaseURL: "https://covidsmallbizlink.firebaseio.com",
-      projectId: "covidsmallbizlink",
-      storageBucket: "covidsmallbizlink.appspot.com",
-      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-    };
+    var db = firebase.firestore()
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    var user = firebase.auth().currentUser;
+    var in_name, in_email, in_photoUrl, uid, emailVerified;
+
+    if (user != null) {
+        in_name = user.displayName;
+        in_email = user.email;
+        in_photoUrl = user.photoURL;
+        emailVerified = user.emailVerified;
+        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+    } 
+
+
+
+    function savebiz() {
+        in_data = document.getElementById("biz");
+        in_bizName = in_data.getElementById("biz-name");
+        raw_services = in_data.getElementsByClass("service");
+        in_town = in_data.getElementById("town");
+        in_state = in_data.getElementById("state");
+        in_services = [];
+        for (i = 0; i < raw_services.length; i++) {
+            var s = raw_services[i];
+            if (s.checked) {
+                in_services.append(s.innerText);
+            }
+        }
+        db.collection("businesses").doc(uid).set({
+            name: in_name,
+            email: in_email,
+            photoURL: in_photoUrl,
+            bizName: in_bizName,
+            services: in_services,
+            town: in_town,
+            state: in_state,
+        }); 
+        
+
+    }
+
+    function saveVol() {
+        in_data = document.getElementById("biz");
+        raw_services = in_data.getElementsByClass("service");
+        in_town = in_data.getElementById("town");
+        in_state = in_data.getElementById("state");
+        in_services = [];
+        for (i = 0; i < raw_services.length; i++) {
+            var s = raw_services[i];
+            if (s.checked) {
+                in_services.append(s.innerText);
+            }
+        }
+        db.collection("businesses").doc(uid).set({
+            name: in_name,
+            email: in_email,
+            photoURL: in_photoUrl,
+            services: in_services,
+            town: in_town,
+            state: in_state,
+        });
+
+
+    }
+
+
+
 </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
