@@ -89,6 +89,27 @@
     
     ui.start('#firebaseui-auth-container', uiConfig);
     
+    firebase.auth().onAuthStateChanged(function(user) {		
+        if (user) {		
+            // User is signed in.		
+            var displayName = user.displayName;		
+            var email = user.email;		
+            var uid = user.uid;		
+            sessionStorage.setItem("user",user);		
+            sessionStorage.setItem("uid", uid);		
+            sessionStorage.setItem("name", displayName);		
+            sessionStorage.setItem("email", email);		
+            // ...		
+        } else {		
+            // User is signed out.		
+            // ...		
+        }		
+ });
+    uid = sessionStorage.getItem("uid");		
+    if (uid) {		
+        b = document.getElementsByClassName("btn btn-primary ml-auto")[0];		
+        b.innerText = "Hello, " + name;		
+        b.href = "businesses.html";}
     
 </script>
 
