@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -79,7 +79,17 @@
 <script src="/assets/js/setup.js"></script>
 <script>
     var db = firebase.firestore()
+    var firebaseConfig = {
+      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
+      authDomain: "covidsmallbizlink.firebaseapp.com",
+      databaseURL: "https://covidsmallbizlink.firebaseio.com",
+      projectId: "covidsmallbizlink",
+      storageBucket: "covidsmallbizlink.appspot.com",
+      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
+    };
 
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
