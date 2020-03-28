@@ -1,16 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CovidBizLink</title>
+    <title>CovidBizLink (1)</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Blue.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/Team-Grid.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
@@ -35,41 +38,70 @@
 <!-- Previously loaded Firebase SDKs -->
 
 <script>
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var in_email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var isAnonymous = user.isAnonymous;
-            var uid = user.uid;
-            var providerData = user.providerData;
-            // ...
-        } else {
-            window.location.replace("sign.html");
-        }
-    });
-    var db = firebase.firestore();
-    var b = db.collection("businesses")
-    var userData;
-    db.collection("volunteers").doc(uid).get().then(function (doc) {
-        userData = doc.data()
-    });
+    // TODO: Replace the following with your app's Firebase project configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
+      authDomain: "covidsmallbizlink.firebaseapp.com",
+      databaseURL: "https://covidsmallbizlink.firebaseio.com",
+      projectId: "covidsmallbizlink",
+      storageBucket: "covidsmallbizlink.appspot.com",
+      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
+    };
 
-    var selection = b.where("services", "array-contains-any", userData['services'])
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                  //TODO:Add query data to doc  
-
-            });
-        })
-
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 </script>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
+    <h1 style="padding: 23px;">Find Business Who Need Your Help.</h1>
+    <p>Distance:&nbsp;<input type="text"></p><iframe allowfullscreen="" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50&amp;q=Paris%2C+France&amp;zoom=11" width="100%" height="400"></iframe>
+    <div
+        class="highlight-blue">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">William K.</h2>
+                <p class="text-center">I am a person</p>
+            </div>
+            <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+        </div>
+        </div>
+        <div class="highlight-clean">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Luc G.</h2>
+                    <p class="text-center">I am like cookies</p>
+                </div>
+                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+            </div>
+        </div>
+        <div class="highlight-blue">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Daniel W.</h2>
+                    <p class="text-center">I like cake</p>
+                </div>
+                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+            </div>
+        </div>
+        <div class="highlight-clean">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Andrew F.</h2>
+                    <p class="text-center">I am like pies</p>
+                </div>
+                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+            </div>
+        </div>
+        <div class="highlight-blue">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Myles J.</h2>
+                    <p class="text-center">I like apples.</p>
+                </div>
+                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+            </div>
+        </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/bs-init.js"></script>
 </body>
 
 </html>
