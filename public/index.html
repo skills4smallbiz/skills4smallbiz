@@ -75,9 +75,21 @@
 
 <script>
 
+<<<<<<< HEAD
 
 
 
+=======
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+
+    uid = sessionStorage.getItem("uid");
+    if (uid) {
+        b = document.getElementsByClassName("btn btn-primary ml-auto")[0];
+        b.innerText = "Hello, " + name;
+        b.href = "businesses.html";}
+>>>>>>> parent of 51899cb... Added Email Functionality and made sign in image full page
 </script>
     <footer class="footer bg-light">
         <div class="container">

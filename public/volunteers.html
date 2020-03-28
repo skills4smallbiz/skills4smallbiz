@@ -50,9 +50,16 @@
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    
+    uid = sessionStorage.getItem("uid");
+    if (uid) {
+        b = document.getElementsByClassName("btn btn-primary ml-auto")[0];
+        b.innerText = "Hello, " + name;
+        b.href = "businesses.html";}
+
 </script>
     <h1 style="padding: 23px;">Find Business Who Need Your Help.</h1>
-    <p>Distance:&nbsp;<input type="text"></p><iframe allowfullscreen="" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50&amp;q=Paris%2C+France&amp;zoom=11" width="100%" height="400" style="height: 400px;"></iframe>
+    <p>Distance:&nbsp;<input type="text"></p><iframe allowfullscreen="" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50&amp;q=Paris%2C+France&amp;zoom=11" width="100%" height="400"></iframe>
     <div
         class="text-center d-lg-flex justify-content-lg-center highlight-blue" style="margin: 75px;margin-top: 0px;margin-bottom: 0px;">
         <div class="container">
