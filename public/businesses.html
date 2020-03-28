@@ -1,16 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CovidBizLink</title>
+    <title>CovidBizLink (1)</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Blue.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/Team-Grid.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
@@ -24,50 +27,54 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
                 </ul>
             </div><a class="btn btn-primary ml-auto" role="button" href="/sign.html">Sign In/Sign Up</a></div>
-    </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
-<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-
-<!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
-<!-- Previously loaded Firebase SDKs -->
-<script src="assets/js/setup.js"></script>
-<script>
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var in_email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var isAnonymous = user.isAnonymous;
-            var uid = user.uid;
-            var providerData = user.providerData;
-            // ...
-        } else {
-            window.location.replace("sign.html");
-        }
-    });
-    var db = firebase.firestore();
-    var v = db.collection("volunteer")
-    var userData;
-    db.collection("businesses").doc(uid).get().then(function (doc) {
-        userData = doc.data()
-    });
-
-    var selection = v.where("services", "array-contains-any", userData['services'])
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                //TODO:Add query data to doc  
-
-            });
-        })
-
-
-</script>
+    </nav>
+    <h1 style="padding: 23px;">Find Locals To Help Your Business.</h1>
+    <p>Filters:</p>
+    <div class="highlight-blue">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">William K.</h2>
+                <p class="text-center">I am a person</p>
+            </div>
+            <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+        </div>
+    </div>
+    <div class="highlight-clean">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Luc G.</h2>
+                <p class="text-center">I am like cookies</p>
+            </div>
+            <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+        </div>
+    </div>
+    <div class="highlight-blue">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Daniel W.</h2>
+                <p class="text-center">I like cake</p>
+            </div>
+            <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+        </div>
+    </div>
+    <div class="highlight-clean">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Andrew F.</h2>
+                <p class="text-center">I am like pies</p>
+            </div>
+            <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+        </div>
+    </div>
+    <div class="highlight-blue">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Myles J.</h2>
+                <p class="text-center">I like apples.</p>
+            </div>
+            <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
+        </div>
+    </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
