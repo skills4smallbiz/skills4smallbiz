@@ -14,10 +14,11 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="/__/firebase/7.13.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-database.js"></script>`
 
     <!-- Initialize Firebase -->
     <script src="/__/firebase/init.js"></script>
-
+    
 
 
     <script>
@@ -34,8 +35,14 @@
 
         var database = firebase.database();
         function createVol() {
-            firebase.database().ref('users/' + userId).set({
-                Username: document.getElementById("FullName").nodeValue,
+            var first = document.getElementById("First").nodeValue
+            var Last = document.getElementById("Last").nodeValue
+            var userID = first.trim() + last.trim()
+            var name = first + ' ' + last 
+
+            firebase.database().ref('Buisness/' + userID).set({
+                Username: userID,
+                name: name,
                 Email: document.getElementById("Email").nodeValue,
                 FrontEnd: Document.getElementById("FrontEnd").checked,
                 BackEnd: Document.getElementById("BackEnd").checked,
@@ -50,7 +57,30 @@
             });
         }
 
+        function createBiz() {
 
+            var first = document.getElementById("First").nodeValue
+            var Last = document.getElementById("Last").nodeValue
+            var userID = first.trim() + last.trim()
+            var name = first + ' ' + last 
+
+ 
+
+            firebase.database().ref('Developer/' + userId).set({
+                Username: document.getElementById("FullName").nodeValue,
+                Email: document.getElementById("Email").nodeValue,
+                FrontEnd: Document.getElementById("FrontEnd").checked,
+                BackEnd: Document.getElementById("BackEnd").checked,
+                Fullstack: Document.getElementById("Fullstack").checked,
+                Law: Document.getElementById("Law").checked,
+                Marketing: Document.getElementById("Marketing").checked,
+                Accounting: Document.getElementById("Accounting").checked,
+                Data_Sci: Document.getElementById("Data_Sci").checked,
+                Other: Document.getElementById("Other").checked,
+                Password: Document.getElementById("Password").nodeValue
+                //TODO: Profile Picuture
+            });
+        }
     </script>
 
     <div class="onLoad">
@@ -58,10 +88,26 @@
     </div>
     <div class="dev">
       
-        <input id="FullName" name="Full Name" type="text"/>
+        <input id="First" name="First Name" type="text"/>
+        <input id="Last" name="Last Name" type="text" />
         <input id="Email" name="email" type="text"/>
         <input id="FrontEnd" name="Front End Developer" type="checkbox" />
-        <input id="BackEnd" name="Back End Developer" type="checkbox"/>
+        <input id="BackEnd" name="Back End Developer" type="checkbox"/> 
+        <input id="Fullstack" name="Full Stack Developer" type="checkbox" />
+        <input id="Law" name="Law" type="checkbox" />
+        <input id="Marketing" name="Marketing" type="checkbox" />
+        <input id="Accounting" name="Accounting" type="checkbox" />
+        <input id="Data_Sci" name="Data Scientist" type="checkbox" />
+        <input id="Other" name="Other" type="text" />
+        <input id="State" name="State" type="Text" />
+        <input id="State" name="Town" type="text" />
+        <input id="Password" name="Password" type="text" />
+    </div>
+    <div class="biz">
+        <input id="FullName" name="Full Name" type="text" />
+        <input id="Email" name="email" type="text" />
+        <input id="FrontEnd" name="Front End Developer" type="checkbox" />
+        <input id="BackEnd" name="Back End Developer" type="checkbox" />
         <input id="Fullstack" name="Full Stack Developer" type="checkbox" />
         <input id="Law" name="Law" type="checkbox" />
         <input id="Marketing" name="Marketing" type="checkbox" />
@@ -70,8 +116,8 @@
         <input id="Other" name="Other" type="text" />
         <input id="Password" name="Password" type="text" />
 
-    </div>
-    <div class="biz">
+
+
     </div>
 
 
