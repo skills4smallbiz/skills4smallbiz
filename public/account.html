@@ -4,11 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Account</title>
+    <title>CovidBizLink</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
@@ -20,30 +21,50 @@
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/businesses.html">Businesses</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/volunteers.html">Volunteers</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
                 </ul>
             </div><a class="btn btn-primary ml-auto" role="button" href="/sign.html">Sign In/Sign Up</a></div>
-    </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
-    <h1>Sup ya'll this is going to be where the user enters their data (1st time sign up), and after that, they can see their existing data and change what they want to change</h1>
-    <div>
-        <p></p>
-        <p></p>
-
-        <h3>Toggle: my volunteer profile/my business profile</h3>
-
-        <div class="Entry-Field">
-                <div id="biz">
-                   <input class="service" /> 
-                     
-                
+    </nav>
+    <h4 class="text-center">Business</h4>
+    <div style="margin: 0px auto;width: 80%;max-width: 570px;">
+        <form>
+            <div class="form-group d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center" style="padding: 0;min-width: 260px;"><label style="padding-right: 10px;min-width: 135px;" for="biz-name">Business Name:</label><input class="form-control" type="text" id="biz-name"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;">Services Required:</label>
+                <div class="d-flex flex-wrap">
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-phone-line"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
                 </div>
-                <div id="Results">
-            
-                </div>
-            
             </div>
-   </div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="serv-other"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="address"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="about"></textarea></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="address"></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit">update</button></div>
+        </form>
+    </div>
+    <h4 class="text-center" style="padding-top: 59px;">Volunteer</h4>
+    <div style="margin: 0px auto;width: 80%;max-width: 570px;">
+        <form>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;">Services Offered:</label>
+                <div class="d-flex flex-wrap">
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-phone-line"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
+                </div>
+            </div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="serv-other"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About You:</label><textarea class="form-control" id="about"></textarea></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="address"></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit">update</button></div>
+        </form>
+    </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
