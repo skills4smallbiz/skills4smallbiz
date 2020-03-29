@@ -1,3 +1,13 @@
+function formatServices(serv) {
+    var res = "";
+    const split = ", "
+    serv.forEach(function(s) {
+        res += s.slice(0,1).toUpperCase() + s.slice(1) + split;
+    });
+
+    return res.slice(0, -2)
+}
+
 function printData(qtype, prefix, fields, servlist){
     var table = document.getElementById(prefix+'-table')
 
@@ -8,8 +18,12 @@ function printData(qtype, prefix, fields, servlist){
                 var cells = [];
                 for (i = 0; i < fields.length; i++){
                     cells.push(row.insertCell());
-                    cells[i].innerHTML = doc.data()[fields[i]]
-                    cells[i].id = prefix + '-' + fields;
+                    var fmtData = doc.data()[fields[i]]
+                    if (fields[i] == 'services') {
+                        fmtData = formatServices(fmtData);
+                    }
+                    cells[i].innerHTML = fmtData
+                    cells[i].className = prefix + '-' + fields[i];
                     
                     row.addEventListener("click", () => {
                         window.location.href = "profile.html?type=" + qtype + "&user=" + doc.id;

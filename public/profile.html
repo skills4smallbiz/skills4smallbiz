@@ -77,6 +77,9 @@
         }
     });
 </script>
+<script src="dbload.js"></script>
+<script src="assets/js/dbload.js"></script>
+
 <script>
     Array.prototype.forEach.call(document.getElementById("profile").children, function(n) {
         n.style.display = "none";
@@ -116,8 +119,14 @@
 
                 keys.forEach(function(id) {
                     console.log(id)
+                    var fmtData = data[id];
+                    
+                    if (id == "services") {
+                       fmtData = formatServices(fmtData);
+                    }
+                    
                     textDoc = document.getElementById('profile-' + id)
-                    textDoc.innerText += data[id];
+                    textDoc.innerText += fmtData;
                     textDoc.style.display = "";
                 });
                 //document.getElementById("type").innerText = type;
