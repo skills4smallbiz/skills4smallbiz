@@ -8,26 +8,29 @@ function formatServices(serv) {
     return res.slice(0, -2)
 }
 
-function printData(qtype, prefix, fields, servlist){
+function printData(qtype, prefix, fields, servlist, uid){
     var table = document.getElementById(prefix+'-table')
 
     db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
         if(Object.keys(snapshot).length > 0){
-            snapshot.docs.forEach(function(doc) {            
-                var row = table.insertRow(-1);
-                var cells = [];
-                for (i = 0; i < fields.length; i++){
-                    cells.push(row.insertCell());
-                    var fmtData = doc.data()[fields[i]]
-                    if (fields[i] == 'services') {
-                        fmtData = formatServices(fmtData);
+            snapshot.docs.forEach(function(doc) { 
+                
+                if (doc.id != uid) {
+                    var row = table.insertRow(-1);
+                    var cells = [];
+                    for (i = 0; i < fields.length; i++){
+                        cells.push(row.insertCell());
+                        var fmtData = doc.data()[fields[i]]
+                        if (fields[i] == 'services') {
+                            fmtData = formatServices(fmtData);
+                        }
+                        cells[i].innerHTML = fmtData
+                        cells[i].className = prefix + '-' + fields[i];
+
+                        row.addEventListener("click", () => {
+                            window.location.href = "profile.html?type=" + qtype + "&user=" + doc.id;
+                        });
                     }
-                    cells[i].innerHTML = fmtData
-                    cells[i].className = prefix + '-' + fields[i];
-                    
-                    row.addEventListener("click", () => {
-                        window.location.href = "profile.html?type=" + qtype + "&user=" + doc.id;
-                    });
                 }
             });
         } else {
@@ -59,7 +62,7 @@ function query(qtype, utype, user, prefix, fields){
                 error.appendChild(error_t)
                 document.body.appendChild(error)
             }
-            printData(qtype, prefix, fields, servlist)
+            printData(qtype, prefix, fields, servlist, uid)
         });
 
     } else {
