@@ -171,6 +171,9 @@
           }
         });
 
+        values["email"] = email;
+        values["name"] = name;
+
         db.collection(collection).doc(uid).set(values);
 
         document.getElementById(prefix + '-submit').innerText = "Updated!"
