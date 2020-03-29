@@ -120,6 +120,10 @@
                 socials.appendChild(social_t)
                 cell.appendChild(socials)
 
+                var learnMore = document.createButton('button', { 'onclick':'goProfilePage('+doc.id()+')'})
+                
+                cell.appendChild(learnMore)
+
                 
                 cell.appendChild(serviceList)
                 container.appendChild(cell)
