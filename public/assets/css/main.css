@@ -113,11 +113,11 @@
   width: 30%;
 }
 
-.biz-address {
+.biz-services {
   width: 50%;
 }
 
-.biz-socials {
+.biz-other-serv {
   width: 20%;
 }
 
@@ -133,6 +133,14 @@ h1 {
 }
 
 .vol-services {
-  width: 50%;
+  width: 30%;
+}
+
+.vol-other-serv {
+  width: 30%;
+}
+
+.vol-socials {
+  width: 20%;
 }
 

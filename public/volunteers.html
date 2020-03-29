@@ -33,6 +33,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Services</th>
+                    <th>Other</th>
                     <th>Socials</th>
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
                 <tr>
                     <td class="vol-name">Volunteer Name</td>
                     <td class="vol-services">abcdedfadkljflkaj</td>
+                    <td class="vol-other-serv">Cell 3</td>
                     <td class="vol-socials">linkedin</td>
                 </tr>
             </tbody>
@@ -88,7 +90,13 @@
 <script src="assets/js/dbload.js"></script>
 
 <script>
-    loadSome('volunteers', 'vol', ['name', 'services', 'socials'])
+    var db = firebase.firestore();
+    
+    firebase.auth().onAuthStateChanged(function(user){
+        var fields = ['name', 'services', 'other-serv', 'socials'];
+        query("volunteers", "businesses", user, "vol", fields);
+    });
+    
 </script>
 
     <script src="assets/js/jquery.min.js"></script>
