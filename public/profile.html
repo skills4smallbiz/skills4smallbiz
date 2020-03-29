@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="text-center">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -26,7 +26,16 @@
             <div class="dropdown bg-primary border-primary shadow-sm" id="account-drop" style="padding: 7px;border-radius: 4px; display: none"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="account-welcome" href="#" style="color: rgb(255,255,255);">Dropdown </a>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
             </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
-    </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    </nav>
+    <section style="padding: 35px;padding-top: 55px;padding-bottom: 55px;">
+        <div class="col-lg-4" style="width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;">
+            <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3"></div>
+            <h3 id="profile-name" class="name">Name</h3>
+            <p id="profile-services" class="title">Services:&nbsp;</p>
+            <p id="profile-about" class="description">About:</p>
+            <p id="profile-socials" class="description">Links:</p>
+        </div>
+    </section><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
@@ -66,69 +75,9 @@
         }
     });
 </script>
-<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-
-
 <script>
-    // REFERENCE: https://firebase.google.com/docs/auth/web/firebaseui
-    
-    // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    
-    var uiConfig = {
-      callbacks: {
-        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-          // User successfully signed in.
-          // Return type determines whether we continue the redirect automatically
-          // or whether we leave that to developer to handle.
-          return true;
-        },
-        uiShown: function() {
-          // The widget is rendered.
-          // Hide the loader.
-          document.getElementById('loader').style.display = 'none';
-        }
-      },
-      // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-      //signInFlow: 'popup',
-      signInSuccessUrl: '/account.html',
-      signInOptions: [
-        // Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
-      ],
-      // Terms of service url.
-      tosUrl: '<your-tos-url>',
-      // Privacy policy url.
-      privacyPolicyUrl: '<your-privacy-policy-url>'
-    };
-    
-    ui.start('#firebaseui-auth-container', uiConfig);
-    
     
 </script>
-
-    <div id="container"><img class="img-fluid flex-grow-1" id="background-img" src="assets/img/IMG_8041%202%20copy.JPG" style="opacity: 0.89;filter: blur(4px);width: 100%;">
-        <div id="login-div" style="width: 100%;padding-top: 16px;">
-            <h2 class="text-center" style="color: rgb(255,255,255);">Sign In / Sign Up</h2>
-            <div id="firebaseui-auth-container"></div>
-            <div id="loader">
-                <p class="text-center">Loading...</p>
-            </div>
-        </div>
-    </div>
-    <footer class="footer bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
-                    <p class="text-muted small mb-4 mb-lg-0">© Covid Biz Link 2020. All Rights Reserved.</p>
-                </div>
-                <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
-                    <p>Created by&nbsp;Andrew Ferruolo,&nbsp; Lucien Gaitskell,&nbsp;Myles Johnson, William Kopans,&nbsp; and Daniel Wang.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>

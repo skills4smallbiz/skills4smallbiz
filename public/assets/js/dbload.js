@@ -18,7 +18,10 @@ function printData(qtype, prefix, fields, servlist){
                     cells.push(row.insertCell());
                     cells[i].innerHTML = doc.data()[fields[i]]
                     cells[i].id = prefix + '-' + fields;
-                    idx = i;
+                    
+                    row.addEventListener("click", () => {
+                        window.location.href = "profile.html?type=businesses&user=" + doc.id;
+                    });
                 }
                 cells.push(row.insertCell());
                 cells[idx + 1 ].innerHTML = "<button onclick=\"goProfiePage(" + doc.id + ")\"> View Profile</button>"; 
@@ -70,9 +73,4 @@ function query(qtype, utype, user, prefix, fields){
 
 
 
-}
-
-
-function goProfiePage(uid){
-    window.location.href = "viewProfile.html?type=volunteers&user=" + uid;
 }
