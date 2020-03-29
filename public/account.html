@@ -28,21 +28,21 @@
     <h4 class="text-center">Business</h4>
     <div style="margin: 0px auto;width: 80%;max-width: 570px;">
         <form onsubmit="return false">
-            <div class="form-group d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center" style="padding: 0;min-width: 260px;"><label style="padding-right: 10px;min-width: 135px;" for="biz-name">Business Name:</label><input class="form-control" type="text" id="biz-name"></div>
+            <div class="form-group d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center" style="padding: 0;min-width: 260px;"><label style="padding-right: 10px;min-width: 135px;" for="biz-name">Business Name:</label><input class="form-control" type="text" id="biz-bizname"></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;">Services Required:</label>
                 <div class="d-flex flex-wrap">
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-phone-line"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-phone"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
                 </div>
             </div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="serv-other"></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="address"></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="about"></textarea></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="socials"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-address"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="biz-about"></textarea></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="biz-socials"></div>
             <div class="form-group"><button class="btn btn-primary" type="submit" onclick="savebiz()">update</button></div>
         </form>
     </div>
@@ -51,17 +51,17 @@
         <form onsubmit="return false">
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;">Services Offered:</label>
                 <div class="d-flex flex-wrap">
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-phone-line"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
-                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-phone"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
                 </div>
             </div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="serv-other"></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About You:</label><textarea class="form-control" id="about"></textarea></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="socials"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="vol-other-serv"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About You:</label><textarea class="form-control" id="vol-about"></textarea></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="vol-socials"></div>
             <div class="form-group"><button class="btn btn-primary" type="submit" onclick="savevol()">update</button></div>
         </form>
     </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -104,80 +104,82 @@
     //var user = firebase.auth().currentUser;
 </script><script>
     var uid, name, email;
-    var db = firebase.firestore() 
-    
+    var db = firebase.firestore()
+
+
+    var idlist = {
+      biz: ['bizname', 'other-serv', 'address', 'about', 'socials'],
+      vol: ['other-serv', 'about', 'socials']
+    };
+    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting'];
+
+
+    function recover_information(col, prefix) {
+      db.collection(col).doc(uid).get().then(function(doc){
+        if (doc.exists){
+
+          idlist[prefix].forEach(function(id) {
+            htmlid = prefix + '-' + id;
+            document.getElementById(htmlid).value = doc.data()[id]
+          });
+
+          doc.data()['services'].forEach(function(id) {
+            htmlid = prefix + '-' + 'serv-' + id;
+            document.getElementById(htmlid).checked = true;
+          });
+        } else {
+          console.log("No such document!")
+        }
+      }).catch(function(error) {
+            console.log("Error getting document:", error)
+      });
+    }
     firebase.auth().onAuthStateChanged(function(user){
         if (user == null) {
             window.location.replace('/sign.html');
         }
-        
+
         uid = user.uid;
         name = user.displayName;
         email = user.email;
-    });
-    
-    function savebiz() {
-        console.log("Saving Data...")
-        var data = document.forms[0];
-        var in_bizName = data.getElementsByTagName("input")["biz-name"].value;
-        console.log("biz-name: " + in_bizName);
-        var in_accounting = data.getElementsByTagName("input")["serv-accounting"].checked
-        var in_webdev = data.getElementsByTagName("input")["serv-webdev"].checked
-        var in_phone = data.getElementsByTagName("input")["serv-phone-line"].checked
-        var in_legal = data.getElementsByTagName("input")["serv-legal"].checked
-        var in_ad = data.getElementsByTagName("input")["serv-advertising"].checked
-        var in_consulting = data.getElementsByTagName("input")["serv-consulting"].checked
-        var in_about = data.getElementsByTagName("textarea")["about"].value
-        var in_address = data.getElementsByTagName("input")["address"].value
-        var in_socials = data.getElementsByTagName("input")["socials"].value
-        var in_other = data.getElementsByTagName("input")["serv-other"].value
-        var in_services = []
-        if (in_accounting) { in_services.push("Accounting") }
-        if (in_webdev) { in_services.push("WebDev") }
-        if (in_phone) { in_services.push("Phone") }
-        if (in_legal) { in_services.push("Legal") }
-        if (in_ad) { in_services.push("Advertising") }
-        if (in_consulting) { in_services.push("Consulting") }
-      
 
-        db.collection("businesses").doc(uid).set({
-            name: name,
-            email: email,
-            bizName: in_bizName,
-            services: in_services,
-            address: in_address,
-            about: in_about,
-            other: in_other,
-            socials: in_socials
+        recover_information("businesses", "biz")
+        recover_information("volunteers", "vol")
+
+    });
+
+    function saveone(collection, prefix) {
+        var values = {}
+        idlist[prefix].forEach(function(id) {
+          htmlid = prefix + '-' + id;
+          values[id] = document.getElementById(htmlid).value;
         });
 
+        values['services'] = []
+        servlist.forEach(function(id) {
+          htmlid = prefix + '-' + 'serv-' + id;
+
+          if (document.getElementById(htmlid).checked) {
+            values['services'].push(id)
+          }
+        });
+
+        db.collection(collection).doc(uid).set(values);
+    }
+
+    function savebiz() {
+        console.log("Saving Data...")
+
+        saveone("businesses", "biz")
     }
 
     function savevol() {
         var data = document.forms[1];
-        in_accounting = data.getElementsByTagName("input")["serv-accounting"].checked
-        in_webdev = data.getElementsByTagName("input")["serv-webdev"].checked
-        in_phone = data.getElementsByTagName("input")["serv-phone-line"].checked
-        in_legal = data.getElementsByTagName("input")["serv-legal"].checked
-        in_ad = data.getElementsByTagName("input")["serv-advertising"].checked
-        in_consulting = data.getElementsByTagName("input")["serv-consulting"].checked
-        in_about = data.getElementsByTagName("textarea")["about"].value
-        in_services = []
-        if (in_accounting) { in_services.push("Accounting") }
-        if (in_webdev) { in_services.push("WebDev") }
-        if (in_phone) { in_services.push("Phone") }
-        if (in_legal) { in_services.push("Legal") }
-        if (in_ad) { in_services.push("Advertising") }
-        if (in_consulting) { in_services.push("Consulting") }
 
-        db.collection("volunteers").doc(uid).set({
-            name: name,
-            email: email,
-            services: in_services,
-            about: in_about
-        });
+        saveone("volunteers", "vol")
     }
 </script>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
