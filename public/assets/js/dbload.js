@@ -8,14 +8,25 @@ function formatServices(serv) {
     return res.slice(0, -2)
 }
 
+function errorMsg() {
+    var error = document.getElementById('loading-message');
+    error.innerHTML = "No users match your current requirements, try changing them in accounts!"
+    error.style.display = ""
+}
+
 function printData(qtype, prefix, fields, servlist, uid){
     var table = document.getElementById(prefix+'-table')
 
-    db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
-        if(Object.keys(snapshot).length > 0){
+    console.log(servlist)
+    
+    
+    
+    if (servlist.length > 0) {
+        db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
+            var numEntries = 0;
             snapshot.docs.forEach(function(doc) { 
-                
                 if (doc.id != uid) {
+                    numEntries += 1;
                     var row = table.insertRow(-1);
                     var cells = [];
                     for (i = 0; i < fields.length; i++){
@@ -33,13 +44,14 @@ function printData(qtype, prefix, fields, servlist, uid){
                     }
                 }
             });
-        } else {
-            var error = document.createElement('h1');
-            var error_t = document.createTextNode("No users match your current requirements, try changing them in accounts!")
-            error.appendChild(error_t)
-            document.body.appendChild(error)
-        }
-    });
+            
+            if (numEntries == 0) {
+                errorMsg();
+            }
+        });
+    } else {
+        errorMsg()
+    }
 }
 
 
