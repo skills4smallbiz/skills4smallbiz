@@ -35,7 +35,7 @@
             <p id="profile-services" class="title">Services:&nbsp;</p>
             <p id="profile-other-serv" class="description">Other Services:&nbsp;</p>
             <p id="profile-about" class="description">About:&nbsp;</p>
-            <p id="profile-socials" class="description">Links:&nbsp;</p>
+            <p id="profile-socials" class="description"></p>
         </div>
     </section><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
@@ -127,6 +127,12 @@
                     
                     textDoc = document.getElementById('profile-' + id)
                     textDoc.innerText += fmtData;
+                    if (id == "socials") {
+                        textDoc.style.textDecoration = "underline";
+                        textDoc.addEventListener("click", () => {
+                            window.open(fmtData)
+                        })
+                    }
                     textDoc.style.display = "";
                 });
                 //document.getElementById("type").innerText = type;
