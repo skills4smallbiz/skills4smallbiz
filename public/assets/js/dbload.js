@@ -3,10 +3,14 @@ function printData(qtype, prefix, fields, servlist){
 
     db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
         if(Object.keys(snapshot).length > 0){
-            console.log(Object.keys(snapshot))
+           
 
 
             snapshot.docs.forEach(function(doc) {            
+                
+                
+                
+                
                 var row = table.insertRow(-1);
                 var cells = [];
                 var idx = 0;

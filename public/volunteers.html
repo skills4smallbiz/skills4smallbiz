@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -33,7 +33,6 @@
                 <tr>
                     <th>Name</th>
                     <th>Services</th>
-                    <th>Other</th>
                     <th>Socials</th>
                 </tr>
             </thead>
@@ -41,13 +40,13 @@
                 <tr>
                     <td class="vol-name">Volunteer Name</td>
                     <td class="vol-services">abcdedfadkljflkaj</td>
-                    <td class="vol-other-serv">Cell 3</td>
                     <td class="vol-socials">linkedin</td>
                 </tr>
             </tbody>
         </table>
     </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
+</table>
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 
@@ -55,22 +54,14 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
+<script src="/assets/js/dbload.js"></script>
 
+<script src="assets/js/setup.js"></script>
 <script>
-    // TODO: Replace the following with your app's Firebase project configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-      authDomain: "covidsmallbizlink.firebaseapp.com",
-      databaseURL: "https://covidsmallbizlink.firebaseio.com",
-      projectId: "covidsmallbizlink",
-      storageBucket: "covidsmallbizlink.appspot.com",
-      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-    };
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    firebase.auth().onAuthStateChanged(function(user){
+    var db = firebase.firestore();
+    var uid, name, email;
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user != null) {
             // Name, email address etc
             var name = user.displayName;
@@ -85,19 +76,24 @@
             document.getElementById("account-drop").style.display = "";
         }
     });
-</script>
-<script src="dbload.js"></script>
-<script src="assets/js/dbload.js"></script>
-
-<script>
-    var db = firebase.firestore();
-    
     firebase.auth().onAuthStateChanged(function(user){
-        var fields = ['name', 'services', 'other-serv', 'socials'];
-        query("volunteers", "businesses", user, "vol", fields);
+        var fields = [ 'name', 'email', 'about', 'services', 'other-serv']
+        
+        
+        query("volunteers", "businesses", user, "vol", fields)
     });
-    
+
+
+
+
+
+function goProfiePage(uid){
+    window.location.href = "viewProfile.html?type=volunteers&user=" + uid;
+}
 </script>
+
+
+
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
