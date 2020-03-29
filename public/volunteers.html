@@ -103,10 +103,15 @@
                 socials.appendChild(social_t)
                 cell.appendChild(socials)
 
+                var learnMore = document.createButton('button', { 'onclick':'goProfilePage('+doc.id()+')'})
+                
+                cell.appendChild(learnMore)
                 
                 cell.appendChild(serviceList)
                 container.appendChild(cell)
                 document.body.appendChild(container)
+
+
             });
             
             
@@ -114,8 +119,11 @@
     })
     })
 
-
+function goProfiePage(uid){
+    window.location.href = "profilePage?type=volunteers&user=" + uid;
+}
 </script>
+<input type=""
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
