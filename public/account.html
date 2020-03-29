@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
 <body>
@@ -105,9 +104,6 @@
             document.getElementById("account-welcome").innerText = "Hello, " + name;
             document.getElementById("account-drop").style.display = "";
         }
-        else {
-            window.location = "sign.html";
-        }
     });
 </script>
 <script>
@@ -174,9 +170,6 @@
           }
         });
 
-        values["email"] = email;
-        values["name"] = name;
-
         db.collection(collection).doc(uid).set(values);
 
         document.getElementById(prefix + '-submit').innerText = "Updated!"
@@ -195,6 +188,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/dbload.js"></script>
 </body>
 
 </html>

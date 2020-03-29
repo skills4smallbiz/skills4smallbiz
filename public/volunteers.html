@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
@@ -23,9 +22,29 @@
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="/volunteers.html">Volunteers</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
                 </ul>
+            </div>
+            <div class="dropdown bg-primary border-primary shadow-sm" id="account-drop" style="padding: 7px;border-radius: 4px; display: none"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="account-welcome" href="#" style="color: rgb(255,255,255);">Dropdown </a>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
             </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
-    </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-<table id="biz-table">
+    </nav>
+    <div class="table-responsive">
+        <table class="table" id="vol-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Services</th>
+                    <th>Socials</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="vol-name">Volunteer Name</td>
+                    <td class="vol-services">abcdedfadkljflkaj</td>
+                    <td class="vol-socials">linkedin</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 </table>
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -35,9 +54,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
+<script src="/dbload.js"></script>
 <script src="assets/js/setup.js"></script>
 <script>
-
 
     var db = firebase.firestore();
     var uid, name, email;
@@ -50,45 +69,17 @@
             console.log(name);
 
             b = document.getElementById("sign-btn");
-            b.innerText = "Hello, " + name;
-            b.href = "account.html";
+            b.style.display = "none";
+
+            document.getElementById("account-welcome").innerText = "Hello, " + name;
+            document.getElementById("account-drop").style.display = "";
         }
     });
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user == null) {
-            var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting'];
-            db.collection("volunteers").where('services', 'array-contains-any', servlist).get().then(
-                snapshot => {
-            snapshot.docs.forEach(doc =>{
-                plotBox(doc.data(), doc.id)            
+    firebase.auth().onAuthStateChanged(function(user){
 
-
-            }
-            )
-        })
-        } else{
-
-        uid = user.uid;
-        name = user.displayName;
-        email = user.email;
-
-        var userData;
-        db.collection("businesses").doc(uid).get().then(function(doc){
-    
-            userData = doc.data();
-    
-            db.collection("volunteers").where('services', 'array-contains-any', userData['services']).get().then(snapshot => {
-            snapshot.docs.forEach(doc =>{
-                var data = doc.data()
-                plotBox(doc.data(), doc.id);
-
-            });
-            
-            
-        })
-    })
-        }
-    })
+        var fields = [ 'name', 'email', 'about', 'services', 'other-serv']
+        query("volunteers", "businesses", user, "vol", fields)
+    });
 
 
 
@@ -99,9 +90,13 @@ function goProfiePage(uid){
 }
 </script>
 
+
+
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/dbload.js"></script>
 </body>
 
 </html>
