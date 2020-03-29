@@ -144,3 +144,11 @@ h1 {
   width: 20%;
 }
 
+tr:hover:not(#table-header) {
+  background-color: #a8c4ff;
+}
+
+.vol-name:hover, .biz-bizname:hover {
+  color: #3b0707;
+}
+
