@@ -35,7 +35,6 @@ function query(qtype, utype, user, prefix, fields){
         db.collection(utype).doc(uid).get().then(function(doc) {
             if (doc != undefined){
                 servlist = doc.data()['services'];
-                console.log(servlist)
             } else{
                 var error = document.createElement('h1');
                 var error_t = document.createTextNode("No users match your current requirements, try changing them in accounts!")

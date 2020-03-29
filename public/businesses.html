@@ -32,15 +32,15 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Address</th>
-                    <th>Socials</th>
+                    <th>Services</th>
+                    <th>Other Requirements</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td class="biz-bizname">Business Name</td>
-                    <td class="biz-address">abcdedfadkljflkaj</td>
-                    <td class="biz-socials">linkedin</td>
+                    <td class="biz-services">abcdedfadkljflkaj</td>
+                    <td class="biz-other-serv">linkedin</td>
                 </tr>
             </tbody>
         </table>
@@ -88,6 +88,14 @@ var db = firebase.firestore();
 function goProfiePage(uid){
     window.location.href = "viewProfile.html?type=volunteers&user=" + uid;
 }
+
+    var db = firebase.firestore();
+    
+    firebase.auth().onAuthStateChanged(function(user){
+        var fields = ['bizname', 'services', 'other-serv'];
+        
+        query("businesses", "volunteers", user, "biz", fields)
+    });
 </script>
 
 
