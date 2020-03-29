@@ -116,36 +116,44 @@
     function savebiz() {
         console.log("Saving Data...")
         var data = document.forms[0];
-        var in_bizName = data.getElementsByTagName("input")["biz-name"].innerText;
+        var in_bizName = data.getElementsByTagName("input")["biz-name"].value;
         var in_accounting = data.getElementsByTagName("input")["serv-webdev"].checked 
         var in_webdev = data.getElementsByTagName("input")["serv-webdev"].checked
         var in_phone = data.getElementsByTagName("input")["serv-phone-line"].checked
         var in_legal = data.getElementsByTagName("input")["serv-legal"].checked
         var in_ad = data.getElementsByTagName("input")["serv-advertising"].checked
         var in_consulting = data.getElementsByTagName("input")["serv-consulting"].checked
-      //  var in_about = data.getElementsByTagName("input")["about"].innerText
-        var in_Address = data.getElementsByTagName("input")["address"].innerText
-        //var in_other = data.getElementsByTagName("input")["other"].innerText
+        var in_about = data.getElementsByTagName("input")["about"].value
+        var in_Address = data.getElementsByTagName("input")["address"].value
+        var in_other = data.getElementsByTagName("input")["other"].value
         var in_services = []
-    var uid, in_email, in_photo, displayName;
+        if (in_accounting) { in_services.push("Accounting") }
+        if (in_webdev) { in_services.push("WebDev") }
+        if (in_phone) { in_services.push("Phone") }
+        if (in_legal) { in_services.push("Legal") }
+        if (in_ad) { in_services.push("Advertising") }
+        if (in_consulting) { in_services.push("Consulting") }
+
+    var uid, in_email,  displayName;
     uid = sessionStorage.getItem("uid");
     name = sessionStorage.getItem("name");
     email = sessionStorage.getItem("email");
 
-      
+     console.log(in_legal) 
 
         db.collection("businesses").doc(uid).set({
             name: displayName,
             email: in_email,
-            photoURL: in_photoUrl,
             bizName: in_bizName,
             services: in_services,
-            address: in_address,
+            address: in_Address,
             about: in_about,
             other: in_other
         });
-
-    }
+        return false
+ 
+ 
+ }
 /*
     function saveVol() {
         in_data = document.getElementById("vol");
