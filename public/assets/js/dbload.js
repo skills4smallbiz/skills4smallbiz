@@ -10,6 +10,10 @@ function printData(qtype, prefix, fields, servlist){
                     cells.push(row.insertCell());
                     cells[i].innerHTML = doc.data()[fields[i]]
                     cells[i].id = prefix + '-' + fields;
+                    
+                    row.addEventListener("click", () => {
+                        window.location.href = "profile.html?type=businesses&user=" + doc.id;
+                    });
                 }
             });
         } else {
@@ -48,4 +52,3 @@ function query(qtype, utype, user, prefix, fields){
         printData(qtype, prefix, fields, servlist)
     }
 }
-
