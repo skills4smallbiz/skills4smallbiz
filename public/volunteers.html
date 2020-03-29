@@ -77,6 +77,9 @@
     });
     firebase.auth().onAuthStateChanged(function(user){
 
+<script src="dbload.js"></script>
+<script src="assets/js/dbload.js"></script>
+
         var fields = [ 'name', 'email', 'about', 'services', 'other-serv']
         query("volunteers", "businesses", user, "vol", fields)
     });

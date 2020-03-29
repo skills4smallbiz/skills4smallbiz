@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>CovidBizLink</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
 <body>
+    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+            <div class="container"><a class="navbar-brand" href="/index.html" style="padding-right: 25px;">Covid Biz Link</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="/businesses.html">Businesses</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/volunteers.html">Volunteers</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
+                    </ul>
+                </div>
+                <div class="dropdown bg-primary border-primary shadow-sm" id="account-drop" style="padding: 7px;border-radius: 4px; display: none"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="account-welcome" href="#" style="color: rgb(255,255,255);">Dropdown </a>
+                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
+                </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
+    </nav>
+        
+    <!-- template -->
+    <h1 id = "name">name here</h1>
+    <h1 id = "type">type here</h1>
+    <h1 id = "bizname"></h1>
+    <h1 id = "uid">uid here</h1>
+    <h1 id = "email">email here</h1>
+    <h1 id = "services"> services here</h1>
+    <h1 id = "about"> about </h1>
+    <h1 id = "socials"> socials here</h1>
+    
+
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+<!-- Previously loaded Firebase SDKs -->
+<script src="assets/js/setup.js">   </script>
 
 <script>
 function getUrlVars() {
@@ -15,104 +59,75 @@ function getUrlVars() {
     return vars;
 }
 var uid, name, email;
+var button_name;
+var db, userID, type;
+var about, services, socials, bizname;
+
     firebase.auth().onAuthStateChanged(function (user) {
         if (user != null) {
             // Name, email address etc
-            var name = user.displayName;
-            var email = user.email;
-            console.log("yes");
-            console.log(name);
-
+            button_name = user.displayName;
             b = document.getElementById("sign-btn");
-            b.innerText = "Hello, " + name;
+            b.innerText = "Hello, " + button_name;
             b.href = "account.html";
         }
-    });
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user == null) {
-            window.location.replace('/sign.html');
-        }
+        //set up database
+        db = firebase.firestore();
+        //get uid, type from url
+        userID = getUrlVars()['user'];
+        type = getUrlVars()['type'];
+        //recover info from db and update relevant fields
+        recover_information(type)
 
-        uid = user.uid;
-        name = user.displayName;
-        email = user.email;
-
-
-        // JavaScript source code
+        
         });
 
-        var db = firebase.firestore();
-        var userID = getUrlVars()['user']
-        var type = getUrlVars()['type']
 
+    function recover_information(col) {
+      db.collection(col).doc(userID).get().then(function(doc){
+        if (doc.exists){
+            console.log("retrieving info")
+            var data = doc.data();
+            name = data["name"]
+            email = data["email"]
+            services = data["services"]
+            about = data["about"]
+            socials = data["socials"]
+            //extra field for businesses
+            if (type == "businesses") {
+                bizname = data["bizname"]
+            }
+            console.log(services, socials)
 
-    db.collection(type).doc(userID).get.then(function(doc){
+            //update info here because of asynchronization
+            updateinfo();
 
-
-        var data = doc.data()
-        var container = document.createElement('div', { class: 'container' })
-        var cell = document.createElement('div', { class: 'intro' })
-        var serviceList = document.createElement('div', { class: "serv-list" })
-        var services = doc.data()['services']
-
-        for (i = 0; i < services.length; i++) {
-            var child = document.createElement('p', { class: 'serv-item' })
-            var t = document.createTextNode(services)
-            child.appendChild(t)
-            serviceList.appendChild(child)
+        } else {
+          console.log("No such document!")
         }
-        var info = ['name', 'email', 'address', 'socials']
-               
-                
-                
-                
-        var bname = document.createElement('h3', { class: "text-center" })
-        var bname_t = document.createTextNode(data['bizname'])
-        bname.appendChild(bname_t)
-        cell.appendChild(bname)
+      }).catch(function(error) {
+            console.log("Error getting document:", error)
+      });
 
-                
-        var name = document.createElement('h5', { class: "text-center" })
-        var name_t = document.createTextNode(data['name'])
-        name.appendChild(name_t)
-        cell.appendChild(name)
+      
 
-        var a = document.createElement('a', {'href': data['email'], class: "text-center"})
-        var email_t = document.createTextNode(data['email'])
-        a.appendChild(email_t)
-        cell.appendChild(a)
-                   
+    }
 
-                
-        var address = document.createElement('div',{ class: "text-center" })
-        var address_t = document.createTextNode(data['address'])
-        address.appendChild(address_t)
-        cell.appendChild(address)
+    function updateinfo() {
+        document.getElementById("name").innerText = name;
+        document.getElementById("email").innerText = email;
+        document.getElementById("uid").innerText = userID;
+        document.getElementById("services").innerText = services;
+        document.getElementById("about").innerText = about;
+        document.getElementById("socials").innerText = socials;
+        if (type == "businesses") {
+            document.getElementById("bizname").innerText = bizname;
+        }
+        document.getElementById("type").innerText = type;
 
-
-
-        var socials = document.createElement('div',{ class: "text-center" })
-        var social_t = document.createTextNode(data['socials'])
-        socials.appendChild(social_t)
-        cell.appendChild(socials)
-
-                
-        cell.appendChild(serviceList)
-        container.appendChild(cell)
-        document.body.appendChild(container)
-
-
-
-
-
-
-//Not optimal, will fix later
-
-    })
-
-    
-
-
+        
+        console.log("updating info")
+    }
     
 
 
