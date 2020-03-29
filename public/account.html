@@ -160,6 +160,8 @@
           values[id] = document.getElementById(htmlid).value;
         });
 
+        values["email"] = email;
+        values["name"] = name;
         values['services'] = []
         servlist.forEach(function(id) {
           htmlid = prefix + '-' + 'serv-' + id;
