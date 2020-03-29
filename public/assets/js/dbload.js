@@ -1,4 +1,4 @@
-function printData(qtype, prefix, fields, servlist){
+function printData(qtype, prefix, fields, servlist, uid){
     var table = document.getElementById(prefix+'-table')
 
     db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
@@ -8,7 +8,7 @@ function printData(qtype, prefix, fields, servlist){
 
             snapshot.docs.forEach(function(doc) {            
                 
-                
+                if (doc.id != uid){          
                 
                 
                 var row = table.insertRow(-1);
@@ -26,7 +26,7 @@ function printData(qtype, prefix, fields, servlist){
                 cells.push(row.insertCell());
                 cells[idx + 1 ].innerHTML = "<button onclick=\"goProfiePage(" + doc.id + ")\"> View Profile</button>"; 
                 
-
+            }
 
             });
 
@@ -39,7 +39,9 @@ function printData(qtype, prefix, fields, servlist){
             error.appendChild(error_t)
             document.body.appendChild(error)
         }
+    
     });
+
 }
 
 
@@ -62,11 +64,11 @@ function query(qtype, utype, user, prefix, fields){
                 error.appendChild(error_t)
                 document.body.appendChild(error)
             }
-            printData(qtype, prefix, fields, servlist)
+            printData(qtype, prefix, fields, servlist, uid)
         });
 
     } else {
-        printData(qtype, prefix, fields, servlist)
+        printData(qtype, prefix, fields, servlist, null)
     }
 
     
