@@ -12,8 +12,4 @@ db.collection("volunteers").doc(uid).get().then(function (doc) {
 var selection = b.where("services", "array-contains-any", userData['services'])
     .get()
     .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            //TODO:Add query data to doc  
-
-        });
     })
