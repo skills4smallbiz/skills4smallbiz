@@ -20,7 +20,7 @@ function printData(qtype, prefix, fields, servlist, uid){
                     cells[i].id = prefix + '-' + fields;
                     
                     row.addEventListener("click", () => {
-                        window.location.href = "profile.html?type=businesses&user=" + doc.id;
+                        window.location.href = "profile.html?type=" + qtype + "&user=" + doc.id;
                     });
                 }
                 cells.push(row.insertCell());

@@ -28,12 +28,14 @@
             </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
     </nav>
     <section style="padding: 35px;padding-top: 55px;padding-bottom: 55px;">
-        <div class="col-lg-4" style="width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;">
-            <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3"></div>
-            <h3 id="profile-name" class="name">Name</h3>
+        <div class="col-lg-4" id="profile" style="width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;">
+            <h3 id="profile-name" class="name">&nbsp;</h3>
+            <h3 id="profile-bizname" class="name">&nbsp;</h3>
+            <p id="profile-address" class="title">Address:&nbsp;</p>
             <p id="profile-services" class="title">Services:&nbsp;</p>
-            <p id="profile-about" class="description">About:</p>
-            <p id="profile-socials" class="description">Links:</p>
+            <p id="profile-other-serv" class="description">Other Services:&nbsp;</p>
+            <p id="profile-about" class="description">About:&nbsp;</p>
+            <p id="profile-socials" class="description">Links:&nbsp;</p>
         </div>
     </section><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
@@ -76,7 +78,59 @@
     });
 </script>
 <script>
+    Array.prototype.forEach.call(document.getElementById("profile").children, function(n) {
+        n.style.display = "none";
+    });
     
+    var db = firebase.firestore();
+    var prefix = "biz";
+    
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+    var uid, name, email;
+    var button_name;
+    var about, services, socials, bizname;
+    var userid = getUrlVars()['user'];
+    var col = getUrlVars()['type'];
+    console.log(userid)
+    console.log(col)
+
+    var keys;
+    if (col == "businesses") {
+        keys = ["bizname", "address", "services", "other-serv", "about", "socials"]
+    } else if (col == "volunteers") {
+        keys = ["name", "services", "other-serv", "about", "socials"]
+    }
+    
+    firebase.auth().onAuthStateChanged(function (user) {
+        //recover info from db and update relevant fields
+        db.collection(col).doc(userid).get().then(function(doc){
+            if (doc.exists){
+                console.log("retrieving info")
+                var data = doc.data();
+
+                keys.forEach(function(id) {
+                    console.log(id)
+                    textDoc = document.getElementById('profile-' + id)
+                    textDoc.innerText += data[id];
+                    textDoc.style.display = "";
+                });
+                //document.getElementById("type").innerText = type;
+
+
+                console.log("updating info")
+            } else {
+              console.log("No such document!")
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error)
+        });
+    });
 </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
