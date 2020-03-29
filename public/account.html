@@ -98,16 +98,16 @@
             var email = user.email;
             console.log("yes");
             console.log(name);
-            
+
             b = document.getElementById("sign-btn");
             b.style.display = "none";
-            
+
             document.getElementById("account-welcome").innerText = "Hello, " + name;
             document.getElementById("account-drop").style.display = "";
         }
     });
-    }
-</script><script>
+</script>
+<script>
     var uid, name, email;
     var db = firebase.firestore()
 
@@ -170,7 +170,7 @@
         });
 
         db.collection(collection).doc(uid).set(values);
-        
+
         document.getElementById(prefix + '-submit').innerText = "Updated!"
     }
 
