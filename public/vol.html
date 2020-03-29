@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
 <body>
@@ -19,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/businesses.html">Businesses</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="/volunteers.html">Volunteers</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/volunteers.html">Volunteers</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
                 </ul>
             </div>
@@ -28,72 +29,31 @@
             </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
     </nav>
     <div class="table-responsive">
-        <table class="table" id="vol-table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Services</th>
+                    <th>Address</th>
                     <th>Socials</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="vol-name">Volunteer Name</td>
-                    <td class="vol-services">abcdedfadkljflkaj</td>
-                    <td class="vol-socials">linkedin</td>
+                    <td class="biz-name">Business Name</td>
+                    <td class="biz-address">abcdedfadkljflkaj</td>
+                    <td class="biz-socials">linkedin</td>
+                </tr>
+                <tr>
+                    <td class="biz-name">Bus 2</td>
+                    <td class="biz-address">hehehe</td>
+                    <td class="biz-socials">tiktok</td>
                 </tr>
             </tbody>
         </table>
-    </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
-<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-
-<!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
-<!-- Previously loaded Firebase SDKs -->
-
-<script>
-    // TODO: Replace the following with your app's Firebase project configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-      authDomain: "covidsmallbizlink.firebaseapp.com",
-      databaseURL: "https://covidsmallbizlink.firebaseio.com",
-      projectId: "covidsmallbizlink",
-      storageBucket: "covidsmallbizlink.appspot.com",
-      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    firebase.auth().onAuthStateChanged(function(user){
-        if (user != null) {
-            // Name, email address etc
-            var name = user.displayName;
-            var email = user.email;
-            console.log("yes");
-            console.log(name);
-
-            b = document.getElementById("sign-btn");
-            b.style.display = "none";
-
-            document.getElementById("account-welcome").innerText = "Hello, " + name;
-            document.getElementById("account-drop").style.display = "";
-        }
-    });
-</script>
-<script src="/dbload.js"></script>
-
-<script>
-    loadSome('volunteers', 'vol', ['name', 'services', 'socials'])
-</script>
-
+    </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/dbload.js"></script>
 </body>
 
 </html>

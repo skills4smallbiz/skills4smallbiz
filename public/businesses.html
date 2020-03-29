@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
 <body>
@@ -27,7 +26,25 @@
             <div class="dropdown bg-primary border-primary shadow-sm" id="account-drop" style="padding: 7px;border-radius: 4px; display: none"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="account-welcome" href="#" style="color: rgb(255,255,255);">Dropdown </a>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
             </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
-    </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    </nav>
+    <div class="table-responsive">
+        <table class="table" id="biz-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Socials</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="biz-bizname">Business Name</td>
+                    <td class="biz-address">abcdedfadkljflkaj</td>
+                    <td class="biz-socials">linkedin</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
@@ -36,10 +53,22 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
-<script src="assets/js/setup.js">   </script>
+
 <script>
-   var uid, name, email;
-    firebase.auth().onAuthStateChanged(function (user) {
+    // TODO: Replace the following with your app's Firebase project configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
+      authDomain: "covidsmallbizlink.firebaseapp.com",
+      databaseURL: "https://covidsmallbizlink.firebaseio.com",
+      projectId: "covidsmallbizlink",
+      storageBucket: "covidsmallbizlink.appspot.com",
+      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged(function(user){
         if (user != null) {
             // Name, email address etc
             var name = user.displayName;
@@ -48,100 +77,23 @@
             console.log(name);
 
             b = document.getElementById("sign-btn");
-            b.innerText = "Hello, " + name;
-            b.href = "account.html";
+            b.style.display = "none";
+
+            document.getElementById("account-welcome").innerText = "Hello, " + name;
+            document.getElementById("account-drop").style.display = "";
         }
     });
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user == null) {
-            window.location.replace('/sign.html');
-        }
-
-        uid = user.uid;
-        name = user.displayName;
-        email = user.email;
-
-
-        // JavaScript source code
-        var db = firebase.firestore();
-
-        var userData;
-        db.collection("volunteers").doc(uid).get().then(function(doc){
-    
-            userData = doc.data();
-    
-            db.collection("businesses").where('services', 'array-contains-any', userData['services']).get().then(snapshot => {
-            snapshot.docs.forEach(doc =>{
-                var data = doc.data()
-                var container = document.createElement('div', { class: 'container' })
-                var cell = document.createElement('div', { class: 'intro' })
-                var serviceList = document.createElement('div', { class: "serv-list" })
-                var services = doc.data()['services']
-
-                for (i = 0; i < services.length; i++) {
-                    var child = document.createElement('p', { class: 'serv-item' })
-                    var t = document.createTextNode(services)
-                    child.appendChild(t)
-
-                    serviceList.appendChild(child)
-                    }
-                var info = ['name', 'email', 'address', 'socials']
-                
-                
-                
-                
-                var bname = document.createElement('h3', { class: "text-center" })
-                var bname_t = document.createTextNode(data['bizname'])
-                bname.appendChild(bname_t)
-                cell.appendChild(bname)
-
-                
-                var name = document.createElement('h5', { class: "text-center" })
-                var name_t = document.createTextNode(data['name'])
-                name.appendChild(name_t)
-                cell.appendChild(name)
-
-                var a = document.createElement('a', {'href': data['email'], class: "text-center"})
-                var email_t = document.createTextNode(data['email'])
-                a.appendChild(email_t)
-                cell.appendChild(a)
-                    
-
-                
-                var address = document.createElement('div',{ class: "text-center" })
-                var address_t = document.createTextNode(data['address'])
-                address.appendChild(address_t)
-                cell.appendChild(address)
-
-
-
-                var socials = document.createElement('div',{ class: "text-center" })
-                var social_t = document.createTextNode(data['socials'])
-                socials.appendChild(social_t)
-                cell.appendChild(socials)
-
-                var learnMore = document.createButton('button', { 'onclick':'goProfilePage('+doc.id()+')'})
-                
-                cell.appendChild(learnMore)
-
-                
-                cell.appendChild(serviceList)
-                container.appendChild(cell)
-                document.body.appendChild(container)
-            });
-            
-            
-        })
-    })
-    })
-function goProfiePage(uid){
-    window.location.href = "viewProfile.html?type=businesses&user=" + uid;
-}
-
 </script>
-    
+<script src="/dbload.js"></script>
+
+<script>
+    loadSome('businesses', 'biz', ['bizname', 'address', 'socials'])
+</script>
+
+    <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/dbload.js"></script>
 </body>
 
 </html>

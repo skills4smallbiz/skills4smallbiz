@@ -109,3 +109,30 @@
   top: 0;
 }
 
+.biz-bizname {
+  width: 30%;
+}
+
+.biz-address {
+  width: 50%;
+}
+
+.biz-socials {
+  width: 20%;
+}
+
+h1 {
+  align-content: center;
+}
+
+.btn.btn-primary.ml-auto {
+}
+
+.vol-name {
+  width: 20%;
+}
+
+.vol-services {
+  width: 50%;
+}
+
