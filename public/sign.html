@@ -4,29 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CovidBizLink (1)</title>
+    <title>CovidBizLink</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
-    <link rel="stylesheet" href="assets/css/Highlight-Blue.css">
-    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/Team-Grid.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-        <div class="container"><a class="navbar-brand" href="https://covidbiz.link/" style="padding-right: 25px;">Covid Link Biz</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
+        <div class="container"><a class="navbar-brand" href="/index.html" style="padding-right: 25px;">Covid Link Biz</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/businesses.html">Businesses</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/volunteers.html">Volunteers</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
                 </ul>
-            </div><a class="btn btn-primary ml-auto" role="button" href="/sign.html">Sign In/Sign Up</a></div>
+            </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
     </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -50,6 +47,21 @@
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged(function(user){
+        if (user != null) {
+            // Name, email address etc
+            var name = user.displayName;
+            var email = user.email;
+            console.log("yes");
+            console.log(name);
+            
+            b = document.getElementById("sign-btn");		
+            b.innerText = "Hello, " + name;	
+            b.href = "account.html";
+        }
+    });
+    //var user = firebase.auth().currentUser;
 </script><script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
@@ -89,31 +101,10 @@
     
     ui.start('#firebaseui-auth-container', uiConfig);
     
-    firebase.auth().onAuthStateChanged(function(user) {		
-        if (user) {		
-            // User is signed in.		
-            var displayName = user.displayName;		
-            var email = user.email;		
-            var uid = user.uid;		
-            sessionStorage.setItem("user",user);		
-            sessionStorage.setItem("uid", uid);		
-            sessionStorage.setItem("name", displayName);		
-            sessionStorage.setItem("email", email);		
-            // ...		
-        } else {		
-            // User is signed out.		
-            // ...		
-        }		
- });
-    uid = sessionStorage.getItem("uid");		
-    if (uid) {		
-        b = document.getElementsByClassName("btn btn-primary ml-auto")[0];		
-        b.innerText = "Hello, " + name;		
-        b.href = "businesses.html";}
     
 </script>
 
-    <div id="container"><img class="img-fluid flex-fill" id="background-img" src="assets/img/IMG_8041%202%20copy.JPG" style="opacity: 0.89;filter: blur(4px);margin-bottom: 0px;margin-right: -9;">
+    <div id="container"><img class="img-fluid flex-grow-1" id="background-img" src="assets/img/IMG_8041%202%20copy.JPG" style="opacity: 0.89;filter: blur(4px);">
         <div id="login-div" style="width: 100%;padding-top: 16px;">
             <h2 class="text-center" style="color: rgb(255,255,255);">Sign In / Sign Up</h2>
             <div id="firebaseui-auth-container"></div>

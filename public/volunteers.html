@@ -4,29 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CovidBizLink (1)</title>
+    <title>CovidBizLink</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
-    <link rel="stylesheet" href="assets/css/Highlight-Blue.css">
-    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/Team-Grid.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-        <div class="container"><a class="navbar-brand" href="https://covidbiz.link/" style="padding-right: 25px;">Covid Link Biz</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
+        <div class="container"><a class="navbar-brand" href="/index.html" style="padding-right: 25px;">Covid Link Biz</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/businesses.html">Businesses</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="/volunteers.html">Volunteers</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
                 </ul>
-            </div><a class="btn btn-primary ml-auto" role="button" href="/sign.html">Sign In/Sign Up</a></div>
+            </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
     </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -51,64 +48,24 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    uid = sessionStorage.getItem("uid");		
-    if (uid) {		
-        b = document.getElementsByClassName("btn btn-primary ml-auto")[0];		
-        b.innerText = "Hello, " + name;		
-        b.href = "businesses.html";}
-
+    firebase.auth().onAuthStateChanged(function(user){
+        if (user != null) {
+            // Name, email address etc
+            var name = user.displayName;
+            var email = user.email;
+            console.log("yes");
+            console.log(name);
+            
+            b = document.getElementById("sign-btn");		
+            b.innerText = "Hello, " + name;	
+            b.href = "account.html";
+        }
+    });
+    //var user = firebase.auth().currentUser;
 </script>
-    <h1 style="padding: 23px;">Find Business Who Need Your Help.</h1>
-    <p>Distance:&nbsp;<input type="text"></p><iframe allowfullscreen="" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50&amp;q=Paris%2C+France&amp;zoom=11" width="100%" height="400"></iframe>
-    <div
-        class="text-center d-lg-flex justify-content-lg-center highlight-blue" style="margin: 75px;margin-top: 0px;margin-bottom: 0px;">
-        <div class="container">
-            <div class="intro">
-                <h2 class="text-center">William K.</h2>
-                <p class="text-center">I am a person</p>
-            </div>
-            <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
-        </div>
-        </div>
-        <div class="highlight-clean" style="margin: 75px;margin-top: 0px;margin-bottom: 0px;">
-            <div class="container">
-                <div class="intro">
-                    <h2 class="text-center">Luc G.</h2>
-                    <p class="text-center">I am like cookies</p>
-                </div>
-                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
-            </div>
-        </div>
-        <div class="highlight-blue" style="margin-right: 75px;margin-left: 75px;">
-            <div class="container">
-                <div class="intro">
-                    <h2 class="text-center">Daniel W.</h2>
-                    <p class="text-center">I like cake</p>
-                </div>
-                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
-            </div>
-        </div>
-        <div class="highlight-clean" style="margin-right: 75px;margin-left: 75px;">
-            <div class="container">
-                <div class="intro">
-                    <h2 class="text-center">Andrew F.</h2>
-                    <p class="text-center">I am like pies</p>
-                </div>
-                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
-            </div>
-        </div>
-        <div class="highlight-blue" style="margin-right: 75px;margin-left: 75px;">
-            <div class="container">
-                <div class="intro">
-                    <h2 class="text-center">Myles J.</h2>
-                    <p class="text-center">I like apples.</p>
-                </div>
-                <div class="buttons"><a class="btn btn-primary" role="button" href="#">Email</a></div>
-            </div>
-        </div>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
 </body>
 
 </html>
