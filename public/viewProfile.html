@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+
+<script>
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+var uid, name, email;
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user != null) {
+            // Name, email address etc
+            var name = user.displayName;
+            var email = user.email;
+            console.log("yes");
+            console.log(name);
+
+            b = document.getElementById("sign-btn");
+            b.innerText = "Hello, " + name;
+            b.href = "account.html";
+        }
+    });
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user == null) {
+            window.location.replace('/sign.html');
+        }
+
+        uid = user.uid;
+        name = user.displayName;
+        email = user.email;
+
+
+        // JavaScript source code
+        });
+
+        var db = firebase.firestore();
+        var userID = getUrlVars()['user']
+        var type = getUrlVars()['type']
+
+
+    db.collection(type).doc(userID).get.then(function(doc){
+
+
+        var data = doc.data()
+        var container = document.createElement('div', { class: 'container' })
+        var cell = document.createElement('div', { class: 'intro' })
+        var serviceList = document.createElement('div', { class: "serv-list" })
+        var services = doc.data()['services']
+
+        for (i = 0; i < services.length; i++) {
+            var child = document.createElement('p', { class: 'serv-item' })
+            var t = document.createTextNode(services)
+            child.appendChild(t)
+            serviceList.appendChild(child)
+        }
+        var info = ['name', 'email', 'address', 'socials']
+               
+                
+                
+                
+        var bname = document.createElement('h3', { class: "text-center" })
+        var bname_t = document.createTextNode(data['bizname'])
+        bname.appendChild(bname_t)
+        cell.appendChild(bname)
+
+                
+        var name = document.createElement('h5', { class: "text-center" })
+        var name_t = document.createTextNode(data['name'])
+        name.appendChild(name_t)
+        cell.appendChild(name)
+
+        var a = document.createElement('a', {'href': data['email'], class: "text-center"})
+        var email_t = document.createTextNode(data['email'])
+        a.appendChild(email_t)
+        cell.appendChild(a)
+                   
+
+                
+        var address = document.createElement('div',{ class: "text-center" })
+        var address_t = document.createTextNode(data['address'])
+        address.appendChild(address_t)
+        cell.appendChild(address)
+
+
+
+        var socials = document.createElement('div',{ class: "text-center" })
+        var social_t = document.createTextNode(data['socials'])
+        socials.appendChild(social_t)
+        cell.appendChild(socials)
+
+                
+        cell.appendChild(serviceList)
+        container.appendChild(cell)
+        document.body.appendChild(container)
+
+
+
+
+
+
+//Not optimal, will fix later
+
+    })
+
+    
+
+
+    
+
+
+
+</script>
+
+</body>
+
+
+</html
