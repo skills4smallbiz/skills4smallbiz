@@ -3,15 +3,29 @@ function printData(qtype, prefix, fields, servlist){
 
     db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
         if(Object.keys(snapshot).length > 0){
+            console.log(Object.keys(snapshot))
+
+
             snapshot.docs.forEach(function(doc) {            
                 var row = table.insertRow(-1);
                 var cells = [];
+                var idx = 0;
                 for (i = 0; i < fields.length; i++){
                     cells.push(row.insertCell());
                     cells[i].innerHTML = doc.data()[fields[i]]
                     cells[i].id = prefix + '-' + fields;
+                    idx = i;
                 }
+                cells.push(row.insertCell());
+                cells[idx + 1 ].innerHTML = "<button onclick=\"goProfiePage(" + doc.id + ")\"> View Profile</button>"; 
+                
+
+
             });
+
+
+
+
         } else {
             var error = document.createElement('h1');
             var error_t = document.createTextNode("No users match your current requirements, try changing them in accounts!")
@@ -47,5 +61,14 @@ function query(qtype, utype, user, prefix, fields){
     } else {
         printData(qtype, prefix, fields, servlist)
     }
+
+    
+
+
+
 }
 
+
+function goProfiePage(uid){
+    window.location.href = "viewProfile.html?type=volunteers&user=" + uid;
+}
