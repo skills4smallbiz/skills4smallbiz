@@ -28,7 +28,7 @@
     <h4 class="text-center">Business</h4>
     <div style="margin: 0px auto;width: 80%;max-width: 570px;">
         <form onsubmit="return false">
-            <div class="form-group d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center" style="padding: 0;min-width: 260px;"><label style="padding-right: 10px;min-width: 135px;" for="biz-name">Business Name:</label><input class="form-control" type="text" id="biz-bizname"></div>
+            <div class="form-group d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center" style="padding: 0;min-width: 260px;"><label style="padding-right: 10px;min-width: 135px;" for="biz-name">Business Name:</label><input class="form-control" type="text" id="biz-bizname" required="" minlength="3"></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;">Services Required:</label>
                 <div class="d-flex flex-wrap">
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
@@ -39,10 +39,10 @@
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
                 </div>
             </div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv"></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-address"></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="biz-about"></textarea></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="biz-socials"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv" required=""></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-address" required=""></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="biz-about" required=""></textarea></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="biz-socials" required=""></div>
             <div class="form-group"><button class="btn btn-primary" id="biz-submit" type="submit" onclick="savebiz()">Update</button></div>
         </form>
     </div>
@@ -59,9 +59,9 @@
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
                 </div>
             </div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="vol-other-serv"></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About You:</label><textarea class="form-control" id="vol-about"></textarea></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="vol-socials"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="vol-other-serv" required=""></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About You:</label><textarea class="form-control" id="vol-about" required=""></textarea></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="vol-socials" required=""></div>
             <div class="form-group"><button class="btn btn-primary" id="vol-submit" type="submit" onclick="savevol()">Update</button></div>
         </form>
     </div><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
