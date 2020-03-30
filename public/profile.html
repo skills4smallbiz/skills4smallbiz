@@ -149,12 +149,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
                 //set email
                 document.getElementById("contact").href = "mailto:" + email;
 
-                
-                //latitude and longitute
-                lat = data["lat"]
-                lng = data["lng"]
-
-                initMap(lat, lng)
+                if (col == "businesses") {
+                    //latitude and longitute
+                    lat = data["lat"]
+                    lng = data["lng"]
+                    //initialize the map
+                    initMap(lat, lng)
+                }
 
                 console.log("updating info")
             } else {
@@ -171,10 +172,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
     function initMap(latitutde, longitude) {
         // The location of the biz
         var loc = {lat: latitutde, lng: longitude};
-        // The map, centered at Uluru
+        // The map, centered at the business
         var map = new google.maps.Map(
             document.getElementById('map'), {zoom: 13, center: loc});
-        // The marker, positioned at Uluru
+        // The marker, positioned at the business
         var marker = new google.maps.Marker({position: loc, map: map});
         console.log("map init")
     }
