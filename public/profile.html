@@ -49,6 +49,10 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 <!-- Previously loaded Firebase SDKs -->
 
+<script 
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s">
+</script>
+
 <script>
     // TODO: Replace the following with your app's Firebase project configuration
     var firebaseConfig = {
@@ -79,7 +83,6 @@
         }
     });
 </script>
-<script src="dbload.js"></script>
 <script src="assets/js/dbload.js"></script>
 
 <script>
@@ -152,6 +155,8 @@
         }).catch(function(error) {
             console.log("Error getting document:", error)
         });
+
+        
     });
 
     //mapping the business given lat and lng
@@ -163,6 +168,7 @@
             document.getElementById('map'), {zoom: 13, center: loc});
         // The marker, positioned at Uluru
         var marker = new google.maps.Marker({position: loc, map: map});
+        console.log("map init")
     }
 
     
@@ -175,9 +181,16 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/dbload.js"></script>
     <!-- daniel's account -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&callback=initMap">
-    </script>
+
+
+    <style>
+        #map {
+            height: 300px;  /* The height is 400 pixels */
+            width: 70%;  /* The width is the width of the web page */
+            margin: 0 auto;
+ }
+    </style>
+
 </body>
 
 </html>
