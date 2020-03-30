@@ -112,7 +112,7 @@
 
 
 <script>
-    var uid, name, email, address, coords, lat, lng, geocoder;
+    var uid, name, email, address, coords, lat, lng, geocoder, position;
     var db = firebase.firestore();
     
 
@@ -182,19 +182,30 @@
         });
 
         //call func here to get coords
-        console.log(address)
-        console.log(geocoder,address)
-        coords = geocodeAddress(geocoder,address)
-        lat = Number(coords[0])
-        lng = Number(coords[1])
+        // geocodeAddress(geocoder,address)
+        
+        var address = document.getElementById('biz-address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            position = results[0].geometry.location
+            lat = Number(position["lat"]())
+            lng = Number(position["lng"]())
+            console.log(lat, lng)
+            //add coords here
+            values["lat"] = lat
+            values["lng"] = lng
+            console.log(values)
 
-        //add coords here
-        values["lat"] = lat
-        values["lng"] = lng
+            console.log("updating")
 
-        db.collection(collection).doc(uid).set(values);
+            db.collection(collection).doc(uid).set(values);
 
-        document.getElementById(prefix + '-submit').innerText = "Updated!"
+            document.getElementById(prefix + '-submit').innerText = "Updated!"
+            
+        } 
+    });
+
+
     }
 
     function savebiz() {
@@ -278,11 +289,14 @@
     
 
     function geocodeAddress(geocoder, address) {
-    var address = document.getElementById('biz-address').value;
-    geocoder.geocode({'address': address}, function(results, status) {
+        var address = document.getElementById('biz-address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
-            position = resultsMap.setCenter(results[0].geometry.location);
-        return position
+            position = results[0].geometry.location
+            console.log(position)
+            lat = Number(position["lat"]())
+            lng = Number(position["lng"]())
+            
         } 
     });
 }
@@ -305,7 +319,7 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/dbload.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNvua_RRAQPQLwOG_kyZpqepK76zpgljA&libraries=places&callback=initAutocomplete"  async defer> </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&libraries=places&callback=initAutocomplete"  async defer> </script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"  async defer> </script> -->
 
 
