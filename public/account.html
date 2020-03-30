@@ -106,10 +106,15 @@
         }
     });
 </script>
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&libraries=places&callback=initAutocomplete"></script> -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"> </script> -->
+
+
 <script>
     var uid, name, email, address, lat, lng;
     var db = firebase.firestore();
-    var geocoder = new google.maps.Geocoder();
+    
 
 
     var idlist = {
@@ -224,6 +229,8 @@
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
     autocomplete.addListener('place_changed', fillInAddress);
+
+    initMap();
     }
 
     function fillInAddress() {
@@ -262,13 +269,17 @@
     }
     }
 
+    function initMap() {
+        console.log("initializing geocoder")
+        var geocoder = new google.maps.Geocoder();
+    }
     
 
     function geocodeAddress(geocoder, address) {
-    var address = document.getElementById('address').value;
+    var address = document.getElementById('biz-address').value;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
-        position = resultsMap.setCenter(results[0].geometry.location);
+            position = resultsMap.setCenter(results[0].geometry.location);
         return position
         } 
     });
@@ -292,8 +303,10 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/dbload.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNvua_RRAQPQLwOG_kyZpqepK76zpgljA&libraries=places&callback=initAutocomplete"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNvua_RRAQPQLwOG_kyZpqepK76zpgljA&libraries=places&callback=initAutocomplete"  async defer> </script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"  async defer> </script> -->
+
+
 
 
 </body>
