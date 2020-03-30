@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv"></div>
-            <div id="locationField" class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-autocomplete" placeholder = "enter your address" onFocus = "geolocate()" required=""></div>
+            <div id="locationField" class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-address" placeholder = "enter your address" onFocus = "geolocate()" required=""></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="biz-about" required=""></textarea></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="biz-socials" required=""></div>
             <div class="form-group"><button class="btn btn-primary" id="biz-submit" type="submit" onclick="savebiz()">Update</button></div>
@@ -112,7 +112,7 @@
 
 
     var idlist = {
-      biz: ['bizname', 'other-serv', 'autocomplete', 'about', 'socials'],
+      biz: ['bizname', 'other-serv', 'address', 'about', 'socials'],
       vol: ['other-serv', 'about', 'socials']
     };
     var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting'];
@@ -200,7 +200,7 @@
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
     autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('biz-autocomplete'), {types: ['geocode']});
+        document.getElementById('biz-address'), {types: ['geocode']});
 
     // Avoid paying for data that you don't need by restricting the set of
     // place fields that are returned to just the address components.
