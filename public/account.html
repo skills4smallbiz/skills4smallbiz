@@ -112,7 +112,7 @@
 
 
 <script>
-    var uid, name, email, address, lat, lng;
+    var uid, name, email, address, coords, lat, lng, geocoder;
     var db = firebase.firestore();
     
 
@@ -182,9 +182,11 @@
         });
 
         //call func here to get coords
+        console.log(address)
+        console.log(geocoder,address)
         coords = geocodeAddress(geocoder,address)
-        lat = coords[0]
-        lng = coords[1]
+        lat = Number(coords[0])
+        lng = Number(coords[1])
 
         //add coords here
         values["lat"] = lat
@@ -271,7 +273,7 @@
 
     function initMap() {
         console.log("initializing geocoder")
-        var geocoder = new google.maps.Geocoder();
+        geocoder = new google.maps.Geocoder();
     }
     
 
