@@ -37,6 +37,8 @@
             <p id="profile-about" class="description">About:&nbsp;</p>
             <p id="profile-socials" class="description"></p>
         </div>
+        
+        <div id = "map"></div>
     </section><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -97,7 +99,7 @@
     }
     var uid, name, email;
     var button_name;
-    var about, services, socials, bizname;
+    var about, services, socials, bizname, lat, lng;
     var userid = getUrlVars()['user'];
     var col = getUrlVars()['type'];
     console.log(userid)
@@ -105,6 +107,7 @@
 
     var keys;
     if (col == "businesses") {
+        //add lat and lng
         keys = ["bizname", "address", "services", "other-serv", "about", "socials"]
     } else if (col == "volunteers") {
         keys = ["name", "services", "other-serv", "about", "socials"]
@@ -135,8 +138,12 @@
                     }
                     textDoc.style.display = "";
                 });
-                //document.getElementById("type").innerText = type;
+                
+                //latitude and longitute
+                lat = data["lat"]
+                lng = data["lng"]
 
+                initMap(lat, lng)
 
                 console.log("updating info")
             } else {
@@ -146,11 +153,31 @@
             console.log("Error getting document:", error)
         });
     });
+
+    //mapping the business given lat and lng
+    function initMap(latitutde, longitude) {
+        // The location of the biz
+        var loc = {lat: latitutde, lng: longitude};
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 13, center: loc});
+        // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({position: loc, map: map});
+    }
+
+    
+
+
+
 </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/dbload.js"></script>
+    <!-- daniel's account -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&callback=initMap">
+    </script>
 </body>
 
 </html>
