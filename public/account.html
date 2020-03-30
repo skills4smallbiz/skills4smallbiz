@@ -107,8 +107,9 @@
     });
 </script>
 <script>
-    var uid, name, email;
-    var db = firebase.firestore()
+    var uid, name, email, address, lat, lng;
+    var db = firebase.firestore();
+    var geocoder = new google.maps.Geocoder();
 
 
     var idlist = {
@@ -157,6 +158,10 @@
         idlist[prefix].forEach(function(id) {
           htmlid = prefix + '-' + id;
           values[id] = document.getElementById(htmlid).value;
+            //save address
+          if (id = "address") {
+              address = values[id]
+          }
         });
 
         values["email"] = email;
@@ -165,10 +170,20 @@
         servlist.forEach(function(id) {
           htmlid = prefix + '-' + 'serv-' + id;
 
+
           if (document.getElementById(htmlid).checked) {
             values['services'].push(id)
           }
         });
+
+        //call func here to get coords
+        coords = geocodeAddress(geocoder,address)
+        lat = coords[0]
+        lng = coords[1]
+
+        //add coords here
+        values["lat"] = lat
+        values["lng"] = lng
 
         db.collection(collection).doc(uid).set(values);
 
@@ -247,7 +262,17 @@
     }
     }
 
+    
 
+    function geocodeAddress(geocoder, address) {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+        position = resultsMap.setCenter(results[0].geometry.location);
+        return position
+        } 
+    });
+}
 
 </script>
 
