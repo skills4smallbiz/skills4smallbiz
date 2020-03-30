@@ -36,6 +36,7 @@
             <p id="profile-other-serv" class="description">Other Services:&nbsp;</p>
             <p id="profile-about" class="description">About:&nbsp;</p>
             <p id="profile-socials" class="description"></p>
+            <a class="btn btn-primary ml-auto" role="button" id="contact">Contact</a>
         </div>
         
         <div id = "map"></div>
@@ -133,6 +134,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
                     
                     textDoc = document.getElementById('profile-' + id)
                     textDoc.innerText += fmtData;
+
                     if (id == "socials") {
                         textDoc.style.textDecoration = "underline";
                         textDoc.addEventListener("click", () => {
@@ -141,6 +143,12 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
                     }
                     textDoc.style.display = "";
                 });
+                
+                //email
+                email = data["email"]
+                //set email
+                document.getElementById("contact").href = "mailto:" + email;
+
                 
                 //latitude and longitute
                 lat = data["lat"]
@@ -173,6 +181,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
 
     
 
+    //override css to make button visible
+    document.getElementById("contact").style = "";
 
 
 </script>
