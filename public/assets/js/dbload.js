@@ -89,11 +89,13 @@ async function sortData(qtype, prefix, fields, servlist, uid){
                 console.log(items)
                 printData(items, prefix, fields, uid, qtype)
                 printed = true;
+
+                console.log(uid);
                 if (uid != null) {
-                    document.getElementById("filter-message").innerHTML = "Businesses sorted by proximity and filtered so that their needs match your skillset."
+                    document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity and filtered so that their needs match your skillset."
                 }
                 else {
-                    document.getElementById("filter-message").innerHTML = "Content sorted by proximity."
+                    document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity."
                 }
                 
             })
@@ -101,7 +103,7 @@ async function sortData(qtype, prefix, fields, servlist, uid){
                 
             } else{
                 if (uid == null) {
-                    document.getElementById("filter-message").innerHTML = "Allow location access to sort by proximity, and log in to filter by your skillset."   
+                    document.getElementById("filter-message").innerHTML = "Log in to filter volunteers by their skillset."   
                 }
                 else {
                     document.getElementById("filter-message").innerHTML = "Volunteers are filtered so that their skillset matches your needs."      
