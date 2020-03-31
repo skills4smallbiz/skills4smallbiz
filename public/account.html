@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>CovidBizLink</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
@@ -106,9 +108,15 @@
         }
     });
 </script>
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&libraries=places&callback=initAutocomplete"></script> -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"> </script> -->
+
+
 <script>
-    var uid, name, email;
-    var db = firebase.firestore()
+    var uid, name, email, address, coords, lat, lng, geocoder, position;
+    var db = firebase.firestore();
+    
 
 
     var idlist = {
@@ -157,6 +165,16 @@
         idlist[prefix].forEach(function(id) {
           htmlid = prefix + '-' + id;
           values[id] = document.getElementById(htmlid).value;
+            //save address
+          if (id == "address") {
+              address = values[id]
+          } else if (id == "socials") {
+              console.log(values[id], id)
+                if (!values[id].match(/^https?:\/\//i)) {
+                    console.log("url altered")
+                    values[id] = 'http://' + values[id];
+                }
+          }
         });
 
         values["email"] = email;
@@ -170,9 +188,39 @@
           }
         });
 
-        db.collection(collection).doc(uid).set(values);
+        //if business, update coords
+        if (prefix=="biz") {
+            var address = document.getElementById('biz-address').value;
+            geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                position = results[0].geometry.location
+                lat = Number(position["lat"]())
+                lng = Number(position["lng"]())
+                console.log(lat, lng)
+                //add coords here
+                values["lat"] = lat
+                values["lng"] = lng
+                console.log(values)
 
-        document.getElementById(prefix + '-submit').innerText = "Updated!"
+                console.log("updating")
+
+                db.collection(collection).doc(uid).set(values);
+
+                document.getElementById(prefix + '-submit').innerText = "Updated!"
+                
+            } 
+            
+
+            });
+        }
+        //if volunteer, don't update coords
+        else {
+            db.collection(collection).doc(uid).set(values);
+            document.getElementById(prefix + '-submit').innerText = "Updated!"
+
+        }
+
+
     }
 
     function savebiz() {
@@ -209,6 +257,8 @@
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
     autocomplete.addListener('place_changed', fillInAddress);
+
+    initMap();
     }
 
     function fillInAddress() {
@@ -247,7 +297,24 @@
     }
     }
 
+    function initMap() {
+        console.log("initializing geocoder")
+        geocoder = new google.maps.Geocoder();
+    }
+    
 
+    function geocodeAddress(geocoder, address) {
+        var address = document.getElementById('biz-address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            position = results[0].geometry.location
+            console.log(position)
+            lat = Number(position["lat"]())
+            lng = Number(position["lng"]())
+            
+        } 
+    });
+}
 
 </script>
 
@@ -267,8 +334,10 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/dbload.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNvua_RRAQPQLwOG_kyZpqepK76zpgljA&libraries=places&callback=initAutocomplete"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&libraries=places&callback=initAutocomplete"  async defer> </script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"  async defer> </script> -->
+
+
 
 
 </body>
