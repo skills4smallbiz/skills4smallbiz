@@ -17,14 +17,37 @@ function errorMsg() {
 function printData(qtype, prefix, fields, servlist, uid){
     var table = document.getElementById(prefix+'-table')
 
-    console.log(servlist)
-    
-    
-    
+
     if (servlist.length > 0) {
         db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
             var numEntries = 0;
-            snapshot.docs.forEach(function(doc) { 
+            orderedItems = []
+            
+            snapshot.docs.forEach((doc)=> orderedItems.push(doc))
+            if (prefix == 'biz' && navigator.geolocation){ 
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                        };
+            console.log('My Lat:' + geolocation.lat)
+            console.log('My Long:' + geolocation.lng)
+            orderedItems.sort((i)=>{
+                var lat = i.data()['lat']
+                var long = i.data()['lng']
+                var dist = Math.sqrt(Math.pow((geolocation['lat']-lat),2) + Math.pow((geolocation['lng']-long), 2)) 
+                console.log(i.data()['bizname'], dist) 
+
+                return dist
+                })
+            
+            })
+        }
+        orderedItems.forEach((x)=>{
+            console.log(x.id, x.data())
+        }
+        ) 
+            orderedItems.forEach(function(doc) { 
                 if (doc.id != uid) {
                     numEntries += 1;
                     var row = table.insertRow(-1);
