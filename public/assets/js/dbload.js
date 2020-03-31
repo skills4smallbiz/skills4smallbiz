@@ -95,8 +95,8 @@ async function sortData(qtype, prefix, fields, servlist, uid){
                     document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity and filtered so that their needs match your skillset."
                 }
                 else {
-                    document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity."
-                }
+                    document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity. "
+                }        
                 
             })
             
@@ -143,3 +143,5 @@ function query(qtype, utype, user, prefix, fields){
         sortData(qtype, prefix, fields, servlist)
     }
 }
+
+
