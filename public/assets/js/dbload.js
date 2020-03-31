@@ -89,7 +89,7 @@ async function sortData(qtype, prefix, fields, servlist, uid){
                 console.log(items)
                 printData(items, prefix, fields, uid, qtype)
                 printed = true;
-                if (user != null) {
+                if (uid != null) {
                     document.getElementById("filter-message").innerHTML = "Businesses sorted by proximity and filtered so that their needs match your skillset."
                 }
                 else {
@@ -100,7 +100,7 @@ async function sortData(qtype, prefix, fields, servlist, uid){
             
                 
             } else{
-                if (user == null) {
+                if (uid == null) {
                     document.getElementById("filter-message").innerHTML = "Allow location access to sort by proximity, and log in to filter by your skillset."   
                 }
                 else {
