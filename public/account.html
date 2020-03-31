@@ -164,8 +164,14 @@
           htmlid = prefix + '-' + id;
           values[id] = document.getElementById(htmlid).value;
             //save address
-          if (id = "address") {
+          if (id == "address") {
               address = values[id]
+          } else if (id == "socials") {
+              console.log(values[id], id)
+                if (!values[id].match(/^https?:\/\//i)) {
+                    console.log("url altered")
+                    values[id] = 'http://' + values[id];
+                }
           }
         });
 
@@ -174,7 +180,6 @@
         values['services'] = []
         servlist.forEach(function(id) {
           htmlid = prefix + '-' + 'serv-' + id;
-
 
           if (document.getElementById(htmlid).checked) {
             values['services'].push(id)
