@@ -186,29 +186,37 @@
           }
         });
 
-        //call func here to get coords
-        // geocodeAddress(geocoder,address)
-        
-        var address = document.getElementById('biz-address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-        if (status === 'OK') {
-            position = results[0].geometry.location
-            lat = Number(position["lat"]())
-            lng = Number(position["lng"]())
-            console.log(lat, lng)
-            //add coords here
-            values["lat"] = lat
-            values["lng"] = lng
-            console.log(values)
+        //if business, update coords
+        if (prefix=="biz") {
+            var address = document.getElementById('biz-address').value;
+            geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                position = results[0].geometry.location
+                lat = Number(position["lat"]())
+                lng = Number(position["lng"]())
+                console.log(lat, lng)
+                //add coords here
+                values["lat"] = lat
+                values["lng"] = lng
+                console.log(values)
 
-            console.log("updating")
+                console.log("updating")
 
-            db.collection(collection).doc(uid).set(values);
+                db.collection(collection).doc(uid).set(values);
 
-            document.getElementById(prefix + '-submit').innerText = "Updated!"
+                document.getElementById(prefix + '-submit').innerText = "Updated!"
+                
+            } 
             
-        } 
-    });
+
+            });
+        }
+        //if volunteer, don't update coords
+        else {
+            db.collection(collection).doc(uid).set(values);
+            document.getElementById(prefix + '-submit').innerText = "Updated!"
+
+        }
 
 
     }
