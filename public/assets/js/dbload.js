@@ -1,4 +1,7 @@
 function formatServices(serv) {
+    //pre: a lsit of services
+    //post: String: formats services with commas and spaces
+
     var res = "";
     const split = ", "
     serv.forEach(function(s) {
@@ -9,12 +12,16 @@ function formatServices(serv) {
 }
 
 function errorMsg() {
+    //post: error message
+    
     var error = document.getElementById('loading-message');
     error.innerHTML = "No users match your current requirements, try changing them in accounts!"
     error.style.display = ""
 }
 
 function printData(items, prefix, fields, uid, qtype){
+    //pre: items: listings to be printed, prefix: see below, uid: see user ID, qtype: see below
+    //post: prints out listings on user screen
 
     var numEntries = 0;
     var table = document.getElementById(prefix+'-table')
@@ -56,7 +63,11 @@ function dist(i, geolocation){
 
 
 async function sortData(qtype, prefix, fields, servlist, uid, same){
-
+    //pre:
+        //qtype: see below, prefix: see below, servlist: a list of the user's skills/needs, used to filter
+        //uid: user ID, same: whether it's the same type of user looking at the same type of page (eg. vol looking at vol, biz looking at biz)
+    //post:
+        //sorts the data (geo sorted for businesses), and calls printData() to display data
 
     if (servlist.length > 0) {
         db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
@@ -123,6 +134,16 @@ async function sortData(qtype, prefix, fields, servlist, uid, same){
 
 //
 function query(qtype, utype, user, prefix, fields){
+    //pre: 
+        //qtype: the page querying the data from: businesses/volunteers
+        //utype: the user type (the one that's not qtype)
+        //user: the firebase auth obj
+        //prefix: biz/vol, consistent with qtype
+        //fields: the data fields to be queried (varies depending on biz/vol)
+    
+    //post:
+        //calls sortData based  on the type and user
+
     //all the skills
     var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "socialmedia", "organize"];
     //if user is logged in
