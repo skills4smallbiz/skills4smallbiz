@@ -13,7 +13,7 @@ function formatServices(serv) {
 
 function errorMsg() {
     //post: error message
-    
+
     var error = document.getElementById('loading-message');
     error.innerHTML = "No users match your current requirements, try changing them in accounts!"
     error.style.display = ""
@@ -133,19 +133,30 @@ async function sortData(qtype, prefix, fields, servlist, uid, same){
 
 
 //
-function query(qtype, utype, user, prefix, fields){
+function query(qtype, utype, user, prefix, fields, showAll){
+    console.log(showAll)
     //pre: 
         //qtype: the page querying the data from: businesses/volunteers
         //utype: the user type (the one that's not qtype)
         //user: the firebase auth obj
         //prefix: biz/vol, consistent with qtype
         //fields: the data fields to be queried (varies depending on biz/vol)
+        //showAll: if query is to display all data
     
     //post:
         //calls sortData based  on the type and user
 
     //all the skills
     var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "socialmedia", "organize"];
+
+    if (showAll) {
+        //clears table
+        document.getElementById(prefix +'-table').innerHTML = ""
+        sortData(qtype, prefix, fields, servlist)
+        return;
+    }
+    console.log("continue")
+
     //if user is logged in
     if (user != null)  {
         uid = user.uid;

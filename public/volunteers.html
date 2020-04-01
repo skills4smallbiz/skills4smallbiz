@@ -29,8 +29,11 @@
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
             </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
     </nav>
-    <div id="filter-message" class="text-center">
+    <div id="filter-message" class="text-center listLinks">
 
+    </div>
+    <div id = "showall" class="text-center listLinks">
+        <a style = "text-decoration:underline" onclick = "query('volunteers', 'businesses', null, 'vol', fields = ['name', 'services', 'other-serv', 'socials'], true)">View all Listings</a> (default when not signed-in)
     </div>
     <div class="table-responsive">
         <table class="table" id="vol-table">
@@ -90,6 +93,8 @@
             document.getElementById("account-welcome").innerText = "Hello, " + name;
             document.getElementById("account-drop").style.display = "";
         }
+        //TODO: BUG. This loads the data twice
+        // document.getElementById("showall").onclick = query('volunteers', 'businesses', user, 'vol', fields = ['name', 'services', 'other-serv', 'socials'], true);
     });
 </script>
 <script src="assets/js/dbload.js"></script>
