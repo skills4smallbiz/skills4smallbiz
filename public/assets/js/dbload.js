@@ -121,7 +121,7 @@ async function sortData(qtype, prefix, fields, servlist, uid){
 
 //
 function query(qtype, utype, user, prefix, fields){
-    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting'];
+    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "socialmedia", "organize"];
     if (user != null)  {   // USER LOGGED IN
         uid = user.uid;
         name = user.displayName;
