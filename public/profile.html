@@ -23,7 +23,9 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/businesses.html">Businesses</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/volunteers.html">Volunteers</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
-                </ul>
+                </ul><a href="/contact.html" style="padding: 10px;padding-bottom: 0px;padding-right: 0;padding-top: 0;">Contact Us</a></div>
+
+
             </div>
             <div class="dropdown bg-primary border-primary shadow-sm" id="account-drop" style="padding: 7px;border-radius: 4px; display: none"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="account-welcome" href="#" style="color: rgb(255,255,255);">Dropdown </a>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
@@ -50,7 +52,8 @@
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
-<!-- Previously loaded Firebase SDKs -->
+ <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+
 
 <script 
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s">
