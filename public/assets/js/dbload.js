@@ -1,4 +1,7 @@
 function formatServices(serv) {
+    //pre: a lsit of services
+    //post: String: formats services with commas and spaces
+
     var res = "";
     const split = ", "
     serv.forEach(function(s) {
@@ -9,12 +12,16 @@ function formatServices(serv) {
 }
 
 function errorMsg() {
+    //post: error message
+
     var error = document.getElementById('loading-message');
     error.innerHTML = "No users match your current requirements, try changing them in accounts!"
     error.style.display = ""
 }
 
 function printData(items, prefix, fields, uid, qtype){
+    //pre: items: listings to be printed, prefix: see below, uid: see user ID, qtype: see below
+    //post: prints out listings on user screen
 
     var numEntries = 0;
     var table = document.getElementById(prefix+'-table')
@@ -55,8 +62,12 @@ function dist(i, geolocation){
 
 
 
-async function sortData(qtype, prefix, fields, servlist, uid){
-
+async function sortData(qtype, prefix, fields, servlist, uid, same){
+    //pre:
+        //qtype: see below, prefix: see below, servlist: a list of the user's skills/needs, used to filter
+        //uid: user ID, same: whether it's the same type of user looking at the same type of page (eg. vol looking at vol, biz looking at biz)
+    //post:
+        //sorts the data (geo sorted for businesses), and calls printData() to display data
 
     if (servlist.length > 0) {
         db.collection(qtype).where('services', 'array-contains-any', servlist).get().then(function(snapshot) {
@@ -91,11 +102,11 @@ async function sortData(qtype, prefix, fields, servlist, uid){
                 printed = true;
 
                 console.log(uid);
-                if (uid != null) {
+                if (uid != null && !same)  {
                     document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity and filtered so that their needs match your skillset."
                 }
                 else {
-                    document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity. "
+                    document.getElementById("filter-message").innerHTML = "Businesses are sorted by proximity."
                 }        
                 
             })
@@ -104,6 +115,9 @@ async function sortData(qtype, prefix, fields, servlist, uid){
             } else{
                 if (uid == null) {
                     document.getElementById("filter-message").innerHTML = "Log in to filter volunteers by their skillset."   
+                }
+                else if (same){
+                    document.getElementById("filter-message").innerHTML = `As a volunteer, you are viewing all volunteers.`     
                 }
                 else {
                     document.getElementById("filter-message").innerHTML = "Volunteers are filtered so that their skillset matches your needs."      
@@ -118,27 +132,65 @@ async function sortData(qtype, prefix, fields, servlist, uid){
 
 
 
-
 //
-function query(qtype, utype, user, prefix, fields){
-    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting'];
-    if (user != null)  {   // USER LOGGED IN
+function query(qtype, utype, user, prefix, fields, showAll){
+    console.log(showAll)
+    //pre: 
+        //qtype: the page querying the data from: businesses/volunteers
+        //utype: the user type (the one that's not qtype)
+        //user: the firebase auth obj
+        //prefix: biz/vol, consistent with qtype
+        //fields: the data fields to be queried (varies depending on biz/vol)
+        //showAll: if query is to display all data
+    
+    //post:
+        //calls sortData based  on the type and user
+
+    //all the skills
+    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "socialmedia", "organize"];
+
+    if (showAll) {
+        //clears table
+        document.getElementById(prefix +'-table').innerHTML = ""
+        sortData(qtype, prefix, fields, servlist)
+        return;
+    }
+    console.log("continue")
+
+    //if user is logged in
+    if (user != null)  {
         uid = user.uid;
         name = user.displayName;
         email = user.email;
-
+        //get that user's data
         db.collection(utype).doc(uid).get().then(function(doc) {
-            if (doc != undefined){
+            //if user is of the other type (biz looking at vol, vol looking at biz)
+            if (doc.data() != undefined){
+                //generate servlist based on needs/skills
                 servlist = doc.data()['services'];
-            } else{
-                var error = document.createElement('h1');
-                var error_t = document.createTextNode("No users match your current requirements, try changing them in accounts!")
-                error.appendChild(error_t)
-                document.body.appendChild(error)
-            }
-            sortData(qtype, prefix, fields, servlist, uid)
-        });
+                sortData(qtype, prefix, fields, servlist, uid)
+            } 
+            //if doc is empty: 2 scenarios
+            else{
+                db.collection(qtype).doc(uid).get().then(function(doc) {
+                    //if both are empty 
+                    if (doc.data() == undefined){
+                        var error = document.createElement('h1');
+                        var error_t = document.createTextNode("You did not make a profile or no users match your current needs/skills, try changing them in Account!")
+                        error.appendChild(error_t)
+                        document.body.appendChild(error)
+                    }
+                    //if the other one is filled (vol looking at vol, biz looking at biz)
+                    else {
+                        //display all
+                        sortData(qtype, prefix, fields, servlist, uid, true) 
 
+                    }
+                
+            });
+        }
+        });
+    //else if the user is not logged in, display all
     } else {
         sortData(qtype, prefix, fields, servlist)
     }

@@ -2,6 +2,8 @@
 <html>
 
 <head>
+
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>CovidBizLink</title>
@@ -39,13 +41,15 @@
                 <div class="d-flex flex-wrap">
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-socialmedia"><label class="form-check-label" for="formCheck-1">Social Media</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-organize"><label class="form-check-label" for="formCheck-1">Organizing</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-phone"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
                 </div>
             </div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv" placeholder = "Really, anything!"></div>
             <div id="locationField" class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-address" placeholder = "enter your address" onFocus = "geolocate()" required=""></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="biz-about" required=""></textarea></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="biz-socials" required=""></div>
@@ -59,13 +63,15 @@
                 <div class="d-flex flex-wrap">
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-accounting"><label class="form-check-label" for="formCheck-1">Accounting</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-webdev"><label class="form-check-label" for="formCheck-1">Web Development</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-socialmedia"><label class="form-check-label" for="formCheck-1">Social Media</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-organize"><label class="form-check-label" for="formCheck-1">Organizing</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-phone"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-legal"><label class="form-check-label" for="formCheck-1">Legal</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
                 </div>
             </div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="vol-other-serv"></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="vol-other-serv" placeholder = "Really, anything!"></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About You:</label><textarea class="form-control" id="vol-about" required=""></textarea></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="vol-socials" required=""></div>
             <div class="form-group"><button class="btn btn-primary" id="vol-submit" type="submit" onclick="savevol()">Update</button></div>
@@ -126,7 +132,7 @@
       biz: ['bizname', 'other-serv', 'address', 'about', 'socials'],
       vol: ['other-serv', 'about', 'socials']
     };
-    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting'];
+    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "socialmedia", "organize"];
 
 
     function recover_information(col, prefix) {
@@ -185,7 +191,7 @@
         values['services'] = []
         servlist.forEach(function(id) {
           htmlid = prefix + '-' + 'serv-' + id;
-
+        console.log(htmlid)
           if (document.getElementById(htmlid).checked) {
             values['services'].push(id)
           }
@@ -208,9 +214,6 @@
                 console.log("updating")
 
                 db.collection(collection).doc(uid).set(values);
-
-                document.getElementById(prefix + '-submit').innerText = "Updated!"
-                
             } 
             
 
@@ -219,9 +222,10 @@
         //if volunteer, don't update coords
         else {
             db.collection(collection).doc(uid).set(values);
-            document.getElementById(prefix + '-submit').innerText = "Updated!"
-
         }
+        //update button
+        document.getElementById(prefix + '-submit').innerText = "Updated!"
+
 
 
     }
