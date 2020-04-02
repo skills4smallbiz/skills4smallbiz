@@ -5,9 +5,9 @@ function formatServices(serv) {
     var res = "";
     const split = ", "
     serv.forEach(function(s) {
-        res += s.slice(0,1).toUpperCase() + s.slice(1) + split;
+        res += s.slice(0,1) + s.slice(1) + split;
     });
-
+    res=res[0].toUpperCase()+res.slice(1);
     return res.slice(0, -2)
 }
 
@@ -147,7 +147,7 @@ function query(qtype, utype, user, prefix, fields, showAll){
         //calls sortData based  on the type and user
 
     //all the skills
-    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "socialmedia", "organize"];
+    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "social media", "organize"];
 
     if (showAll) {
         //clears table
