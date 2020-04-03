@@ -85,7 +85,7 @@ async function sortData(qtype, prefix, fields, servlist, uid, same){
 
 
                 navigator.geolocation.getCurrentPosition(function(position) {
-                document.getElementById(prefix +'-table').innerHTML = ""
+                document.getElementById(prefix +'-table').innerHTML = document.getElementById(prefix + '-table').getElementsByTagName('tr')[0].innerHTML
                 console.log('Not bad')
                 var geolocation = {
                     lat: position.coords.latitude,
@@ -151,7 +151,7 @@ function query(qtype, utype, user, prefix, fields, showAll){
 
     if (showAll) {
         //clears table
-        document.getElementById(prefix +'-table').innerHTML = ""
+        document.getElementById(prefix +'-table').innerHTML = document.getElementById(prefix + '-table').getElementsByTagName('tr')[0].innerHTML
         sortData(qtype, prefix, fields, servlist)
         return;
     }
