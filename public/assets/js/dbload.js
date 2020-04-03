@@ -195,5 +195,19 @@ function query(qtype, utype, user, prefix, fields, showAll){
         sortData(qtype, prefix, fields, servlist)
     }
 }
+function delete_account(type, uid){
+    var collection = (type == "vol-delete") ? "volunteers" : "businesses";
+    console.log(collection, uid)
+    db.collection(collection).doc(uid).delete().then(function() {
+    console.log("Document successfully deleted!");
+    window.alert("Your data has been successfully deleted")
+    location.reload()
+})
+}
 
-
+function set_up_delete(uid){
+    var button_ids = ['biz-delete','vol-delete']
+    button_ids.forEach((button_id)=>{
+        document.getElementById(button_id).addEventListener("click",()=>{delete_account(button_id, uid)})
+    })
+}
