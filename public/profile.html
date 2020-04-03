@@ -65,6 +65,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-functions.js"></script>
 
 
 <script 
@@ -104,6 +105,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
 <script src="assets/js/dbload.js"></script>
 
 <script>
+    var sendtoemail;
     Array.prototype.forEach.call(document.getElementById("profile").children, function(n) {
         n.style.display = "none";
     });
@@ -165,7 +167,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
                 email = data["email"]
                 //set email
                 document.getElementById("contact").href = "mailto:" + email;
-
+                sendtoemail = email
                 if (col == "businesses") {
                     //latitude and longitute
                     lat = data["lat"]
@@ -201,7 +203,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
 
     //override css to make button visible
     document.getElementById("contact").style = "";
+    document.getElementById("reach-out").style = "";
+    document.getElementById("reach-out").addEventListener("click", ()=>{
+        var name = document.getElementById("profile-name").innerText
 
+        console.log("sending that email")
+        sendEmail(userid)
+        window.alert("Email sent to " + name + '!')
+    })
 </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
