@@ -147,7 +147,7 @@ function query(qtype, utype, user, prefix, fields, showAll){
         //calls sortData based  on the type and user
 
     //all the skills
-    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "social media", "organize", "online video platform"];
+    var servlist = ['accounting', 'webdev', 'phone', 'legal', 'advertising', 'consulting', "social media", "organize", "online video platform","marketing/outreach"];
 
     if (showAll) {
         //clears table
