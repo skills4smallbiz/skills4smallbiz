@@ -136,7 +136,7 @@
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&libraries=places&callback=initAutocomplete"></script> -->
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"> </script> -->
-
+<script src="assets/js/log.js"></script>
 
 <script>
     var uid, name, email, address, coords, lat, lng, geocoder, position;
@@ -150,7 +150,7 @@
     };
     var servlist = ['accounting', 'webdev', 'phone', 'advertising', 'consulting', "social media", "organize","online video platform","marketing/outreach"];
 
-
+    
     function recover_information(col, prefix) {
       db.collection(col).doc(uid).get().then(function(doc){
         if (doc.exists){
@@ -183,6 +183,12 @@
         recover_information("businesses", "biz")
         recover_information("volunteers", "vol")
         set_up_delete(uid);
+        var events = [
+            {ID:"biz-submit", eventType:"click", action: user.uid + "updated biz info", category:"update", event_label: "biz", value: 4},
+            {ID:"vol-submit", eventType:"click", action: user.uid + "updated vol info", category:"update", event_label: "vol", value: 3}
+
+        ]
+        reportEvents(events)
     });
 
     function saveone(collection, prefix) {
