@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Covid Link Biz</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/css/Article-Clean.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+        <div class="container"><a class="navbar-brand" href="/index.html" style="padding-right: 25px;">Covid Biz Link</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/businesses.html">Businesses</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/volunteers.html">Volunteers</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
+                </ul>
+            </div>
+            <div class="dropdown bg-primary border-primary shadow-sm" id="account-drop" style="padding: 7px;border-radius: 4px; display: none"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="account-welcome" href="#" style="color: rgb(255,255,255);">Dropdown </a>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
+            </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
+    </nav><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+<!-- Previously loaded Firebase SDKs -->
+
+<script>
+    // TODO: Replace the following with your app's Firebase project configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
+      authDomain: "covidsmallbizlink.firebaseapp.com",
+      databaseURL: "https://covidsmallbizlink.firebaseio.com",
+      projectId: "covidsmallbizlink",
+      storageBucket: "covidsmallbizlink.appspot.com",
+      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged(function(user){
+        if (user != null) {
+            // Name, email address etc
+            var name = user.displayName;
+            var email = user.email;
+            console.log("yes");
+            console.log(name);
+
+            b = document.getElementById("sign-btn");
+            b.style.display = "none";
+
+            document.getElementById("account-welcome").innerText = "Hello, " + name;
+            document.getElementById("account-drop").style.display = "";
+        }
+    });
+</script>
+
+    <div class="article-clean">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                    <div class="intro">
+                        <h1 class="text-center">Terms</h1>
+                    </div>
+                    <div class="text">
+                        <p>CovidBizLink assumes no control or liability over the quality, safety or legality of the online volunteering opportunities or applications posted, the truth or accuracy of the listings, the ability of the Organization to offer
+                            online volunteering opportunities to the individuals submitting applications, or the ability of such individuals to fill the online volunteering opportunity openings.<br><br>The Business shall be responsible for verifying the
+                            accuracy and validity of the advice and/or deliverables it receives from Online Volunteers. The Online Volunteer shall not partake in any activities that could be detrimental to the Organization or to its objectives, and the
+                            advice and/or deliverables the Online Volunteer will provide to the Organization will reflect the full extent of her/his knowledge and experience. The Registered User shall not apply for opportunities where s/he does not have
+                            the appropriate skills or qualifications. The Online Volunteer accepts sole responsibility in the case of her/his gross negligence or willful misconduct in connection with any online volunteering opportunity.<br><br>Also, please
+                            note that there are risks in using the Platform, and the User, registered or otherwise, assumes all risks associated with dealing with other Users, registered or otherwise, with whom s/he comes in contact through the Platform.
+                            CovidBizLink expects that the User, registered or otherwise, will use caution and common sense when using this Platform.<br><br>Because User authentication on the Internet is difficult, CovidBizLink cannot and does not confirm
+                            that each User, registered or otherwise, is who s/he claims to be. Because CovidBizLink does not and cannot be involved in user-to-user dealings or control the behavior of Users on or off the Platform, in the event that the
+                            User, registered or otherwise, has a dispute with one or more Users, registered or otherwise, the User releases CovidBizLink and its agents from claims, demands, and damages actual and consequential, direct and indirect of
+                            every kind and nature, known and unknown, suspected and unsuspected, disclosed and undisclosed, arising out of or in any way connected with such disputes.<br><br>CovidBizLink acts as a passive conduit for the online distribution
+                            and publication of User-submitted information and has no obligation to screen communications or information in advance and is not responsible for screening or monitoring material posted by Users. If notified by a Registered
+                            User of communications which allegedly are inaccurate, CovidBizLink may investigate the allegation and determine in good faith and in its sole discretion whether to remove or request the removal of the communication. CovidBizLink
+                            has no liability to Users, registered or otherwise, for performance or nonperformance of such activities. CovidBizLink reserves the right to expel Users, registered or otherwise, and prevent their further access to the Platform
+                            for violating the Terms of Use or applicable law and the right to remove communications, which are abusive, illegal, or disruptive. CovidBizLink may take any action with respect to User-submitted information that it deems necessary
+                            or appropriate in its sole discretion if it believes it may create liability or embarrassment for CovidBizLink.<br><br>This Platform may contain links and references to third-party websites. The linked sites are not under the
+                            control of CovidBizLink and CovidBizLink is not responsible for the contents of any linked site or any link contained in a linked site. CovidBizLink provides these links only as a convenience, and the inclusion of a link or
+                            reference does not imply endorsement of the linked site by CovidBizLink. If the User, registered or otherwise, decides to access linked third-party websites, the User does so at her/his own risk.<br><br>This Platform may be
+                            used only for lawful purposes. It should not be used to defame, abuse, harass, stalk, threaten or otherwise violate the legal rights (such as rights of privacy and publicity) of others.<br><br>CovidBizLink has the ability to
+                            at any time for any reason alter or delete the profile of any User or Business at its sole discretion.&nbsp;</p>
+                        <h1 class="text-center">Privacy</h1>
+                        <p>By using the Platform, the User consents to the policies and practices described in this Privacy Policy.This Platform contains links to other websites over which CovidBizLink has no control. CovidBizLink is not responsible for
+                            the privacy policies or practices of other websites to which the User chooses to link from this Platform. CovidBizLink encourages the User to review the privacy policies of those other websites so s/he can understand how they
+                            collect, use and share her/his information. This Privacy Policy applies solely to the information CovidBizLink collects on this Platform.&nbsp;<br><br><strong>II. Collection and Retention of Information</strong>In some areas
+                            of the Platform, and in order to become a Registered User of the Online Volunteering service, CovidBizLink requests or may request that the User provides personal information, including name, address, e-mail address, contact
+                            information, and any other information from which her/his identity is discernible. In other areas, CovidBizLink collects or may collect demographic information that is not unique to the User such as nationality, country of
+                            residence, age, gender, degree, area of expertise and employment status. Sometimes CovidBizLink collects or may collect a combination of this type of information. An example of an area on the Platform where CovidBizLink collects
+                            personal or combined personal and demographic data is the registration page.CovidBizLink also gathers or may gather certain information about the User's use of this Platform, such as what areas the User visits and what services
+                            s/he accesses. Moreover, there is information about the User's computer hardware and software that may be collected by CovidBizLink. This information can include without limitation the IP address, browser type, domain names,
+                            access times, and referring website addresses.CovidBizLink retains indefinitely all the information it gathers about the User to make her/his use of this Platform more efficient, practical and relevant. Of course, the User
+                            can correct or update her/his personal information at any time. Moreover, the User can withdraw from the Platform, in which event CovidBizLink will remove the User's account profile information except for an archival copy,
+                            which is not accessible on the Internet. When a user deletes their account, we still retain analytics data generated by that User. This data, however, is not available to the general public and, in most cases, is taken in aggregate
+                            and somewhat anonymous.<br><br><strong>III. Use of Information</strong>CovidBizLink uses the information it gathers on the Platform, whether personal, demographic, collective or technical, for the purpose of operating and improving
+                            the Platform, fostering a positive User experience and facilitating the connection of Online Volunteers to Organizations as set forth in this Privacy Policy. User information, Organization information, and online volunteering
+                            opportunities are managed as follows:<br>All Registered Users maintain their information at the User profile page. The Platform has the ability, for any reason, in its sole discretion, to delete any account for any reason.The
+                            Business Owner can modify the Organization's opportunity postings, take them offline/online or delete them.Organizations and Online Volunteers can submit feedback. Any feedback submitted becomes the property of CovidBizLink
+                            and can be used by CovidBizLink in connection with the Platform or to contact Registered Users for further information.CovidBizLink reserves the right to remove content on the Platform that violates this Privacy Policy or the
+                            Terms of Use or that CovidBizLink otherwise believes to be harmful.To offer the most relevant results to the User, CovidBizLink may access a user's location. Although general demographic information, including location data,
+                            is always collected, when a Volunteer is searching for Businesses, more specific location data may be collected and retained. The User has the option to accept or deny this tracking but it is suggested that a User allow the
+                            collection of location data since it helps CovidBizLink connect Businesses to more localized assistance.&nbsp;<br><strong>IV. Disclosure of Information to Others</strong>CovidBizLink does not disclose to third parties User's
+                            personal information, combined personal and demographic information or information about her/his use of the Platform (such as areas User visits or services User accesses), except that:<br>CovidBizLink may disclose such information
+                            to companies and individuals CovidBizLink employs to perform functions on its behalf. Examples may include hosting the web servers, and analyzing data. These companies and individuals will have access to the User's personal
+                            information as necessary to perform their functions, but they may not share that information with any other third party.<br><br><strong>V. Use of Cookies</strong>The Platform uses "cookies" to help personalize and maximize
+                            the User's online experience and time online. A cookie is a text file that is placed on the User's hard drive by a web page server. Cookies are not used to run programs or deliver viruses to the User's computer. Cookies are
+                            uniquely assigned to the User's computer, and can only be read by a web server in the domain that issued the cookie to the User.One of the primary purposes of cookies is to provide a convenience feature to save the User time.
+                            The purpose of a cookie is to tell the web server that the User has returned to a specific page. For example, if the User personalizes pages or registers, a cookie helps CovidBizLink to recall the User's specific information
+                            (such as user name, password and preferences). Because of the use of cookies, CovidBizLink can deliver faster and more accurate results and a more personalized site experience.The User may have the ability to accept or decline
+                            cookies. Most web browsers automatically accept cookies, but the User can usually modify her/his browser settings to decline all cookies, if the User prefers. Alternatively, the User may be able to modify her/his browser settings
+                            to notify her/him each time a cookie is tendered and permit the User to accept or decline cookies on an individual basis. If the User chooses to decline cookies, however, that may hinder performance and negatively impact the
+                            User experience on the Platform.&nbsp;<br><br><strong>VI. Updating Registered User Information</strong>All Registered Users can correct, update or change their profile at any time from the User profile page accessible from
+                            the User account area of the Platform.&nbsp;<br><br><strong>VII. Security</strong>CovidBizLink has implemented reasonable technical and Organization measures designed to secure the User's personal information from accidental
+                            loss and from unauthorized access, use, alteration or disclosure. However, CovidBizLink cannot guarantee that unauthorized third parties will never be able to defeat those measures or use the User's personal information for
+                            improper purposes.CovidBizLink attempts to limit access to the User's personal information to relevant Registered Users, but CovidBizLink cannot guarantee that other parties will not gain access to it. For example, Users may
+                            have retained a copy of the User's information in their own file system or databases. CovidBizLink is not responsible for the retention, use or privacy of this information in these instances.&nbsp;<br><br><strong>VIII. Changes to the Privacy Policy</strong>Users
+                            should check this page periodically to review this Privacy Policy. CovidBizLink may, in its sole discretion, modify or revise the Privacy Policy at any time by updating this page.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+                    <p class="text-muted small mb-4 mb-lg-0">© Covid Biz Link 2020. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
+                    <p>Created by&nbsp;Andrew Ferruolo,&nbsp; Lucien Gaitskell,&nbsp;Myles Johnson, William Kopans,&nbsp; and Daniel Wang.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/dbload.js"></script>
+</body>
+
+</html>
