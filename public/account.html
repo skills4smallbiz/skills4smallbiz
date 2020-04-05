@@ -277,7 +277,8 @@
         var links = document.getElementById(prefix +'-social-table').getElementsByTagName('input')
         for (i = 0; i < links.length; i++){
             var link = links[i]
-            if (link!=null) {
+            console.log(link.value)
+            if (link.value!="") {
                 if (!link.value.match(/^https?:\/\//i)) {
                     console.log("url altered")
                     url = 'https://' + link.value;
