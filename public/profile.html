@@ -156,22 +156,27 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
                         }
                         
                         textDoc = document.getElementById('profile-' + id)
-                        textDoc.innerText += fmtData;
                         if (id == "socials") {
-                                //TODO: WORK IN PROGRESS
-                                // for (let i =0; i < data[id].length; i++)  {
-                                //     var a = document.createElement("a");
-                                //     a.innerText=data[id][i];
-                                //     a.style.textDecoration = "underline";
-                                //     a.addEventListener("click", () => {
-                                //     window.open(data[id][i])
-                                // })
-                                //     textDoc.appendChild(a);
-                                // }
-                            textDoc.style.textDecoration = "underline";
-                            textDoc.addEventListener("click", () => {
-                                window.open(fmtData)
-                            })
+                                // TODO: WORK IN PROGRESS
+                                for (let i =0; i < data[id].length; i++)  {
+                                    var a = document.createElement("a");
+                                    var p = document.createElement("p");
+                                    a.innerText=data[id][i];
+                                    a.style.textDecoration = "underline";
+                                    a.addEventListener("click", () => {
+                                    window.open(data[id][i])
+                                })
+                                    // p.innerHTML="<br>"
+                                    textDoc.appendChild(a);
+                                    textDoc.appendChild(p)
+                                }
+                            // textDoc.style.textDecoration = "underline";
+                            // textDoc.addEventListener("click", () => {
+                            //     window.open(fmtData)
+                            // })
+                        }
+                        else {
+                            textDoc.innerText += fmtData;
                         }
                         textDoc.style.display = "";
                     });
