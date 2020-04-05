@@ -277,13 +277,15 @@
         var links = document.getElementById(prefix +'-social-table').getElementsByTagName('input')
         for (i = 0; i < links.length; i++){
             var link = links[i]
-            if (!link.value.match(/^https?:\/\//i)) {
-                console.log("url altered")
-                url = 'https://' + link.value;
-            } else{
-                url = link.value
+            if (link!=null) {
+                if (!link.value.match(/^https?:\/\//i)) {
+                    console.log("url altered")
+                    url = 'https://' + link.value;
+                } else{
+                    url = link.value
+                }
+                socials.push(url)
             }
-            socials.push(url)
         }
         values["socials"] = socials 
 
