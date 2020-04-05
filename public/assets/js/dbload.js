@@ -34,6 +34,9 @@ function printData(items, prefix, fields, uid, qtype){
             for (i = 0; i < fields.length; i++){
                 cells.push(row.insertCell());
                 var fmtData = doc.data()[fields[i]]
+                if (fields[i] == "socials"){
+                    fmtData = fmtData.toString()
+                }
                 if (fields[i] == 'services') {
                     fmtData = formatServices(fmtData);
                 }

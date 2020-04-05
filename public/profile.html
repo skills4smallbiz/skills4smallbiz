@@ -179,7 +179,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
                     }
                     var events = [
 
-                        {ID:"Contact", eventType:"click", action: user.uid + "connected with" + userid, category:"Connection", event_label: intersection(userData.data()['services'], doc.data()['services']).toString(), value: 5}
+                        {ID:"contact", eventType:"click", action: user.uid + "connected with" + userid, category:"Connection", event_label: intersection(userData.data()['services'], doc.data()['services']).toString(), value: 5}
                     ]
                     reportEvents(events)
                     console.log("updating info")

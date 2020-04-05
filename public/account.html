@@ -197,7 +197,7 @@
             htmlid = prefix + '-' + id;
             document.getElementById(htmlid).value = doc.data()[id]
           });
-          doc.data()['social'].forEach(link=>{
+          doc.data()['socials'].forEach(link=>{
                 var table = document.getElementById(prefix +'-social-table')
                 var len = table.getElementsByTagName("tr").length
                 addSocialRow(prefix)
@@ -277,7 +277,7 @@
             }
             socials.push(url)
         }
-        values["social"] = socials 
+        values["socials"] = socials 
 
         //if business, update coords
         if (prefix=="biz") {
