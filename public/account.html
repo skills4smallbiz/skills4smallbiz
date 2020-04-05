@@ -197,6 +197,14 @@
             htmlid = prefix + '-' + id;
             document.getElementById(htmlid).value = doc.data()[id]
           });
+          doc.data()['social'].forEach(link=>{
+                var table = document.getElementById(prefix +'-social-table')
+                var len = table.getElementsByTagName("tr").length
+                addSocialRow(prefix)
+                table.getElementsByTagName("input")[len-1].value = link
+            })
+
+
 
           doc.data()['services'].forEach(function(id) {
             htmlid = prefix + '-' + 'serv-' + id;
@@ -258,8 +266,9 @@
         });
 
         var socials = []
-        var links = document.getElementById(prefix +'social-table').getElementsByTagName('input')
-        links.forEach(link=>{
+        var links = document.getElementById(prefix +'-social-table').getElementsByTagName('input')
+        for (i = 0; i < links.length; i++){
+            var link = links[i]
             if (!link.value.match(/^https?:\/\//i)) {
                 console.log("url altered")
                 url = 'https://' + link.value;
@@ -267,7 +276,7 @@
                 url = link.value
             }
             socials.push(url)
-        })
+        }
         values["social"] = socials 
 
         //if business, update coords
