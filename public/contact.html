@@ -127,11 +127,12 @@ firebase.auth().onAuthStateChanged(function(user){
                 var update = []
             }
             update.push(submission)
+            console.log(update)
             db.collection('suggestions').doc(uid).set({
                 array: update
             })
         window.alert('Your suggestion has been submitted!')
-        window.location.replace('/index.html')
+       // window.location.replace('/index.html')
         
         })
 

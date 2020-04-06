@@ -43,6 +43,14 @@
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
             </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
     </nav>
+    <div id="terms" class="text-center">
+        <a href="terms.html">Please read these terms and click agree. Without clicking agree, you can not sucessfully enter any data</a>
+       
+        <br>
+        <label>Click Here to agree:<input type="checkbox" id="terms-checkbox"/></label>
+    </div>
+
+
     <h4 class="text-center">Business</h4>
     <p class="text-center">(If you need help)</p>
     <div style="margin: 0px auto;width: 80%;max-width: 570px;">
@@ -64,7 +72,19 @@
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv" placeholder = "Really, anything!"></div>
             <div id="locationField" class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-address" placeholder = "enter your address" onFocus = "geolocate()" required=""></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="biz-about" required=""></textarea></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="biz-socials" required=""></div>
+            <div class="form-group d-flex" style="min-width: 260px;">
+                <label style="min-width: 135px;" for="serv-other">Socials / Links:</label>
+                <table id="biz-social-table">
+                    <tr>
+                        <td>  
+                            <input class="form-control" type="text" id="biz-socials" />
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" id="add-social" type="button" onclick="addSocialRow('biz')">Add a link</button>
+                        </td>
+                    </tr>
+                </table> 
+                           </div>
             <div class="form-group"><button class="btn btn-primary" id="biz-submit" type="submit" onclick="savebiz()">Update</button></div>
             <div class="form-group"><button class="btn btn-primary" id="biz-delete" type="submit" style="background-color: #fa4d41;">Delete Data</button></div>
         </form>
@@ -88,7 +108,21 @@
             </div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="vol-other-serv" placeholder = "Really, anything!"></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About You:</label><textarea class="form-control" id="vol-about" required=""></textarea></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label><input class="form-control" type="text" id="vol-socials" required=""></div>
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Socials / Links:</label>
+                <table id="vol-social-table">
+                    <tr>
+                        <td>  
+                            <input class="form-control" type="text" id="vol-socials" />
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" id="add-social" type="button" onclick="addSocialRow('vol')">Add a link</button>
+                        </td>
+                    </tr>
+                </table> 
+                
+            
+            
+            </div>
             <div class="form-group"><button class="btn btn-primary" id="vol-submit" type="submit" onclick="savevol()">Update</button></div>
             <div class="form-group"><button class="btn btn-primary" id="vol-delete" type="submit" style="background-color: #fa4d41;">Delete Data</button></div>
         </form>
@@ -136,29 +170,49 @@
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s&libraries=places&callback=initAutocomplete"></script> -->
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"> </script> -->
-
+<script src="assets/js/log.js"></script>
 
 <script>
+
+
+    function addSocialRow(prefix){
+        var table = document.getElementById(prefix + "-social-table")        
+        var row = table.insertRow(-1) 
+        var cell = row.insertCell()
+        cell.innerHTML = "<input class='form-control' type='text' id='" + prefix + "-socials' />"
+     }
+
+
+
+
     var uid, name, email, address, coords, lat, lng, geocoder, position;
     var db = firebase.firestore();
     
 
 
     var idlist = {
-      biz: ['bizname', 'other-serv', 'address', 'about', 'socials'],
-      vol: ['other-serv', 'about', 'socials']
+      biz: ['bizname', 'other-serv', 'address', 'about' ],
+      vol: ['other-serv', 'about' ]
     };
     var servlist = ['accounting', 'webdev', 'phone', 'advertising', 'consulting', "social media", "organize","online video platform","marketing/outreach"];
 
-
+    
     function recover_information(col, prefix) {
       db.collection(col).doc(uid).get().then(function(doc){
         if (doc.exists){
-
+            document.getElementById("terms-checkbox").checked = true;
           idlist[prefix].forEach(function(id) {
             htmlid = prefix + '-' + id;
             document.getElementById(htmlid).value = doc.data()[id]
           });
+          doc.data()['socials'].forEach(link=>{
+                var table = document.getElementById(prefix +'-social-table')
+                var len = table.getElementsByTagName("tr").length
+                addSocialRow(prefix)
+                table.getElementsByTagName("input")[len-1].value = link
+            })
+
+
 
           doc.data()['services'].forEach(function(id) {
             htmlid = prefix + '-' + 'serv-' + id;
@@ -183,6 +237,12 @@
         recover_information("businesses", "biz")
         recover_information("volunteers", "vol")
         set_up_delete(uid);
+        var events = [
+            {ID:"biz-submit", eventType:"click", action: user.uid + "updated biz info", category:"update", event_label: "biz", value: 4},
+            {ID:"vol-submit", eventType:"click", action: user.uid + "updated vol info", category:"update", event_label: "vol", value: 3}
+
+        ]
+        reportEvents(events)
     });
 
     function saveone(collection, prefix) {
@@ -193,13 +253,13 @@
             //save address
           if (id == "address") {
               address = values[id]
-          } else if (id == "socials") {
-              console.log(values[id], id)
-                if (!values[id].match(/^https?:\/\//i)) {
-                    console.log("url altered")
-                    values[id] = 'https://' + values[id];
-                }
-          }
+        //   } else if (id == "socials") {
+        //       console.log(values[id], id)
+        //          (!values[id].match(/^https?:\/\//i)) {
+        //             console.log("url altered")
+        //             values[id] = 'https://' + values[id];
+        //         }
+        }
         });
 
         values["email"] = email;
@@ -212,6 +272,23 @@
             values['services'].push(id)
           }
         });
+
+        var socials = []
+        var links = document.getElementById(prefix +'-social-table').getElementsByTagName('input')
+        for (i = 0; i < links.length; i++){
+            var link = links[i]
+            console.log(link.value)
+            if (link.value!="") {
+                if (!link.value.match(/^https?:\/\//i)) {
+                    console.log("url altered")
+                    url = 'https://' + link.value;
+                } else{
+                    url = link.value
+                }
+                socials.push(url)
+            }
+        }
+        values["socials"] = socials 
 
         //if business, update coords
         if (prefix=="biz") {
@@ -247,12 +324,39 @@
     }
 
     function savebiz() {
-        saveone("businesses", "biz")
+        var terms = document.getElementById("terms-checkbox").checked
+        if(terms){
+            var bizName = document.getElementById("biz-bizname").value == ""
+            var biz_other_serv = document.getElementById("biz-other-serv").value == ""
+            var biz_address = document.getElementById("biz-address").value == ""
+            var biz_about = document.getElementById("biz-about").value == ""         
+            if (!bizName && ! biz_other_serv && !biz_address && ! biz_about){
+                saveone("businesses", "biz")
+            } else{
+                window.alert("Please fill out all fields!")
+            }
+        }else{
+            window.alert("You did not agree to the terms of use policy")
+            // location.reload()
+        }
     }
 
     function savevol() {
-
-        saveone("volunteers", "vol")
+        var terms = document.getElementById("terms-checkbox").checked
+        if(terms){
+            var vol_other_serv = document.getElementById("vol-other-serv").value == ""
+            var vol_about = document.getElementById("vol-about").value == ""
+            console.log(vol_other_serv, vol_about) 
+            if(! vol_other_serv && ! vol_about){
+                console.log("Saving...")
+                saveone("volunteers", "vol")
+            } else{
+                 window.alert("Please fill out all fields!")
+            }
+        }else{
+            window.alert("You did not agree to the terms of use policy")
+            // location.reload()
+        }
     }
 
 

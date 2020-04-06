@@ -66,7 +66,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-functions.js"></script>
-
+<script src="assets/js/log.js"></script>
 
 <script 
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s">
@@ -127,63 +127,85 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
     var col = getUrlVars()['type'];
     console.log(userid)
     console.log(col)
-
+    var user_col = (col == "businesses")? "volunteers": "businesses"
     var keys;
     if (col == "businesses") {
         //add lat and lng
         keys = ["bizname", "address", "services", "other-serv", "about", "socials"]
     } else if (col == "volunteers") {
         keys = ["name", "services", "other-serv", "about", "socials"]
+
     }
-    
+
+
+
     firebase.auth().onAuthStateChanged(function (user) {
         //recover info from db and update relevant fields
-        db.collection(col).doc(userid).get().then(function(doc){
-            if (doc.exists){
-                console.log("retrieving info")
-                var data = doc.data();
+        // db.collection(user_col).doc(user.uid).get().then(function(userData){
+            db.collection(col).doc(userid).get().then(function(doc){
+                if (doc.exists){
+                    console.log("retrieving info")
+                    var data = doc.data();
 
-                keys.forEach(function(id) {
-                    console.log(id)
-                    var fmtData = data[id];
+                    keys.forEach(function(id) {
+                        console.log(id)
+                        var fmtData = data[id];
+                        
+                        if (id == "services") {
+                        fmtData = formatServices(fmtData);
+                        }
+                        
+                        textDoc = document.getElementById('profile-' + id)
+                        if (id == "socials") {
+                                // TODO: WORK IN PROGRESS
+                                for (let i =0; i < data[id].length; i++)  {
+                                    var a = document.createElement("a");
+                                    var p = document.createElement("p");
+                                    a.innerText=data[id][i];
+                                    a.style.textDecoration = "underline";
+                                    a.addEventListener("click", () => {
+                                    window.open(data[id][i])
+                                })
+                                    // p.innerHTML="<br>"
+                                    textDoc.appendChild(a);
+                                    textDoc.appendChild(p)
+                                }
+                            // textDoc.style.textDecoration = "underline";
+                            // textDoc.addEventListener("click", () => {
+                            //     window.open(fmtData)
+                            // })
+                        }
+                        else {
+                            textDoc.innerText += fmtData;
+                        }
+                        textDoc.style.display = "";
+                    });
                     
-                    if (id == "services") {
-                       fmtData = formatServices(fmtData);
+                    //email
+                    email = data["email"]
+                    //set email
+                    document.getElementById("contact").href = "mailto:" + email;
+                    sendtoemail = email
+                    if (col == "businesses") {
+                        //latitude and longitute
+                        lat = data["lat"]
+                        lng = data["lng"]
+                        //initialize the map
+                        initMap(lat, lng)
                     }
-                    
-                    textDoc = document.getElementById('profile-' + id)
-                    textDoc.innerText += fmtData;
+                    var events = [
 
-                    if (id == "socials") {
-                        textDoc.style.textDecoration = "underline";
-                        textDoc.addEventListener("click", () => {
-                            window.open(fmtData)
-                        })
-                    }
-                    textDoc.style.display = "";
-                });
-                
-                //email
-                email = data["email"]
-                //set email
-                document.getElementById("contact").href = "mailto:" + email;
-                sendtoemail = email
-                if (col == "businesses") {
-                    //latitude and longitute
-                    lat = data["lat"]
-                    lng = data["lng"]
-                    //initialize the map
-                    initMap(lat, lng)
+                        // {ID:"contact", eventType:"click", action: user.uid + "connected with" + userid, category:"Connection", event_label: intersection(userData.data()['services'], doc.data()['services']).toString(), value: 5}
+                    ]
+                    reportEvents(events)
+                    console.log("updating info")
+                } else {
+                console.log("No such document!")
                 }
-
-                console.log("updating info")
-            } else {
-              console.log("No such document!")
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error)
-        });
-
+            }).catch(function(error) {
+                console.log("Error getting document:", error)
+            });
+    // })
         
     });
 
@@ -204,13 +226,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF
     //override css to make button visible
     document.getElementById("contact").style = "";
     //document.getElementById("reach-out").style = "";
-    document.getElementById("reach-out").addEventListener("click", ()=>{
-        var name = document.getElementById("profile-name").innerText
+    // document.getElementById("reach-out").addEventListener("click", ()=>{
+    //     var name = document.getElementById("profile-name").innerText
 
-        console.log("sending that email")
-        sendEmail(userid)
-        window.alert("Email sent to " + name + '!')
-    })
+    //     console.log("sending that email")
+    //     sendEmail(userid)
+    //     window.alert("Email sent to " + name + '!')
+    // })
 </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
