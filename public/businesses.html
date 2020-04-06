@@ -48,7 +48,9 @@
     </div>
     <div id = "showall" class="text-center">
         <a style = "text-decoration:underline" class = "listLinks" onclick = "query('businesses', 'volunteers', null, 'biz', fields = ['bizname', 'services', 'other-serv'], true)">View all Listings</a>
+    <br><button type="button" id="view-self" onclick="show_with_self()">View your own profile</button> 
     </div>
+  
     <div class="table-responsive">
         <table class="table" id="biz-table">
             <thead>
@@ -114,12 +116,29 @@
 
 <script>
     var db = firebase.firestore();
-    
+    var userData; 
     firebase.auth().onAuthStateChanged(function(user){
+        userData = user 
         var fields = ['bizname', 'services', 'other-serv'];
-        
-        query("businesses", "volunteers", user, "biz", fields)
+        query("businesses", "volunteers", user, "biz", fields, false, false)
     });
+
+    function show_with_self(){
+            db.collection("businesses").doc(userData.uid).get().then(function(doc){
+            console.log("Printing Self")
+
+            var fields = ['bizname', 'services', 'other-serv'];
+            printData([doc], 'biz', fields, userData.uid, "businesses", true) 
+            console.log("Sucess!")
+        })
+    
+    
+    
+    
+    
+        console.log("Showing:", userData)
+    }
+
 </script>
 
     <footer class="footer bg-light">

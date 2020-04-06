@@ -19,7 +19,7 @@ function errorMsg() {
     error.style.display = ""
 }
 
-function printData(items, prefix, fields, uid, qtype){
+function printData(items, prefix, fields, uid, qtype, view_self){
     //pre: items: listings to be printed, prefix: see below, uid: see user ID, qtype: see below
     //post: prints out listings on user screen
 
@@ -27,7 +27,7 @@ function printData(items, prefix, fields, uid, qtype){
     var table = document.getElementById(prefix+'-table')
     console.log(items)
     items.forEach(function(doc) { 
-        if (doc.id != uid) {
+        if (doc.id != uid || view_self) {
             numEntries += 1;
             var row = table.insertRow(-1);
             var cells = [];
@@ -135,8 +135,8 @@ async function sortData(qtype, prefix, fields, servlist, uid, same){
 
 
 
-//
-function query(qtype, utype, user, prefix, fields, showAll){
+//repect for whoever commented this code-- Andrew
+function query(qtype, utype, user, prefix, fields, showAll, view_self){
     console.log(showAll)
     //pre: 
         //qtype: the page querying the data from: businesses/volunteers
@@ -152,10 +152,13 @@ function query(qtype, utype, user, prefix, fields, showAll){
     //all the skills
     var servlist = ['accounting', 'webdev', 'phone', 'advertising', 'consulting', "social media", "organize", "online video platform","marketing/outreach"];
 
+
+
+
     if (showAll) {
         //clears table
         document.getElementById(prefix +'-table').innerHTML = document.getElementById(prefix + '-table').getElementsByTagName('tr')[0].innerHTML
-        sortData(qtype, prefix, fields, servlist)
+        sortData(qtype, prefix, fields, servlist, view_self)
         return;
     }
     console.log("continue")
@@ -171,7 +174,7 @@ function query(qtype, utype, user, prefix, fields, showAll){
             if (doc.data() != undefined){
                 //generate servlist based on needs/skills
                 servlist = doc.data()['services'];
-                sortData(qtype, prefix, fields, servlist, uid)
+                sortData(qtype, prefix, fields, servlist, uid, view_self)
             } 
             //if doc is empty: 2 scenarios
             else{
@@ -186,7 +189,7 @@ function query(qtype, utype, user, prefix, fields, showAll){
                     //if the other one is filled (vol looking at vol, biz looking at biz)
                     else {
                         //display all
-                        sortData(qtype, prefix, fields, servlist, uid, true) 
+                        sortData(qtype, prefix, fields, servlist, uid, true, view_self) 
 
                     }
                 
@@ -195,7 +198,8 @@ function query(qtype, utype, user, prefix, fields, showAll){
         });
     //else if the user is not logged in, display all
     } else {
-        sortData(qtype, prefix, fields, servlist)
+        console.log("You are not logged in")
+        sortData(qtype, prefix, fields, servlist, view_self)
     }
 }
 function delete_account(type, uid){
