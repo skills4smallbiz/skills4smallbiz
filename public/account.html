@@ -326,7 +326,15 @@
     function savebiz() {
         var terms = document.getElementById("terms-checkbox").checked
         if(terms){
-        saveone("businesses", "biz")
+            var bizName = document.getElementById("biz-bizname").value == ""
+            var biz_other_serv = document.getElementById("biz-other-serv").value == ""
+            var biz_address = document.getElementById("biz-address").value == ""
+            var biz_about = document.getElementById("biz-about").value == ""         
+            if (!bizName && ! biz_other_serv && !biz_address && ! biz_about){
+                saveone("businesses", "biz")
+            } else{
+                window.alert("Please fill out all fields!")
+            }
         }else{
             window.alert("You did not agree to the terms of use policy")
             // location.reload()
@@ -336,7 +344,15 @@
     function savevol() {
         var terms = document.getElementById("terms-checkbox").checked
         if(terms){
-        saveone("volunteers", "vol")
+            var vol_other_serv = document.getElementById("vol-other-serv").value == ""
+            var vol_about = document.getElementById("vol-about").value == ""
+            console.log(vol_other_serv, vol_about) 
+            if(! vol_other_serv && ! vol_about){
+                console.log("Saving...")
+                saveone("volunteers", "vol")
+            } else{
+                 window.alert("Please fill out all fields!")
+            }
         }else{
             window.alert("You did not agree to the terms of use policy")
             // location.reload()
