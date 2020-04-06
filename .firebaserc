@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "covidsmallbizlink"
+    "default": "covidsmallbizlink-staging",
+    "prod": "covidsmallbizlink"
   }
 }
