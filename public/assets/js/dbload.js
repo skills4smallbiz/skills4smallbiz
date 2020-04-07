@@ -27,7 +27,7 @@ function printData(items, prefix, fields, uid, qtype, view_self){
     var table = document.getElementById(prefix+'-table')
     console.log(items)
     items.forEach(function(doc) { 
-        if (doc.id != uid || view_self) {
+   //     if (doc.id != uid || view_self) {
             numEntries += 1;
             var row = table.insertRow(-1);
             var cells = [];
@@ -47,7 +47,7 @@ function printData(items, prefix, fields, uid, qtype, view_self){
                     window.location.href = "profile.html?type=" + qtype + "&user=" + doc.id;
                 });
             }
-        }
+        //}
     });
     if (numEntries == 0) {
         errorMsg();
