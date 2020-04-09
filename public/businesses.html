@@ -99,8 +99,7 @@
             // Name, email address etc
             var name = user.displayName;
             var email = user.email;
-            console.log("yes");
-            console.log(name);
+            console.log("logged in");
 
             b = document.getElementById("sign-btn");
             b.style.display = "none";
@@ -125,18 +124,10 @@
 
     function show_with_self(){
             db.collection("businesses").doc(userData.uid).get().then(function(doc){
-            console.log("Printing Self")
 
             var fields = ['bizname', 'services', 'other-serv'];
             printData([doc], 'biz', fields, userData.uid, "businesses", true) 
-            console.log("Sucess!")
         })
-    
-    
-    
-    
-    
-        console.log("Showing:", userData)
     }
 
 </script>

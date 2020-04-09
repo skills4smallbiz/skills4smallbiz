@@ -100,8 +100,7 @@
             // Name, email address etc
             var name = user.displayName;
             var email = user.email;
-            console.log("yes");
-            console.log(name);
+            console.log("logged in");
 
             b = document.getElementById("sign-btn");
             b.style.display = "none";
@@ -128,11 +127,9 @@
     function show_with_self(){
 
         db.collection("volunteers").doc(userData.uid).get().then(function(doc){
-            console.log("Printing Self")
             var fields = ['name', 'services', 'other-serv', 'socials'];
 
             printData([doc], 'vol', fields, userData.uid, "volunteers", true) 
-            console.log("Sucess!")
         })
     }     
 
