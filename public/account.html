@@ -73,16 +73,6 @@
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="biz-other-serv" placeholder = "Really, anything!"></div>
             <div id="locationField" class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Address:</label><input class="form-control" type="text" id="biz-address" placeholder = "enter your address" onFocus = "geolocate()" required=""></div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">About Your Business:</label><textarea class="form-control" id="biz-about" required=""></textarea></div>
-            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-helpFound">Found help? Please tell us about it here! Make sure to specify the service you received, and the volunteer who helped you</label>
-           </div>
-                <table id="help-table"> 
-                <tr>
-                    <td><textarea class="form-control" style="min-width: 450px;"id="biz-helpFound" required=""></textarea></td>
-                    <td><button class="btn btn-primary" id="add-helpBox" type="button" onclick="addHelpBox()">Been helped by several people? Add another box!</button></td>
-                </tr>
-            </table>
-            
-            
             
             <div class="form-group d-flex" style="min-width: 260px;">
                 <label style="min-width: 135px;" for="serv-other">Socials / Links:</label>
@@ -97,6 +87,16 @@
                     </tr>
                 </table> 
                            </div>
+            
+            <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-helpFound">Found help? Please tell us about it here! Make sure to specify the service you received, and the volunteer who helped you</label>
+            </div>
+                <table id="help-table"> 
+                <tr>
+                    <td><textarea class="form-control" style="min-width: 450px;"id="biz-helpFound" required=""></textarea></td>
+                    <td><button class="btn btn-primary" id="add-helpBox" type="button" onclick="addHelpBox()">Been helped by several people? Add another box!</button></td>
+                </tr>
+            </table>
+
             <div class="form-group"><button class="btn btn-primary" id="biz-submit" type="submit" onclick="savebiz()">Update</button></div>
             <div class="form-group"><button class="btn btn-primary" id="biz-delete" type="submit" style="background-color: #fa4d41;">Delete Data</button></div>
         </form>
