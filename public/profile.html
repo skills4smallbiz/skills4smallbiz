@@ -68,18 +68,12 @@
             <!-- <button class="btn btn-primary ml-auto" id="reach-out">Reach out by sending and email</button> -->
         </div>
 
-        <div id="map"></div>
     </section><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-    <section style="padding: 35px;padding-top: 55px;padding-bottom: 55px;">
-        <div class="col-lg-4" id="profile"
-            style="width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;">
+    
 
-            <h4>Help this business has received:</h4>
-        <table id="help-table">
-        </table>
+    <div id="map"></div>
 
-        </div>
-    </section>
+<section style="padding: 35px;padding-top: 55px;padding-bottom: 55px;"></section>
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 
@@ -195,44 +189,46 @@
                             // textDoc.addEventListener("click", () => {
                             //     window.open(fmtData)
                             // })
-                        }
-                        else if (id == "helpRecv"){
-                        var table = document.getElementById('help-table')
-
-                            var a = data[id]
-                            console.log(a)
-                            for(i=0; i < a.length; i++){
-                                var row= table.insertRow(-1)
-                                var cell = row.insertCell() 
-                                cell.innerText = a[i] 
-                            }
+                        } else if (id == "helpRecv"){ 
+                            if( data[id] != undefined){
+                        
+                                document.getElementById("HelpSection"). innerHTML = "<div class='col-lg-4' id='helpBox' style='width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;'><h4>Help this business has received:</h4><table id='help-table'></table></div> "
+                                var table = document.getElementById('help-table')
+                                var a = data[id]
+                                console.log(a)
+//                                if (a != undefined){
+                                    for(i=0; i < a.length; i++){
+                                    var row= table.insertRow(-1)
+                                    var cell = row.insertCell() 
+                                    cell.innerText = a[i] 
+                                    }
+                                }
                         } else {
                             textDoc.innerText += fmtData;
+                            textDoc.style.display = "";
 
                         }
 
-
-
-
-
-                        textDoc.style.display = "";
                     });
-
+                    console.log("Extra stuff")
                     //email
-                    email = data["email"]
+                    var email = data["email"]
                     //set email
                     document.getElementById("contact").href = "mailto:" + email;
-                    sendtoemail = email
+                    var sendtoemail = email
+                    console.log(email)
                     if (col == "businesses") {
                         //latitude and longitute
                         lat = data["lat"]
                         lng = data["lng"]
+                        console.log('Coords:', lat, lng) 
+                        
                         //initialize the map
                         initMap(lat, lng)
                     }
                     var events = [
 
-                        { ID: "contact", eventType: "click", action: user.uid + "connected with" + userid, category: "Connection", event_label: intersection(userData.data()['services'], doc.data()['services']).toString(), value: 5 }
+                        //{ ID: "contact", eventType: "click", action: user.uid + "connected with" + userid, category: "Connection", event_label: intersection(userData.data()['services'], doc.data()['services']).toString(), value: 5 }
                     ]
                     reportEvents(events)
                     console.log("updating info")

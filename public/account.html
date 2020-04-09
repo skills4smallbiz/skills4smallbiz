@@ -92,7 +92,7 @@
             </div>
                 <table id="help-table"> 
                 <tr>
-                    <td><textarea class="form-control" style="min-width: 450px;"id="biz-helpFound" required=""></textarea></td>
+                    <td><textarea class="form-control" style="min-width: 450px;"id="biz-helpFound"></textarea></td>
                     <td><button class="btn btn-primary" id="add-helpBox" type="button" onclick="addHelpBox()">Been helped by several people? Add another box!</button></td>
                 </tr>
             </table>
@@ -347,6 +347,8 @@
                 values["helpRecv"] = helpRecvArray
                  
             }
+
+            db.collection(collection).doc(uid).set(values);
         }
         //if volunteer, don't update coords
         else {
