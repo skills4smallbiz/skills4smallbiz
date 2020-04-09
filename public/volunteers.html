@@ -2,46 +2,13 @@
 <html>
 
 <head>
-         <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162071177-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-162071177-1');
-    </script>
-
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CovidBizLink</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="/assets/js/jquery.min.js"></script>
+    <title>Volunteers - CovidBizLink</title>
+    <script src="/assets/js/loadtemplate.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-        <div class="container"><a class="navbar-brand" href="/index.html" style="padding-right: 25px;">Covid Biz Link</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/businesses.html">Businesses</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="/volunteers.html">Volunteers</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/account.html">Account<i class="fa fa-user" style="padding-left: 3px;"></i></a></li>
-                </ul><a href="/contact.html" style="padding: 10px;padding-bottom: 0px;padding-right: 0;padding-top: 0;">Contact Us</a></div>
-
-            
-                </div>
-            <div class="dropdown bg-primary border-primary shadow-sm" id="account-drop" style="padding: 7px;border-radius: 4px; display: none"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="account-welcome" href="#" style="color: rgb(255,255,255);">Dropdown </a>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/account.html">Account</a><a class="dropdown-item" role="presentation" onclick="firebase.auth().signOut();window.location.replace(&#39;/index.html&#39;)">Sign Out</a></div>
-            </div><a class="btn btn-primary ml-auto" role="button" id="sign-btn" href="/sign.html">Sign In/Sign Up</a></div>
-    </nav>
+    <div id="navbar"></div>
     <div id="filter-message" class="text-center">
 
     </div>
@@ -135,18 +102,7 @@
 
 </script>
 
-    <footer class="footer bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
-                    <p class="text-muted small mb-4 mb-lg-0">© Covid Biz Link 2020. All Rights Reserved.</p>
-                </div>
-                <div class="col-lg-6 my-auto h-101 text-center text-lg-right">
-                    <p>Created by&nbsp;Andrew Ferruolo,&nbsp; Lucien Gaitskell,&nbsp;Myles Johnson, William Kopans,&nbsp; and Daniel Wang.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <footer class="footer bg-light"></footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
