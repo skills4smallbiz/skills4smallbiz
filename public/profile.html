@@ -163,7 +163,6 @@
                     var data = doc.data();
 
                     keys.forEach(function (id) {
-                        console.log(id)
                         var fmtData = data[id];
 
                         if (id == "services") {
@@ -173,29 +172,30 @@
                         textDoc = document.getElementById('profile-' + id)
                         if (id == "socials") {
                             // TODO: WORK IN PROGRESS
-                            for (let i = 0; i < data[id].length; i++) {
-                                var a = document.createElement("a");
-                                var p = document.createElement("p");
-                                a.innerText = data[id][i];
-                                a.style.textDecoration = "underline";
-                                a.addEventListener("click", () => {
+                            for (let i =0; i < data[id].length; i++)  {
+                                    var a = document.createElement("a");
+                                    var p = document.createElement("p");
+                                    a.innerText=data[id][i];
+                                    a.style.textDecoration = "underline";
+                                    a.addEventListener("click", () => {
                                     window.open(data[id][i])
                                 })
-                                // p.innerHTML="<br>"
-                                textDoc.appendChild(a);
-                                textDoc.appendChild(p)
-                            }
+                                    // p.innerHTML="<br>"
+                                    textDoc.appendChild(a);
+                                    textDoc.appendChild(p)
+                                }
+                            textDoc.style.display = "";
+
                             // textDoc.style.textDecoration = "underline";
                             // textDoc.addEventListener("click", () => {
                             //     window.open(fmtData)
                             // })
                         } else if (id == "helpRecv"){ 
-                            if( data[id] != undefined){
+                            if( data[id] != undefined && data[id]!=null){
                         
                                 document.getElementById("HelpSection"). innerHTML = "<div class='col-lg-4' id='helpBox' style='width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;'><h4>Help this business has received:</h4><table id='help-table'></table></div> "
                                 var table = document.getElementById('help-table')
                                 var a = data[id]
-                                console.log(a)
 //                                if (a != undefined){
                                     for(i=0; i < a.length; i++){
                                     var row= table.insertRow(-1)
@@ -210,18 +210,14 @@
                         }
 
                     });
-                    console.log("Extra stuff")
                     //email
                     var email = data["email"]
                     //set email
                     document.getElementById("contact").href = "mailto:" + email;
                     var sendtoemail = email
-                    console.log(email)
                     if (col == "businesses") {
                         //latitude and longitute
                         lat = data["lat"]
-                        lng = data["lng"]
-                        console.log('Coords:', lat, lng) 
                         
                         //initialize the map
                         initMap(lat, lng)
