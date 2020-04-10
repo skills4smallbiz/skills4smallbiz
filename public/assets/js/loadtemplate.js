@@ -6,10 +6,9 @@
 
 $(function(){
     $("#navbar").load("/templates/navbar.html"); 
-    
-    $.get("/templates/head.html", function(data){
-        $('head').prepend(data);
-    });
-
     $('footer').load('/templates/footer.html');
+});
+
+$.get("/templates/head.html", function(data){
+    $('head').prepend(data);
 });

@@ -18,20 +18,17 @@
     <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
     <!-- Previously loaded Firebase SDKs -->
 
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+    <!-- Previously loaded Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+
+    <script src="assets/js/setup.js"></script>
     <script>
-        // TODO: Replace the following with your app's Firebase project configuration
-        var firebaseConfig = {
-        apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-        authDomain: "covidsmallbizlink.firebaseapp.com",
-        databaseURL: "https://covidsmallbizlink.firebaseio.com",
-        projectId: "covidsmallbizlink",
-        storageBucket: "covidsmallbizlink.appspot.com",
-        appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
         firebase.auth().onAuthStateChanged(function(user){
             if (user != null) {
                 // Name, email address etc
