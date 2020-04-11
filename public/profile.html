@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+
     <script src="/assets/js/jquery.min.js"></script>
     <title>Profile - CovidBizLink</title>
     <script src="/assets/js/loadtemplate.js"></script>
 </head>
-
 <body>
     <div id='navbar'></div>
-
     <section style="padding: 35px;padding-top: 55px;padding-bottom: 55px;">
         <div class="col-lg-4" id="profile"
             style="width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;">
@@ -22,200 +33,31 @@
             <p id="profile-socials" class="description"></p>
             <a class="btn btn-primary ml-auto" role="button" id="contact">Contact</a>
             <!-- <button class="btn btn-primary ml-auto" id="reach-out">Reach out by sending and email</button> -->
+            
         </div>
-
+        <div id="HelpSection">
+               <table id="help-table"></table> 
+        </div>
     </section><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
     
-
+    
+    
     <div id="map"></div>
 
-<section style="padding: 35px;padding-top: 55px;padding-bottom: 55px;"></section>
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <section style="padding: 35px;padding-top: 55px;padding-bottom: 55px;"></section>
     <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-
-    <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+    <!-- Previously loaded Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-functions.js"></script>
+
+    <script src="assets/js/setup.js"></script>
     <script src="assets/js/log.js"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s">
-    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjecfORtBvTXO6jbKbTGc9vmF0i1yBL9s"></script>
     <script src="assets/js/contact.js"></script>
-    <script>
-        // TODO: Replace the following with your app's Firebase project configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-            authDomain: "covidsmallbizlink.firebaseapp.com",
-            databaseURL: "https://covidsmallbizlink.firebaseio.com",
-            projectId: "covidsmallbizlink",
-            storageBucket: "covidsmallbizlink.appspot.com",
-            appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user != null) {
-                // Name, email address etc
-                var name = user.displayName;
-                var email = user.email;
-                console.log("yes");
-                console.log(name);
-
-                b = document.getElementById("sign-btn");
-                b.style.display = "none";
-
-                document.getElementById("account-welcome").innerText = "Hello, " + name;
-                document.getElementById("account-drop").style.display = "";
-            }
-        });
-    </script>
     <script src="assets/js/dbload.js"></script>
-
-    <script>
-        var sendtoemail;
-        Array.prototype.forEach.call(document.getElementById("profile").children, function (n) {
-            n.style.display = "none";
-        });
-
-        var db = firebase.firestore();
-        var prefix = "biz";
-
-        function getUrlVars() {
-            var vars = {};
-            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-                vars[key] = value;
-            });
-            return vars;
-        }
-        var uid, name, email;
-        var button_name;
-        var about, services, socials, bizname, lat, lng;
-        var userid = getUrlVars()['user'];
-        var col = getUrlVars()['type'];
-        console.log(userid)
-        console.log(col)
-        var user_col = (col == "businesses") ? "volunteers" : "businesses"
-        var keys;
-        if (col == "businesses") {
-            //add lat and lng
-            keys = ["bizname", "address", "services", "other-serv", "about", "socials", "helpRecv"]
-        } else if (col == "volunteers") {
-            keys = ["name", "services", "other-serv", "about", "socials"]
-
-        }
-
-
-
-        firebase.auth().onAuthStateChanged(function (user) {
-            //recover info from db and update relevant fields
-            // db.collection(user_col).doc(user.uid).get().then(function(userData){
-            db.collection(col).doc(userid).get().then(function (doc) {
-                if (doc.exists) {
-                    console.log("retrieving info")
-                    var data = doc.data();
-
-                    keys.forEach(function (id) {
-                        var fmtData = data[id];
-
-                        if (id == "services") {
-                            fmtData = formatServices(fmtData);
-                        }
-
-                        textDoc = document.getElementById('profile-' + id)
-                        if (id == "socials") {
-                            // TODO: WORK IN PROGRESS
-                            for (let i =0; i < data[id].length; i++)  {
-                                    var a = document.createElement("a");
-                                    var p = document.createElement("p");
-                                    a.innerText=data[id][i];
-                                    a.style.textDecoration = "underline";
-                                    a.addEventListener("click", () => {
-                                    window.open(data[id][i])
-                                })
-                                    // p.innerHTML="<br>"
-                                    textDoc.appendChild(a);
-                                    textDoc.appendChild(p)
-                                }
-                            textDoc.style.display = "";
-
-                            // textDoc.style.textDecoration = "underline";
-                            // textDoc.addEventListener("click", () => {
-                            //     window.open(fmtData)
-                            // })
-                        } else if (id == "helpRecv"){ 
-                            if( data[id] != undefined && data[id]!=null){
-                        
-                                document.getElementById("HelpSection"). innerHTML = "<div class='col-lg-4' id='helpBox' style='width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;'><h4>Help this business has received:</h4><table id='help-table'></table></div> "
-                                var table = document.getElementById('help-table')
-                                var a = data[id]
-//                                if (a != undefined){
-                                    for(i=0; i < a.length; i++){
-                                    var row= table.insertRow(-1)
-                                    var cell = row.insertCell() 
-                                    cell.innerText = a[i] 
-                                    }
-                                }
-                        } else {
-                            textDoc.innerText += fmtData;
-                            textDoc.style.display = "";
-
-                        }
-
-                    });
-                    //email
-                    var email = data["email"]
-                    //set email
-                    document.getElementById("contact").href = "mailto:" + email;
-                    var sendtoemail = email
-                    if (col == "businesses") {
-                        //latitude and longitute
-                        lat = data["lat"]
-                        lng = data["lng"]
-                        
-                        //initialize the map
-                        initMap(lat, lng)
-                    }
-                    var events = [
-
-                        //{ ID: "contact", eventType: "click", action: user.uid + "connected with" + userid, category: "Connection", event_label: intersection(userData.data()['services'], doc.data()['services']).toString(), value: 5 }
-                    ]
-                    reportEvents(events)
-                    console.log("updating info")
-                } else {
-                    console.log("No such document!")
-                }
-            }).catch(function (error) {
-                console.log("Error getting document:", error)
-            });
-            // })
-
-        });
-
-        //mapping the business given lat and lng
-        function initMap(latitutde, longitude) {
-            // The location of the biz
-            var loc = { lat: latitutde, lng: longitude };
-            // The map, centered at the business
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 13, center: loc });
-            // The marker, positioned at the business
-            var marker = new google.maps.Marker({ position: loc, map: map });
-            console.log("map init")
-        }
-
-
-
-        //override css to make button visible
-        document.getElementById("contact").style = "";
-    //document.getElementById("reach-out").style = "";
-    // document.getElementById("reach-out").addEventListener("click", ()=>{
-    //     var name = document.getElementById("profile-name").innerText
-
-    //     console.log("sending that email")
-    //     sendEmail(userid)
-    //     window.alert("Email sent to " + name + '!')
-    // })
+    <script src ="assets/js/setup.js"></script>
+    <script src="assets/js/loadprofile.js"></script>
+</body>
+</html> 

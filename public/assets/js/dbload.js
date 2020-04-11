@@ -11,6 +11,15 @@ function formatServices(serv) {
     return res.slice(0, -2)
 }
 
+function formatSocials(socials) {
+    var links = socials.toString().split(',')
+    var res = "";
+    for (let i = 0; i < Math.min(socials.length,3); i++) {
+        res += links[i]+", "
+    }
+    return res
+}
+
 function errorMsg() {
     //post: error message
 
@@ -35,7 +44,7 @@ function printData(items, prefix, fields, uid, qtype, view_self){
                 cells.push(row.insertCell());
                 var fmtData = doc.data()[fields[i]]
                 if (fields[i] == "socials"){
-                    fmtData = fmtData.toString()
+                    fmtData = formatSocials(fmtData)
                 }
                 if (fields[i] == 'services') {
                     fmtData = formatServices(fmtData);

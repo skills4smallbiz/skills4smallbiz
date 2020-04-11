@@ -2,6 +2,20 @@
 <html>
 
 <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+
     <script src="/assets/js/jquery.min.js"></script>
     <title>Volunteers - CovidBizLink</title>
     <script src="/assets/js/loadtemplate.js"></script>
@@ -38,30 +52,17 @@
     </div>
     <h4 class="text-center" id="loading-message" style="display: none"></h4><!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
-<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 
-<!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+    <!-- Previously loaded Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
 
-<!-- Previously loaded Firebase SDKs -->
-
+    <script src="assets/js/setup.js"></script>
 <script>
-    // TODO: Replace the following with your app's Firebase project configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyD-_Zm5y-K8xINw3m9eDeHBnAE4DqtSv50",
-      authDomain: "covidsmallbizlink.firebaseapp.com",
-      databaseURL: "https://covidsmallbizlink.firebaseio.com",
-      projectId: "covidsmallbizlink",
-      storageBucket: "covidsmallbizlink.appspot.com",
-      appId: "1:131149431483:web:20f64b67ec10c9c53c1f9e",
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
     firebase.auth().onAuthStateChanged(function(user){
         if (user != null) {
             // Name, email address etc

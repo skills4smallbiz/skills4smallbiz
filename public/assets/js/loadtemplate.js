@@ -3,13 +3,13 @@
  * 
  * Fills navbar and head information.
  */
+$.get("/templates/head.html", function(data){
+    $('head').prepend(data);
+});
 
-$(function(){
+ $(function(){
     $("#navbar").load("/templates/navbar.html"); 
-    
-    $.get("/templates/head.html", function(data){
-        $('head').prepend(data);
-    });
-
     $('footer').load('/templates/footer.html');
 });
+
+
