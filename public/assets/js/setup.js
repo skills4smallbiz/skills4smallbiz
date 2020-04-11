@@ -43,7 +43,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         firebase.initializeApp(firebaseConfigDev);
         var db = firebase.firestore()
     }
-}
+})
 
 /*
 firebase.database.enableLogging(function (message) {
