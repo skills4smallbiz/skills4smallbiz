@@ -71,10 +71,11 @@ function formatEmail(data, textDoc, key) {
 }
 //mapping the business given lat and lng
 function initMap(data, textDoc, key) {
+    console.log(data)
     latitutde = data['lat']
     longitude = data['lng']
-    console.log(latitutde,longitude)
     var loc = { lat: latitutde, lng: longitude };
+    
     var map = new google.maps.Map(
         document.getElementById('map'), { zoom: 13, center: loc });
     var marker = new google.maps.Marker({ position: loc, map: map });
@@ -132,9 +133,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         if (doc.exists) {
             console.log("retrieving info")
             var data = doc.data();
-            var keys = (col == "businesses") ? ['bizname', 'name', 'about', 'address', 'email', 'coords', 'other-serv', 'services', 'socials', "helpRecv"] : ['name', 'about', 'address', 'email', 'other-serv', 'services', 'socials']
+            var keys = (col == "businesses") ? ['bizname', 'name', 'about', 'address', 'email', 'coords', 'other-serv', 'services', 'socials', "helpRecv"] : ['name', 'about', 'email', 'other-serv', 'services', 'socials']
             keys.forEach(function (id) {
-                console.log("Printing: ", id)
                 var textDoc = document.getElementById('profile-' + id)
                 fxn = printfxns[id]
                 fxn(data, textDoc, id)
