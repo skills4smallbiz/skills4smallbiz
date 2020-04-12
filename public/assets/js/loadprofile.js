@@ -72,7 +72,8 @@ function formatEmail(data, textDoc, key) {
 //mapping the business given lat and lng
 function initMap(data, textDoc, key) {
     latitutde = data['lat']
-    longitude = data['long']
+    longitude = data['lng']
+    console.log(latitutde,longitude)
     var loc = { lat: latitutde, lng: longitude };
     var map = new google.maps.Map(
         document.getElementById('map'), { zoom: 13, center: loc });
@@ -102,7 +103,7 @@ var printfxns = {
     'socials': formatSocials,
     'helpRecv': formatHelp,
     'email': formatEmail,
-    // 'coords': initMap
+    'coords': initMap
 }
 
 function log() {
@@ -127,13 +128,11 @@ firebase.auth().onAuthStateChanged(function (user) {
     var col = getUrlVars("type")
     var user_col = (col == "businesses") ? "volunteers" : "businesses"
 
-
-    console.log("Printing for: ", col, ' ', userid)
     db.collection(col).doc(userid).get().then(function (doc) {
         if (doc.exists) {
             console.log("retrieving info")
             var data = doc.data();
-            var keys = (col == "businesses") ? ['bizname', 'name', 'about', 'address', 'email', /*'coords',*/ 'other-serv', 'services', 'socials', "helpRecv"] : ['name', 'about', 'address', 'email', 'other-serv', 'services', 'socials']
+            var keys = (col == "businesses") ? ['bizname', 'name', 'about', 'address', 'email', 'coords', 'other-serv', 'services', 'socials', "helpRecv"] : ['name', 'about', 'address', 'email', 'other-serv', 'services', 'socials']
             keys.forEach(function (id) {
                 console.log("Printing: ", id)
                 var textDoc = document.getElementById('profile-' + id)
