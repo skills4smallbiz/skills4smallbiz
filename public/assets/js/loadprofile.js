@@ -102,7 +102,7 @@ var printfxns = {
     'socials': formatSocials,
     'helpRecv': formatHelp,
     'email': formatEmail,
-    // 'coords': initMap
+     'coords': initMap
 }
 
 function log() {
@@ -133,7 +133,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         if (doc.exists) {
             console.log("retrieving info")
             var data = doc.data();
-            var keys = (col == "businesses") ? ['bizname', 'name', 'about', 'address', 'email', /*'coords',*/ 'other-serv', 'services', 'socials', "helpRecv"] : ['name', 'about', 'address', 'email', 'other-serv', 'services', 'socials']
+            var keys = (col == "businesses") ? ['bizname', 'name', 'about', 'address', 'email', 'coords', 'other-serv', 'services', 'socials', "helpRecv"] : ['name', 'about', 'address', 'email', 'other-serv', 'services', 'socials']
             keys.forEach(function (id) {
                 console.log("Printing: ", id)
                 var textDoc = document.getElementById('profile-' + id)
