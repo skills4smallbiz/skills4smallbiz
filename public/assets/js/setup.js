@@ -19,7 +19,13 @@ var firebaseConfigDev = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfigProd);
+if (window.location.hostname === "covidbiz.link") {
+    firebaseConfig = firebaseConfigProd
+} else {
+    firebaseConfig = firebaseConfigDev
+}
+
+firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore()
 
 
