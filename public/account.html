@@ -333,7 +333,7 @@
             var biz_other_serv = document.getElementById("biz-other-serv").value == ""
             var biz_address = document.getElementById("biz-address").value == ""
             var biz_about = document.getElementById("biz-about").value == ""         
-            if (!bizName && ! biz_other_serv && !biz_address && ! biz_about){
+            if (!bizName && !biz_address && ! biz_about){
                 saveone("businesses", "biz")
             } else{
                 window.alert("Please fill out all fields!")
@@ -350,7 +350,7 @@
             var vol_other_serv = document.getElementById("vol-other-serv").value == ""
             var vol_about = document.getElementById("vol-about").value == ""
 
-            if(! vol_other_serv && ! vol_about){
+            if(!vol_about){
                 console.log("Saving data")
                 saveone("volunteers", "vol")
             } else{
