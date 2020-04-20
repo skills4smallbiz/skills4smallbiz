@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+  
+    <script src="/assets/js/jquery.min.js"></script>
+    <title>Contact - CovidBizLink</title>
+    <script src="/assets/js/loadtemplate.js"></script>
+</head>
+
+<body>
+    <div id='navbar'></div>
+    <div class="WhiteSpace" style="padding-bottom: 30px;"></div>
+    
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+    <!-- Previously loaded Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+
+    <script src="assets/js/setup.js"></script>
+    
+    <script>
+
+        firebase.auth().onAuthStateChanged(function(user){
+            if (user != null) {
+                // Name, email address etc
+                var name = user.displayName;
+                var email = user.email;
+                console.log("yes");
+                console.log(name);
+
+                b = document.getElementById("sign-btn");
+                b.style.display = "none";
+
+                document.getElementById("account-welcome").innerText = "Hello, " + name;
+                document.getElementById("account-drop").style.display = "";
+            }
+        });
+    </script>
+
+    <div class="highlight-blue">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Resources for Small Businesses</h2>
+                <p class="text-center" style="font-size: 20;">Please refer to this page from our partner volunteer
+                    organization, SCORE Boston. They work with the SBA to ensure that small businesses can receive the
+                    help that they need.</p>
+            </div>
+            <div class="justify-content-center" style="display: flex; width: 100%; padding-bottom: 25px;">
+                <a class="btn btn-primary" role="button" target="_blank" href='https://boston.score.org/boston-covid19'
+                    style="margin: 0 auto; text-align: center">COVID-19 Financial Assistance Resources</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="WhiteSpace" style="padding-bottom: 30px;"></div>
+
+    <div class="highlight-blue">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Resources for Volunteers</h2>
+                <p class="text-center" style="font-size: 20;">Check out more ways you can help from our partner
+                    volunteer organization, Cambridge Volunteer Clearinghouse (CVC).</p>
+            </div>
+            <div class="justify-content-center" style="display: flex; width: 100%; padding-bottom: 25px;">
+                <a class="btn btn-primary" role="button" target="_blank"
+                    href='http://www.cambridgevolunteers.org/needed-now/covid-19/'
+                    style="margin: 0 auto; text-align: center">More Ways You Can Help</a>
+            </div>
+
+            <div class="intro">
+                <p class="text-center" style="font-size: 20;">See this page from our partner small business
+                    organization, Cambridge Local First, for ways to support local businesses in the Cambridge area!</p>
+            </div>
+            <div class="justify-content-center" style="display: flex; width: 100%; padding-bottom: 25px;">
+                <a class="btn btn-primary" role="button" target="_blank"
+                    href='https://cambridgelocalfirst.org/how-to-take-action/'
+                    style="margin: 0 auto; text-align: center">Support Local Businesses</a>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer bg-light"></footer>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/bs-init.js"></script>
+</body>
+</html>
