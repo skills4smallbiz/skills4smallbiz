@@ -38,8 +38,8 @@ function formatSocials(data, textDoc, key) {//TODO: Get data from doc
     }
 }
 function formatHelp(data, textDoc, key) {
-
-    if (data[key] != undefined && data[key] != null) {
+    console.log(data[key])
+    if (data[key] != undefined && data[key] != null && data[key][0]!=null) {
         var HelpSection = document.getElementById("HelpSection"); 
         HelpSection.innerHTML = "<div class='col-lg-4' id='helpBox' style='width: 70%; margin: auto; width: 80%; border: 3px solid rgb(0,97,128); padding: 2%;'><h4>Help this business has received:</h4><table id='help-table'></table></div> "
         HelpSection.style.display = "" 
