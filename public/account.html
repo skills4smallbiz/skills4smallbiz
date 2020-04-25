@@ -295,9 +295,10 @@
             var helpRecvArray = []
             var helpRecv = document.getElementById("help-table").getElementsByTagName("textarea")
             for (i=0; i < helpRecv.length; i++){
-                helpRecvArray.push(helpRecv[i].value)//There has to be a better way
+                if (helpRecv[i].value!=""){
+                    helpRecvArray.push(helpRecv[i].value)//There has to be a better way
+                }
             }
-            console.log("Help Received:", helpRecvArray)
             if (helpRecvArray[0] == ""){
                 values["helpRecv"] = []
             } else{
