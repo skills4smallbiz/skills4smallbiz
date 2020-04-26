@@ -168,6 +168,9 @@ function query(qtype, utype, user, prefix, fields, showAll, view_self){
         //clears table
         document.getElementById(prefix +'-table').innerHTML = document.getElementById(prefix + '-table').getElementsByTagName('tr')[0].innerHTML
         sortData(qtype, prefix, fields, servlist, view_self)
+        //make first row header so that it doesn't get highlighted
+        var tbl_rows = document.getElementById(prefix+'-table').rows
+        tbl_rows[0].id="table-header"
         return;
     }
     console.log("continue")
