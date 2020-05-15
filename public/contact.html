@@ -78,7 +78,7 @@
     <form method="post">
         <h4 class="text-center">Have a suggestion about how we could improve CovidBizLink?</p>
         <div class="form-group"><input class="form-control" type="text" id="name" placeholder="Name"></div>
-        <div class="form-group"><input class="form-control is-invalid" type="email" id="email" placeholder="Email"><small class="form-text text-danger">Please enter a correct email address.</small></div>
+        <div class="form-group"><input class="form-control" type="email" id="email" placeholder="Email"></div>
         <div class="form-group"><textarea class="form-control" id="message" placeholder="Message" rows="14"></textarea></div>
         <div class="form-group"><button class="btn btn-primary" type="button" onclick="submitMessage()">send </button></div>
     </form>
@@ -87,18 +87,10 @@
     var db = firebase.firestore()
     var uid, name, email, address, coords, lat, lng, geocoder, position;
 
+    var d = new Date();
+    uid = d.getFullYear().toString() + d.getMonth().toString() + d.getDate().toString() + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString();
+    console.log(uid);
   
-    firebase.auth().onAuthStateChanged(function(user){
-            if (user == null) {
-                window.location.replace('/sign.html');
-            }
-
-            uid = user.uid;
-            name = user.displayName;
-            email = user.email;
-
-
-        });
     function submitMessage(){
         var submission = {
             name: document.getElementById('name').value,

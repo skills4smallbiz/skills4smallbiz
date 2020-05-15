@@ -1,9 +1,16 @@
 rules_version = '2';
 service cloud.firestore {
+
   match /databases/{database}/documents {
+  	match /suggestions/{sugg} {
+    	allow update, write: if true;
+    	allow read: if true;
+    }
+  
     match /{path=*}/{userId} {
       allow read: if true;
       allow update, write: if request.auth.uid == userId;
     }
   }
 }
+
