@@ -49,6 +49,8 @@
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-phone"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="biz-serv-SEO"><label class="form-check-label" for="formCheck-1">SEO</label></div>
+
                     <div>(Once you receive assistance with a service, please uncheck the box. Unchecking all boxes will remove your profile from listings.)</div>
                 </div>
             </div>
@@ -101,6 +103,8 @@
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-phone"><label class="form-check-label" for="formCheck-1">Phone Line</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-advertising"><label class="form-check-label" for="formCheck-1">Advertising</label></div>
                     <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-consulting"><label class="form-check-label" for="formCheck-1">Consulting</label></div>
+                    <div class="form-check" style="padding-left: 34px;"><input class="form-check-input" type="checkbox" id="vol-serv-SEO"><label class="form-check-label" for="formCheck-1">SEO</label></div>
+
                 </div>
             </div>
             <div class="form-group d-flex" style="min-width: 260px;"><label style="min-width: 135px;" for="serv-other">Other Services:</label><input class="form-control" type="text" id="vol-other-serv" placeholder = "Really, anything!"></div>
@@ -183,7 +187,7 @@
       biz: ['bizname', 'other-serv', 'address', 'about' ],
       vol: ['other-serv', 'about' ]
     };
-    var servlist = ['accounting', 'webdev', 'phone', 'advertising', 'consulting', "social media", "organize","data entry/cleaning","online video platform","marketing/outreach"];
+    var servlist = ['accounting', 'webdev', 'phone', 'advertising', 'consulting', "social media", "organize","data entry/cleaning","online video platform","marketing/outreach", "SEO"];
 
     
     function recover_information(col, prefix) {
