@@ -24,7 +24,7 @@ function errorMsg() {
     //post: error message
 
     var error = document.getElementById('loading-message');
-    error.innerHTML = "No users match your current requirements, try changing them in accounts!"
+    error.innerHTML = "No users match your current requirements, try changing them in Account or click 'View all Listings'"
     error.style.display = ""
 }
 
@@ -195,7 +195,7 @@ function query(qtype, utype, user, prefix, fields, showAll, view_self){
                     //if both are empty 
                     if (doc.data() == undefined){
                         var error = document.createElement('h1');
-                        var error_t = document.createTextNode("You did not make a profile or no users match your current needs/skills, try changing them in Account!")
+                        var error_t = document.createTextNode("You did not make a profile or no users match your current needs/skills, try changing them in Account or click 'View all Listings'")
                         error.appendChild(error_t)
                         document.body.appendChild(error)
                     }
